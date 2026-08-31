@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 医疗与 AI 硬件 · 30天沉浸式学习看板与知识库</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+  <!-- 背景动态光晕 -->
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+  <div class="glow-orb orb-3"></div>
+
+  <!-- 顶部导航栏 -->
+  <header class="glass-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-logo">🧠</div>
+        <div class="brand-text">
+          <h1>AI Frontiers Hub</h1>
+          <span class="badge-tag">2026 Edition</span>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <button class="nav-btn active" data-tab="tab-tracker">
+          <span class="icon">📅</span> 30天学习计划
+        </button>
+        <button class="nav-btn" data-tab="tab-gallery">
+          <span class="icon">🖼️</span> 核心知识库 & 信息图
+        </button>
+        <button class="nav-btn" data-tab="tab-notebooks">
+          <span class="icon">📚</span> 全部 14 个笔记本索引
+        </button>
+      </nav>
+      <div class="header-actions">
+        <button id="btn-export-log" class="btn-outline">
+          <span>📥 导出打卡记录</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <!-- 顶部进度统计面板 -->
+    <section class="hero-stats-panel glass-panel">
+      <div class="stats-overview">
+        <div class="welcome-text">
+          <h2>AI 医疗 & AI 硬件/潮玩 · 30 天实战进阶</h2>
+          <p>每天 2 小时 · 1h NotebookLM 深度文献研读 + 1h 权威高播放量精选视频精听</p>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">🔥</div>
+            <div class="stat-info">
+              <span class="stat-value" id="streak-days">0</span>
+              <span class="stat-label">连续打卡 (天)</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">✅</div>
+            <div class="stat-info">
+              <span class="stat-value" id="completed-days">0 / 30</span>
+              <span class="stat-label">已完成天数</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">⏳</div>
+            <div class="stat-info">
+              <span class="stat-value" id="remaining-hours">60</span>
+              <span class="stat-label">剩余学习时长 (小时)</span>
+            </div>
+          </div>
+          <div class="stat-card ring-card">
+            <div class="progress-ring-container">
+              <svg class="progress-ring" width="70" height="70">
+                <circle class="progress-ring__circle-bg" stroke="rgba(255,255,255,0.1)" stroke-width="6" fill="transparent" r="28" cx="35" cy="35"/>
+                <circle class="progress-ring__circle" stroke="#38bdf8" stroke-width="6" stroke-linecap="round" fill="transparent" r="28" cx="35" cy="35"/>
+              </svg>
+              <span class="ring-text" id="ring-percent">0%</span>
+            </div>
+            <div class="stat-info">
+              <span class="stat-label">总体完成率</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 动态进度条 -->
+      <div class="progress-track-wrapper">
+        <div class="progress-labels">
+          <span>🚀 起点启航</span>
+          <span id="current-badge-name">🎖️ 称号：AI 破冰新手</span>
+          <span>🏆 终极目标：AI 医疗与硬件先锋</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="main-progress-bar" style="width: 0%;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 1: 30天学习进度追踪看板 -->
+    <section id="tab-tracker" class="tab-pane active">
+      <div class="section-header">
+        <div class="title-with-desc">
+          <h3>📅 30 天每日学习任务清单</h3>
+          <p>点击复选框即可标记完成，支持添加个人心得打卡并自动保存在浏览器中</p>
+        </div>
+        <div class="filter-controls">
+          <button class="filter-btn active" data-filter="all">全部周次</button>
+          <button class="filter-btn" data-filter="week1">Week 1 基础筑基</button>
+          <button class="filter-btn" data-filter="week2">Week 2 AI 医疗</button>
+          <button class="filter-btn" data-filter="week3">Week 3 AI 硬件/潮玩</button>
+          <button class="filter-btn" data-filter="week4">Week 4 前沿实战</button>
+        </div>
+      </div>
+
+      <!-- 周计划卡片流 -->
+      <div class="weeks-container" id="weeks-container">
+        <!-- 动态由 JS 渲染渲染 30 天任务列表 -->
+      </div>
+    </section>
+
+    <!-- Tab 2: 核心知识库 & 2K 信息图展厅 -->
+    <section id="tab-gallery" class="tab-pane">
+      <div class="section-header">
+        <div class="title-with-desc">
+          <h3>🖼️ 5 大核心领域知识库 & 2K 超高清全景信息图</h3>
+          <p>基于 NotebookLM 深度研究生成的中文架构全景图，点击卡片可全屏高清缩放查看或直达笔记本</p>
+        </div>
+      </div>
+      <div class="gallery-grid" id="gallery-grid">
+        <!-- 由 JS 渲染 5 个核心信息图卡片 -->
+      </div>
+    </section>
+
+    <!-- Tab 3: 全部 14 个笔记本索引 -->
+    <section id="tab-notebooks" class="tab-pane">
+      <div class="section-header">
+        <div class="title-with-desc">
+          <h3>📚 NotebookLM 全量知识库索引（14 个笔记本 · 489 篇来源）</h3>
+          <p>实时检索并可直达个人所有课程、考试、竞赛与前沿研究笔记本</p>
+        </div>
+        <div class="search-box">
+          <input type="text" id="notebook-search-input" placeholder="🔍 搜索笔记本名称或领域关键字...">
+        </div>
+      </div>
+      <div class="notebooks-grid" id="notebooks-grid">
+        <!-- 由 JS 渲染全部 14 个笔记本卡片 -->
+      </div>
+    </section>
+  </main>
+
+  <!-- 全屏信息图预览模态框 Modal -->
+  <div id="image-modal" class="modal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content glass-panel">
+      <div class="modal-header">
+        <h4 id="modal-title">信息图全景预览</h4>
+        <div class="modal-actions">
+          <a id="modal-download-btn" href="#" target="_blank" class="btn-primary" download>
+            📥 下载 2K 高清原图
+          </a>
+          <a id="modal-open-nb-btn" href="#" target="_blank" class="btn-outline">
+            📓 直达对应笔记本
+          </a>
+          <button id="modal-close-btn" class="btn-icon">✕</button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <img id="modal-image" src="" alt="信息图预览">
+      </div>
+    </div>
+  </div>
+
+  <footer class="glass-footer">
+    <p>Powered by Google NotebookLM & Antigravity IDE · 2026 AI Learning Hub</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

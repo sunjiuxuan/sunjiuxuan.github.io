@@ -1,0 +1,74 @@
+<scroll-view class="page-container member-page" scroll-y>
+  <!-- 头部导航栏 (模拟) -->
+  <view class="member-header">
+    <view class="header-title">DR会员</view>
+  </view>
+
+  <!-- 会员提示条 -->
+  <view class="notice-bar">
+    <text class="notice-text">与TA绑定即可获得100真爱值 去绑定>></text>
+    <text class="notice-close">×</text>
+  </view>
+
+  <!-- 会员卡片 -->
+  <view class="member-card">
+    <view class="card-level-tag">当前等级</view>
+    <view class="card-name">注册会员</view>
+    <view class="card-values">
+      <view class="value-left">
+        <text class="num">0</text>
+        <view class="progress-bar">
+          <view class="progress-inner"></view>
+          <text class="heart-icon">♥</text>
+        </view>
+        <text class="upgrade-tips">再消费15000即可升级</text>
+      </view>
+      <view class="value-right">
+        <text class="num-big">0</text>
+        <text class="val-label">我的真爱值</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 会员权益标题 -->
+  <view class="rights-title">
+    <text class="arrow">›</text> 会员权益 <text class="arrow">‹</text>
+  </view>
+
+  <!-- 会员权益网格 -->
+  <view class="rights-grid">
+    <view class="right-item"><view class="r-icon">🎁</view><text>入会见面礼</text></view>
+    <view class="right-item"><view class="r-icon">🏷️</view><text>积分好礼兑换</text></view>
+    <view class="right-item"><view class="r-icon">💎</view><text>升值换新特权</text></view>
+    <view class="right-item"><view class="r-icon">🛍️</view><text>新品优先提醒</text></view>
+    
+    <view class="right-item"><view class="r-icon">✨</view><text>终身免费保养</text></view>
+    <view class="right-item"><view class="r-icon">🎪</view><text>专属线下活动</text></view>
+    <view class="right-item"><view class="r-icon">🪙</view><text>复购积分翻倍</text></view>
+    <view class="right-item"><view class="r-icon">💌</view><text>示爱特权助攻</text></view>
+    
+    <view class="right-item dark-item"><view class="r-icon">🤝</view><text>上门尊享服务</text></view>
+    <view class="right-item dark-item"><view class="r-icon">🥂</view><text>黑钻尊享沙龙</text></view>
+    <view class="right-item dark-item"><view class="r-icon">🤵</view><text>私人专属管家</text></view>
+  </view>
+
+  <!-- 底部横向滚动活动区 -->
+  <scroll-view class="activity-scroll" scroll-x>
+    <view class="activity-list">
+      <view class="act-card act-bg-1">
+        <view class="act-img">👫</view>
+        <view class="act-title">真爱空间</view>
+      </view>
+      <view class="act-card act-bg-2">
+        <view class="act-img">🗺️</view>
+        <view class="act-title">真爱地图</view>
+      </view>
+      <view class="act-card act-bg-3">
+        <view class="act-img">💍</view>
+        <view class="act-title">DR求婚</view>
+      </view>
+    </view>
+  </scroll-view>
+  
+  <view class="bottom-spacer"></view>
+</scroll-view>

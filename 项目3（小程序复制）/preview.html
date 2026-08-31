@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DR 钻戒小程序 - 预览</title>
+    <style>
+        /* 手机外壳样式 */
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        .phone-container {
+            width: 375px;
+            height: 812px;
+            background: #ffffff;
+            border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            position: relative;
+            border: 12px solid #333;
+            display: flex;
+            flex-direction: column;
+        }
+        .notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 30px;
+            background: #333;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            z-index: 1000;
+        }
+        
+        /* 微信顶部导航条模拟 */
+        .wx-header {
+            height: 88px;
+            background: #fff;
+            position: relative;
+            z-index: 999;
+            padding-top: 44px; /* 状态栏高度 */
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .wx-header-dark {
+            background: #4a0003; /* 对应第一张图的深红色 */
+            color: #fff;
+        }
+        .wx-capsule {
+            position: absolute;
+            right: 15px;
+            top: 50px;
+            width: 87px;
+            height: 32px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 12px;
+            box-sizing: border-box;
+            border: 0.5px solid rgba(0,0,0,0.1);
+        }
+        .wx-capsule-dark {
+            background: rgba(0,0,0,0.15);
+            border: 0.5px solid rgba(255,255,255,0.25);
+        }
+        
+        /* 页面内容区 */
+        .page-content {
+            flex: 1;
+            overflow-y: auto;
+            background: #f8f8f8;
+            position: relative;
+            padding-bottom: 50px; /* 为tabbar留白 */
+        }
+        /* 隐藏滚动条 */
+        .page-content::-webkit-scrollbar {
+            display: none;
+        }
+        
+        /* 底部 TabBar 模拟 */
+        .tab-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: #fff;
+            border-top: 1px solid #eee;
+            display: flex;
+            padding-bottom: 20px; /* 安全区 */
+            z-index: 1000;
+        }
+        .tab-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #999;
+            cursor: pointer;
+        }
+        .tab-item.active {
+            color: #333;
+        }
+        .tab-icon {
+            width: 24px;
+            height: 24px;
+            background: #ddd; /* 占位 */
+            margin-bottom: 3px;
+            border-radius: 50%;
+        }
+        .tab-item.active .tab-icon {
+            background: #333; /* 占位选中 */
+        }
+        
+        /* 首页相关样式 */
+        .page-container {
+            min-height: 100vh;
+            background-color: #f8f8f8;
+            padding-bottom: 20px;
+        }
+
+        .header-section {
+            background: linear-gradient(135deg, #3a0002 0%, #630005 100%);
+            color: #fff;
+            padding-top: 50px;
+            position: relative;
+            height: 500px;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            overflow: hidden;
+        }
+
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            position: relative;
+            z-index: 10;
+            margin-top: -30px;
+        }
+
+        .left-actions {
+            display: flex;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 5px 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .icon-box {
+            margin: 0 5px;
+            font-size: 14px;
+        }
+
+        .logo-box {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 32px;
+            font-family: "Times New Roman", Times, serif;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        .jewelry-placeholder {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+        .circle-gold {
+            position: absolute;
+            top: 10px;
+            left: 30px;
+            width: 80px;
+            height: 80px;
+            border: 4px dashed #ffd700;
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+
+        .rose-gold {
+            position: absolute;
+            bottom: 20px;
+            right: 40px;
+            width: 90px;
+            height: 90px;
+            background: radial-gradient(circle, #ffb6c1 0%, #daa520 100%);
+            border-radius: 50%;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        .slogan-main {
+            font-size: 22px;
+            font-weight: 300;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+        }
+
+        .slogan-sub {
+            font-size: 12px;
+            color: rgba(255,255,255,0.7);
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+        }
+
+        .btn-explore {
+            border: 1px solid #fff;
+            padding: 8px 30px;
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+
+        .grid-section {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px 10px;
+            background: #fff;
+            margin: -40px 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 10;
+        }
+
+        .grid-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .icon-wrapper {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .red-bg {
+            background: #7a101b;
+            color: #fff;
+        }
+
+        .grid-text {
+            font-size: 12px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .recommend-section {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 15px;
+        }
+
+        .card-item {
+            flex: 1;
+            height: 140px;
+            border-radius: 8px;
+            margin: 0 4px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            padding-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-item:first-child {
+            margin-left: 0;
+        }
+        .card-item:last-child {
+            margin-right: 0;
+        }
+
+        .dark-card {
+            background: linear-gradient(180deg, #441a1a 0%, #2a0808 100%);
+        }
+
+        .red-card {
+            background: linear-gradient(180deg, #7a101b 0%, #4a0003 100%);
+        }
+
+        .card-title {
+            color: #fff;
+            font-size: 11px;
+            z-index: 2;
+        }
+
+        .card-img-placeholder {
+            position: absolute;
+            top: 25px;
+            font-size: 40px;
+            z-index: 1;
+        }
+        /* 分类页相关样式 */
+        .category-page {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #fff;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            height: 44px;
+            background-color: #fff;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo-box-black {
+            font-size: 24px;
+            font-family: "Times New Roman", Times, serif;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-right: 15px;
+            color: #333;
+        }
+
+        .search-bar {
+            flex: 1;
+            height: 32px;
+            background-color: #f5f5f5;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            margin-right: 100px; /* 避开右侧胶囊按钮 */
+        }
+
+        .search-icon {
+            font-size: 14px;
+            margin-right: 6px;
+            color: #999;
+        }
+
+        .search-text {
+            font-size: 13px;
+            color: #999;
+        }
+
+        .category-body {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .side-nav {
+            width: 90px;
+            background-color: #f8f8f8;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .nav-item {
+            height: 55px;
+            line-height: 55px;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+            position: relative;
+        }
+
+        .nav-item.active {
+            background-color: #7a101b;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 15px;
+            height: 100%;
+            box-sizing: border-box;
+            background-color: #fff;
+            overflow-y: auto;
+        }
+
+        .banner-card {
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .beige-bg {
+            background: linear-gradient(180deg, #f5efe6 0%, #e8ddc9 100%);
+            height: 240px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            padding-bottom: 20px;
+        }
+
+        .banner-placeholder {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ring-large {
+            font-size: 80px;
+            text-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .banner-text-box {
+            text-align: center;
+            color: #fff;
+        }
+
+        .banner-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+        }
+
+        .banner-subtitle {
+            font-size: 11px;
+            opacity: 0.8;
+        }
+
+        .bag-icon-small {
+            position: absolute;
+            right: 15px;
+            bottom: 15px;
+            background: rgba(255,255,255,0.3);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+            margin: 10px 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dot {
+            font-size: 10px;
+            margin: 0 8px;
+        }
+
+        .red-bg-card {
+            background: linear-gradient(135deg, #7a101b 0%, #4a0003 100%);
+            height: 160px;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+        }
+
+        .two-rings {
+            font-size: 40px;
+            margin-right: 15px;
+            transform: rotate(-15deg);
+        }
+
+        .red-card-text {
+            flex: 1;
+            color: #fff;
+        }
+
+        .red-card-title {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .red-card-subtitle {
+            font-size: 11px;
+            opacity: 0.8;
+            margin-bottom: 15px;
+        }
+
+        .btn-detail {
+            display: inline-block;
+            border: 1px solid rgba(255,255,255,0.6);
+            padding: 4px 12px;
+            font-size: 11px;
+            border-radius: 2px;
+        }
+
+        .crown-bg-card {
+            background: linear-gradient(135deg, #6c1b35 0%, #3a0b1b 100%);
+            height: 120px;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            margin-bottom: 0;
+        }
+
+        .crown-icon {
+            font-size: 50px;
+            margin-right: 15px;
+        }
+
+        .crown-card-text {
+            flex: 1;
+            color: #fff;
+            text-align: right;
+        }
+
+        .crown-title {
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: #ffd700;
+        }
+
+        .crown-subtitle {
+            font-size: 10px;
+            opacity: 0.8;
+        }
+
+        .bottom-spacer {
+            height: 50px;
+        }
+
+        /* 会员页相关样式 */
+        .member-page {
+            background-color: #720b18; /* 全局深红色 */
+            min-height: 100vh;
+        }
+
+        .member-header {
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .header-title {
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .notice-bar {
+            background-color: rgba(255,255,255,0.2);
+            color: #fff;
+            font-size: 11px;
+            padding: 6px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            margin: 10px 15px 0;
+        }
+
+        .member-card {
+            margin: 0 15px 20px;
+            background: linear-gradient(135deg, #f7cece 0%, #e8a2a2 100%);
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            padding: 20px 20px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            color: #720b18;
+        }
+
+        .card-level-tag {
+            background: #a92731;
+            color: #fff;
+            font-size: 10px;
+            padding: 3px 10px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .card-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .card-values {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .value-left {
+            flex: 1;
+        }
+
+        .num {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .progress-bar {
+            height: 2px;
+            background: rgba(114, 11, 24, 0.2);
+            width: 70%;
+            position: relative;
+            margin-bottom: 8px;
+        }
+
+        .progress-inner {
+            width: 0%;
+            height: 100%;
+            background: #720b18;
+        }
+
+        .heart-icon {
+            position: absolute;
+            left: 0;
+            top: -6px;
+            font-size: 12px;
+        }
+
+        .upgrade-tips {
+            font-size: 10px;
+            opacity: 0.8;
+        }
+
+        .value-right {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .num-big {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .val-label {
+            font-size: 11px;
+        }
+
+        .rights-title {
+            text-align: center;
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            margin: 10px 0 20px;
+        }
+
+        .rights-grid {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0 10px;
+        }
+
+        .right-item {
+            width: 25%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            color: #fff;
+            font-size: 11px;
+        }
+
+        .r-icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .dark-item {
+            opacity: 0.4; /* 未解锁状态模拟 */
+        }
+
+        .activity-scroll {
+            width: 100%;
+            margin-top: 10px;
+            overflow-x: auto;
+        }
+
+        .activity-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .activity-list {
+            display: flex;
+            padding: 0 15px;
+            width: max-content;
+        }
+
+        .act-card {
+            width: 140px;
+            height: 100px;
+            border-radius: 8px;
+            margin-right: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            padding-bottom: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .act-bg-1 { background: linear-gradient(135deg, #d37979 0%, #aa3e3e 100%); }
+        .act-bg-2 { background: linear-gradient(135deg, #b01a1a 0%, #720b18 100%); }
+        .act-bg-3 { background: linear-gradient(135deg, #440b0b 0%, #200505 100%); }
+
+        .act-title {
+            color: #fff;
+            font-size: 12px;
+            z-index: 2;
+            font-weight: 500;
+        }
+
+        .act-img {
+            position: absolute;
+            top: 15px;
+            font-size: 45px;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-container">
+        <!-- 刘海屏 -->
+        <div class="notch"></div>
+        
+        <!-- 小程序头部 -->
+        <div class="wx-header wx-header-dark" id="page-header">
+            <!-- 胶囊按钮 -->
+            <div class="wx-capsule wx-capsule-dark">
+                <span style="font-size: 16px;font-weight: bold;">···</span>
+                <span style="width: 1px; height: 16px; background: rgba(255,255,255,0.3);"></span>
+                <span style="font-size: 16px; border-radius: 50%; border: 2px solid #fff; width: 12px; height: 12px; display: inline-block;"></span>
+            </div>
+            <!-- 可以放中间标题，如果需要 -->
+        </div>
+        
+        <!-- 页面主体内容加载区 -->
+        <div class="page-content" id="app-content">
+            <!-- 这里将动态加载页面 HTML -->
+            <div style="padding: 20px; text-align: center; color: #666; margin-top: 100px;">
+                正在加载 DR 钻戒小程序首页...
+            </div>
+        </div>
+        
+        <!-- 底部导航 -->
+        <div class="tab-bar">
+            <div class="tab-item active" onclick="navTo('index')">
+                <div class="tab-icon"></div>
+                <span>首页</span>
+            </div>
+            <div class="tab-item" onclick="navTo('category')">
+                <div class="tab-icon"></div>
+                <span>分类</span>
+            </div>
+            <div class="tab-item" onclick="navTo('member')">
+                <div class="tab-icon"></div>
+                <span>会员</span>
+            </div>
+            <div class="tab-item" onclick="navTo('reserve')">
+                <div class="tab-icon"></div>
+                <span>预约试戴</span>
+            </div>
+            <div class="tab-item" onclick="navTo('mine')">
+                <div class="tab-icon"></div>
+                <span>我的</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function navTo(page) {
+            document.querySelectorAll('.tab-item').forEach(el => el.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            
+            // 简单路由模拟
+            const content = document.getElementById('app-content');
+            const header = document.getElementById('page-header');
+            const capsule = document.querySelector('.wx-capsule');
+            
+            if (page === 'index') {
+                header.className = 'wx-header wx-header-dark';
+                capsule.className = 'wx-capsule wx-capsule-dark';
+                content.innerHTML = `
+<div class="page-container">
+  <!-- 头部区域 -->
+  <div class="header-section">
+    <div class="nav-bar">
+      <div class="left-actions">
+        <div class="icon-box"><span class="icon-search">🔍</span></div>
+        <div class="icon-box"><span class="icon-bag">🛍️</span></div>
+        <div class="icon-box"><span class="icon-msg">🔔</span></div>
+      </div>
+      <div class="logo-box">DR</div>
+    </div>
+    
+    <div class="hero-content">
+      <div class="jewelry-placeholder">
+        <div class="circle-gold"></div>
+        <div class="rose-gold"></div>
+      </div>
+      <div class="slogan-main">真心为誓 相伴一生</div>
+      <div class="slogan-sub">DR诠释爱的滋养与呵护</div>
+      <div class="btn-explore">即刻探索</div>
+    </div>
+  </div>
+
+  <!-- 金刚区 -->
+  <div class="grid-section">
+    <div class="grid-item">
+      <div class="icon-wrapper red-bg">💍</div>
+      <span class="grid-text">求婚钻戒</span>
+    </div>
+    <div class="grid-item">
+      <div class="icon-wrapper red-bg">🤝</div>
+      <span class="grid-text">结婚对戒</span>
+    </div>
+    <div class="grid-item">
+      <div class="icon-wrapper red-bg">🐯</div>
+      <span class="grid-text">黄金</span>
+    </div>
+    <div class="grid-item">
+      <div class="icon-wrapper red-bg">🎁</div>
+      <span class="grid-text">纪念日礼物</span>
+    </div>
+  </div>
+
+  <!-- 推荐展示区 -->
+  <div class="recommend-section">
+    <div class="card-item dark-card">
+      <div class="card-img-placeholder">
+        <div class="box-open">💍</div>
+      </div>
+      <span class="card-title">专属指纹印刻</span>
+    </div>
+    <div class="card-item red-card">
+      <div class="card-img-placeholder">
+        <div class="box-closed">🎀</div>
+      </div>
+      <span class="card-title">甄选推荐</span>
+    </div>
+    <div class="card-item dark-card">
+      <div class="card-img-placeholder">
+        <div class="butterfly">🦋</div>
+      </div>
+      <span class="card-title">重磅上新</span>
+    </div>
+  </div>
+</div>
+                `;
+                // 调用一次以保证初始加载也是首页
+            } else if (page === 'category') {
+                header.className = 'wx-header';
+                capsule.className = 'wx-capsule';
+                content.innerHTML = `
+<div class="page-container category-page">
+  <!-- 头部搜索区 -->
+  <div class="category-header">
+    <div class="logo-box-black">DR</div>
+    <div class="search-bar">
+      <span class="search-icon">🔍</span>
+      <span class="search-text">搜索</span>
+    </div>
+  </div>
+
+  <!-- 主体内容 -->
+  <div class="category-body">
+    <!-- 左侧导航 -->
+    <div class="side-nav">
+      <div class="nav-item active">甄选专区</div>
+      <div class="nav-item">浪漫礼物</div>
+      <div class="nav-item">会员日专区</div>
+      <div class="nav-item">品牌新作</div>
+      <div class="nav-item">极速发货</div>
+      <div class="nav-item">钻戒</div>
+      <div class="nav-item">对戒</div>
+      <div class="nav-item">黄金</div>
+      <div class="nav-item">饰品</div>
+    </div>
+
+    <!-- 右侧内容 -->
+    <div class="main-content">
+      <!-- 卡片1: 顶部大 Banner (圣洁教堂) -->
+      <div class="banner-card beige-bg">
+        <div class="banner-placeholder">
+          <div class="ring-large">💍</div>
+        </div>
+        <div class="banner-text-box">
+          <div class="banner-title">圣洁教堂 见证真爱</div>
+          <div class="banner-subtitle">DR美学作品 尽显璀璨</div>
+        </div>
+        <div class="bag-icon-small">🛍️</div>
+      </div>
+
+      <!-- 标题: 会员日专区 -->
+      <div class="section-title">
+        <span class="dot">•</span> 会员日专区 <span class="dot">•</span>
+      </div>
+
+      <!-- 卡片2: 会员日专区 (红色背景双戒) -->
+      <div class="banner-card red-bg-card">
+        <div class="two-rings">
+          <span>💍</span><span>💍</span>
+        </div>
+        <div class="red-card-text">
+          <div class="red-card-title">每月20日 让爱发生</div>
+          <div class="red-card-subtitle">甄选下单礼遇</div>
+          <div class="btn-detail">查看详情</div>
+        </div>
+      </div>
+
+      <!-- 标题: 品牌新作 -->
+      <div class="section-title">
+        <span class="dot">•</span> 品牌新作 <span class="dot">•</span>
+      </div>
+
+      <!-- 卡片3: 品牌新作 (千金冠) -->
+      <div class="banner-card crown-bg-card">
+        <div class="crown-icon">👑</div>
+        <div class="crown-card-text">
+          <div class="crown-title">DR千金冠</div>
+          <div class="crown-subtitle">婚嫁五金天花板 | 明星大婚甄选</div>
+        </div>
+      </div>
+      
+      <!-- 底部留白 -->
+      <div class="bottom-spacer"></div>
+    </div>
+  </div>
+</div>
+                `;
+            } else if (page === 'member') {
+                header.className = 'wx-header wx-header-dark';
+                capsule.className = 'wx-capsule wx-capsule-dark';
+                content.innerHTML = `
+<div class="page-container member-page">
+  <!-- 头部导航栏 (模拟) -->
+  <div class="member-header">
+    <div class="header-title">DR会员</div>
+  </div>
+
+  <!-- 会员提示条 -->
+  <div class="notice-bar">
+    <span class="notice-text">与TA绑定即可获得100真爱值 去绑定>></span>
+    <span class="notice-close">×</span>
+  </div>
+
+  <!-- 会员卡片 -->
+  <div class="member-card">
+    <div class="card-level-tag">当前等级</div>
+    <div class="card-name">注册会员</div>
+    <div class="card-values">
+      <div class="value-left">
+        <span class="num">0</span>
+        <div class="progress-bar">
+          <div class="progress-inner"></div>
+          <span class="heart-icon">♥</span>
+        </div>
+        <span class="upgrade-tips">再消费15000即可升级</span>
+      </div>
+      <div class="value-right">
+        <span class="num-big">0</span>
+        <span class="val-label">我的真爱值</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 会员权益标题 -->
+  <div class="rights-title">
+    <span class="arrow">›</span> 会员权益 <span class="arrow">‹</span>
+  </div>
+
+  <!-- 会员权益网格 -->
+  <div class="rights-grid">
+    <div class="right-item"><div class="r-icon">🎁</div><span>入会见面礼</span></div>
+    <div class="right-item"><div class="r-icon">🏷️</div><span>积分好礼兑换</span></div>
+    <div class="right-item"><div class="r-icon">💎</div><span>升值换新特权</span></div>
+    <div class="right-item"><div class="r-icon">🛍️</div><span>新品优先提醒</span></div>
+    
+    <div class="right-item"><div class="r-icon">✨</div><span>终身免费保养</span></div>
+    <div class="right-item"><div class="r-icon">🎪</div><span>专属线下活动</span></div>
+    <div class="right-item"><div class="r-icon">🪙</div><span>复购积分翻倍</span></div>
+    <div class="right-item"><div class="r-icon">💌</div><span>示爱特权助攻</span></div>
+    
+    <div class="right-item dark-item"><div class="r-icon">🤝</div><span>上门尊享服务</span></div>
+    <div class="right-item dark-item"><div class="r-icon">🥂</div><span>黑钻尊享沙龙</span></div>
+    <div class="right-item dark-item"><div class="r-icon">🤵</div><span>私人专属管家</span></div>
+  </div>
+
+  <!-- 底部横向滚动活动区 -->
+  <div class="activity-scroll">
+    <div class="activity-list">
+      <div class="act-card act-bg-1">
+        <div class="act-img">👫</div>
+        <div class="act-title">真爱空间</div>
+      </div>
+      <div class="act-card act-bg-2">
+        <div class="act-img">🗺️</div>
+        <div class="act-title">真爱地图</div>
+      </div>
+      <div class="act-card act-bg-3">
+        <div class="act-img">💍</div>
+        <div class="act-title">DR求婚</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="bottom-spacer"></div>
+</div>
+                `;
+            } else {
+                header.className = 'wx-header';
+                capsule.className = 'wx-capsule';
+                content.innerHTML = '<div style="padding:20px;text-align:center;">其他页面开发中...</div>';
+            }
+        }
+        
+        // 初始加载首页
+        window.onload = function() {
+            navTo('index');
+        }
+    </script>
+</body>
+</html>

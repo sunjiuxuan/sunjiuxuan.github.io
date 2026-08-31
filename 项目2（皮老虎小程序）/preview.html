@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>千面虎工坊 · 新中式高级文创微信小程序</title>
+  <style>
+    :root {
+      --bg-warm: #FAF8F5;
+      --brand-red: #B8281B;
+      --brand-red-dark: #8D180E;
+      --brand-gold: #C59A58;
+      --text-dark: #1D1917;
+      --text-secondary: #5C524B;
+      --text-muted: #8F857D;
+      --card-bg: #FFFFFF;
+      --border-color: #ECE5D8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: radial-gradient(circle at top center, #261f1c 0%, #110e0d 100%);
+      font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Noto Sans SC', 'Helvetica Neue', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: #fff;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .preview-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .preview-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #F8E7D8;
+      letter-spacing: 3px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .seal-gold-mini {
+      background: var(--brand-gold);
+      color: #1D1917;
+      font-size: 11px;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 4px;
+      letter-spacing: 1px;
+    }
+
+    .preview-desc {
+      font-size: 13px;
+      color: #B3A49A;
+    }
+
+    /* 手机外壳 */
+    .phone-wrapper {
+      width: 390px;
+      height: 790px;
+      background: #1c1817;
+      border-radius: 48px;
+      padding: 12px;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7), 0 0 0 2px #3d3430, 0 0 40px rgba(184, 40, 27, 0.2);
+      position: relative;
+    }
+
+    .phone-notch {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 110px;
+      height: 24px;
+      background: #000;
+      border-radius: 12px;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 10px;
+    }
+    .camera-lens {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #111e2e;
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background-color: var(--bg-warm);
+      border-radius: 38px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      color: var(--text-dark);
+    }
+
+    /* 微信导航栏 */
+    .wechat-header {
+      background: var(--brand-red);
+      color: #fff;
+      padding: 34px 16px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 10px rgba(184, 40, 27, 0.3);
+      position: relative;
+      z-index: 100;
+    }
+
+    .nav-title {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      margin-left: 6px;
+    }
+
+    .wechat-capsule {
+      background: rgba(0, 0, 0, 0.2);
+      border: 0.5px solid rgba(255, 255, 255, 0.35);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      padding: 3px 8px;
+      gap: 8px;
+      font-size: 11px;
+    }
+
+    /* 滚动容器 */
+    .page-container {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding-bottom: 74px;
+      position: relative;
+    }
+    .page-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    .page {
+      display: none;
+      padding: 14px;
+      animation: fadeIn 0.25s ease;
+    }
+    .page.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .bg-card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 16px -2px rgba(78, 44, 25, 0.05);
+    }
+
+    /* 1. 首页 */
+    .banner-art-content {
+      height: 168px;
+      background: linear-gradient(135deg, #B8281B 0%, #8D180E 100%);
+      color: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      border: 1.5px solid #D4A86A;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px -4px rgba(184, 40, 27, 0.35);
+      margin-bottom: 14px;
+      text-align: center;
+      padding: 10px;
+    }
+    .banner-top-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .seal-mark {
+      background: #FFFFFF;
+      color: #B8281B;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 1px 6px;
+      border-radius: 3px;
+      letter-spacing: 1px;
+    }
+    .banner-subtitle {
+      font-size: 11px;
+      color: #F7D8B5;
+      letter-spacing: 1px;
+    }
+    .banner-main-title {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      margin-bottom: 4px;
+    }
+    .banner-caption {
+      font-size: 11px;
+      color: #FBEAD6;
+      opacity: 0.9;
+    }
+    .banner-indicator-bar {
+      position: absolute;
+      bottom: 8px;
+      display: flex;
+      gap: 6px;
+    }
+    .bar {
+      width: 6px;
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.4);
+    }
+    .bar.active {
+      width: 18px;
+      background: #ECC38B;
+    }
+
+    .heritage-intro {
+      padding: 16px 14px;
+      margin-bottom: 16px;
+    }
+    .intro-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+    .line-ornament {
+      width: 24px;
+      height: 1.5px;
+      background: var(--brand-gold);
+    }
+    .header-seal {
+      background: var(--brand-red);
+      color: #FFFFFF;
+      width: 24px;
+      height: 24px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 10px;
+      font-size: 10px;
+      font-weight: bold;
+      border: 1px solid #E5BA80;
+    }
+    .intro-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-dark);
+      letter-spacing: 1px;
+    }
+    .intro-paragraph {
+      font-size: 12px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      text-align: justify;
+      display: block;
+    }
+    .craft-badges {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid #F2ECE1;
+      font-size: 11px;
+      color: #8C6F48;
+    }
+    .craft-item {
+      display: flex;
+      align-items: center;
+    }
+    .craft-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--brand-red);
+      margin-right: 4px;
+    }
+
+    .section-title-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .main-heading {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-right: 6px;
+    }
+    .sub-heading {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .goods-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .goods-card {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .goods-img-box {
+      height: 125px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+    .art-seal-mini {
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      border-bottom: 1.5px solid rgba(255, 255, 255, 0.4);
+      padding-bottom: 2px;
+      margin-bottom: 4px;
+    }
+    .art-sub {
+      font-size: 10px;
+      opacity: 0.85;
+    }
+    .tag-floating {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      background: rgba(29, 25, 23, 0.75);
+      backdrop-filter: blur(4px);
+      color: #F8E5CE;
+      font-size: 9px;
+      padding: 2px 6px;
+      border-radius: 3px;
+      border: 0.5px solid rgba(248, 229, 206, 0.3);
+    }
+    .goods-detail {
+      padding: 10px 8px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .goods-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 2px;
+    }
+    .goods-subtitle {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+    .goods-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+    .price-container {
+      color: var(--brand-red);
+      font-weight: 700;
+      display: flex;
+      align-items: baseline;
+    }
+    .currency { font-size: 11px; }
+    .amount { font-size: 17px; }
+    .cents { font-size: 11px; }
+    .btn-buy {
+      background: var(--brand-red);
+      color: #FFFFFF;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 14px;
+      cursor: pointer;
+      box-shadow: 0 3px 8px rgba(184, 40, 27, 0.2);
+    }
+
+    /* 2. 定制工坊 */
+    .stage-pedestal {
+      height: 205px;
+      background: radial-gradient(circle at 50% 30%, #FFFFFF 0%, #FBF7F0 100%);
+      border: 1.5px solid #E5DCCE;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 12px 8px;
+      overflow: hidden;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    .pedestal-corner {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border: 2px solid var(--brand-gold);
+    }
+    .top-left { top: 6px; left: 6px; border-right: none; border-bottom: none; }
+    .top-right { top: 6px; right: 6px; border-left: none; border-bottom: none; }
+    .bottom-left { bottom: 6px; left: 6px; border-right: none; border-top: none; }
+    .bottom-right { bottom: 6px; right: 6px; border-left: none; border-top: none; }
+
+    .plinth-circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #FAF5ED;
+      box-shadow: inset 0 1px 4px rgba(0,0,0,0.06), 0 3px 10px rgba(197, 154, 88, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 6px;
+    }
+    .tiger-emblem-seal {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 2px solid var(--brand-red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #FFFFFF;
+    }
+    .emblem-glyph {
+      font-size: 22px;
+      font-weight: bold;
+      font-family: "Songti SC", "SimSun", serif;
+      color: var(--brand-red);
+      transition: all 0.2s;
+    }
+    .caption-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-dark);
+      letter-spacing: 1.5px;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .combo-pill {
+      display: inline-flex;
+      align-items: center;
+      background: #F4ECE1;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      color: var(--text-secondary);
+      border: 1px solid #E8DFD3;
+      margin-bottom: 6px;
+    }
+    .combo-head { color: var(--brand-red); font-weight: 600; }
+    .combo-cross { margin: 0 4px; color: #B0A59A; }
+    .combo-bellows { color: #8C6F48; font-weight: 600; }
+
+    .spec-matrix-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #FFFFFF;
+      padding: 3px 12px;
+      border-radius: 16px;
+      border: 1px solid #EFE9E0;
+      font-size: 10px;
+    }
+    .matrix-sep { width: 1px; height: 10px; background: #E5DDD2; }
+    .pedestal-bottom-hint {
+      font-size: 10px;
+      color: #9E938A;
+    }
+
+    .custom-card {
+      padding: 12px;
+      margin-bottom: 60px;
+    }
+    .luxury-tab-header {
+      display: flex;
+      border-bottom: 1.5px solid #F0EAE0;
+      margin-bottom: 14px;
+    }
+    .tab-btn {
+      flex: 1;
+      text-align: center;
+      padding-bottom: 8px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+    }
+    .tab-index-row {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+    .index-num { font-size: 10px; color: #BDB2A7; font-weight: bold; }
+    .tab-text { font-size: 14px; color: var(--text-secondary); font-weight: 600; }
+    .tab-current-val { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+    .tab-btn.active .index-num { color: var(--brand-gold); }
+    .tab-btn.active .tab-text { color: var(--brand-red); }
+    .tab-btn.active .tab-current-val { color: var(--brand-red); }
+    .active-indicator {
+      position: absolute;
+      bottom: -1.5px;
+      width: 44px;
+      height: 3px;
+      background: var(--brand-red);
+      border-radius: 2px;
+    }
+
+    .diy-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .diy-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .option-block {
+      background: #FAF8F5;
+      border: 1.5px solid #EBE4D8;
+      border-radius: 10px;
+      padding: 10px 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .option-block.is-selected {
+      border-color: var(--brand-red);
+      background: #FFF9F7;
+      box-shadow: 0 2px 10px rgba(184, 40, 27, 0.12);
+    }
+    .selected-seal {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: var(--brand-red);
+      color: #FFFFFF;
+      font-size: 9px;
+      padding: 1px 6px;
+      border-bottom-left-radius: 6px;
+      border-top-right-radius: 8px;
+      font-weight: 500;
+    }
+    .art-avatar-box {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 6px;
+      color: #fff;
+      font-size: 16px;
+      font-family: "Songti SC", serif;
+      font-weight: bold;
+    }
+    .opt-title { font-size: 12px; font-weight: 700; color: var(--text-dark); margin-bottom: 2px; }
+    .opt-desc { font-size: 9px; color: var(--text-muted); margin-bottom: 6px; text-align: center; }
+    .offset-sign { color: var(--brand-red); font-weight: 700; font-size: 11px; }
+    .offset-base { color: var(--text-muted); font-size: 10px; }
+
+    .diy-floating-footer {
+      position: absolute;
+      bottom: 56px;
+      left: 0;
+      right: 0;
+      height: 56px;
+      background: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      border-top: 1px solid #EBE4D8;
+      z-index: 90;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.04);
+    }
+    .price-bold-lg {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--brand-red);
+    }
+    .btn-create-tiger {
+      background: linear-gradient(135deg, #C93022 0%, #A81F14 100%);
+      color: #FFFFFF;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(184, 40, 27, 0.25);
+      cursor: pointer;
+    }
+
+    /* 3. 购物车 */
+    .service-notice {
+      background: #FDF7EE;
+      border: 1px solid #F3E6D0;
+      border-radius: 8px;
+      padding: 8px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-size: 11px;
+    }
+    .notice-badge {
+      background: var(--brand-gold);
+      color: #FFFFFF;
+      font-size: 9px;
+      font-weight: bold;
+      padding: 1px 4px;
+      border-radius: 2px;
+      margin-right: 6px;
+    }
+    .notice-text { color: #7A5B32; font-size: 10px; }
+
+    .cart-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 60px;
+    }
+    .cart-card {
+      padding: 12px 10px;
+      display: flex;
+      align-items: center;
+    }
+    .custom-checkbox {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1.5px solid #C8BFB5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 8px;
+      flex-shrink: 0;
+      cursor: pointer;
+      background: #fff;
+    }
+    .custom-checkbox.checked {
+      background: var(--brand-red);
+      border-color: var(--brand-red);
+    }
+    .check-tick {
+      width: 6px;
+      height: 4px;
+      border-left: 1.5px solid #FFFFFF;
+      border-bottom: 1.5px solid #FFFFFF;
+      transform: rotate(-45deg);
+    }
+    .goods-thumb-box {
+      width: 72px;
+      height: 72px;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
+    .thumb-char { font-size: 18px; font-family: "Songti SC", serif; font-weight: bold; }
+    .thumb-sub { font-size: 9px; opacity: 0.85; }
+    .goods-info-col { flex: 1; }
+    .goods-name { font-size: 13px; font-weight: 700; color: var(--text-dark); margin-bottom: 3px; }
+    .spec-capsule-tag {
+      background: #F7F3EB;
+      padding: 2px 6px;
+      border-radius: 3px;
+      display: inline-flex;
+      font-size: 9px;
+      margin-bottom: 8px;
+      border: 0.5px solid #ECE3D4;
+    }
+    .luxury-stepper {
+      display: flex;
+      align-items: center;
+      border: 1px solid #DDD4C7;
+      border-radius: 4px;
+      overflow: hidden;
+      font-size: 11px;
+    }
+    .step-ctrl {
+      width: 20px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #FAF8F5;
+      cursor: pointer;
+    }
+    .step-value {
+      width: 22px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      border-left: 1px solid #EBE4D8;
+      border-right: 1px solid #EBE4D8;
+    }
+
+    /* 4. 我的 */
+    .profile-card {
+      padding: 16px 12px 12px;
+      margin-bottom: 12px;
+      background: linear-gradient(180deg, #FFFFFF 0%, #FAF6EE 100%);
+    }
+    .profile-main-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+    .avatar-vector-seal {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: var(--brand-red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-right: 12px;
+      flex-shrink: 0;
+      color: #fff;
+      font-size: 26px;
+      font-family: "Songti SC", serif;
+      font-weight: bold;
+    }
+    .avatar-gold-border {
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      border-radius: 50%;
+      border: 1.5px dashed var(--brand-gold);
+    }
+    .nickname { font-size: 16px; font-weight: 700; color: var(--text-dark); margin-right: 6px; }
+    .vip-seal-tag {
+      background: #F4E8D6;
+      border: 1px solid #DEC5A2;
+      padding: 1px 6px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+    .tag-txt { font-size: 9px; color: #8C5C26; font-weight: 600; }
+    .heritage-code { font-size: 10px; color: var(--text-muted); margin: 2px 0 3px; display: block; }
+    .craft-motto { font-size: 10px; color: #9C7235; font-style: italic; display: block; }
+
+    .stat-matrix-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      border-top: 1px solid #EFE8DE;
+      padding-top: 10px;
+    }
+    .stat-cell { display: flex; flex-direction: column; align-items: center; }
+    .cell-num { font-size: 16px; font-weight: 800; color: var(--text-dark); }
+    .cell-label { font-size: 10px; color: var(--text-muted); }
+    .cell-sep { width: 1px; height: 18px; background: #EAE2D7; }
+
+    .order-panel {
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .panel-title { font-size: 14px; font-weight: 700; color: var(--text-dark); }
+    .order-status-row { display: flex; justify-content: space-around; }
+    .status-cell { display: flex; flex-direction: column; align-items: center; }
+    .vector-icon-box {
+      position: relative;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 4px;
+    }
+    .vector-badge-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      background: #FAF7F2;
+      border: 1px solid #EAE1D3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .icon-shape {
+      width: 12px;
+      height: 12px;
+      border: 1.5px solid var(--brand-red);
+      border-radius: 2px;
+    }
+    .badge-bubble {
+      position: absolute;
+      top: -3px;
+      right: -4px;
+      background: var(--brand-red);
+      color: #fff;
+      font-size: 9px;
+      height: 14px;
+      min-width: 14px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 3px;
+      font-weight: bold;
+    }
+    .status-name { font-size: 11px; color: var(--text-secondary); }
+
+    .service-menu-panel { padding: 0 12px; }
+    .menu-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 0;
+      border-bottom: 1px solid #F4EDE5;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .menu-row:last-child { border-bottom: none; }
+    .menu-dot-ornament {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--brand-gold);
+      margin-right: 8px;
+    }
+    .menu-desc-tag { font-size: 11px; color: #9C7235; margin-right: 4px; }
+    .arrow { color: #BDB2A7; font-size: 14px; }
+
+    /* TabBar */
+    .wechat-tabbar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 56px;
+      background: #FFFFFF;
+      border-top: 1px solid #EAE2D8;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      z-index: 100;
+    }
+    .tabbar-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: color 0.15s;
+    }
+    .tabbar-item.active {
+      color: var(--brand-red);
+      font-weight: 600;
+    }
+    .tabbar-seal {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-family: "Songti SC", serif;
+      font-weight: bold;
+      border: 1px solid currentColor;
+      margin-bottom: 2px;
+    }
+    .tabbar-text { font-size: 10px; }
+
+    /* 快捷切换栏 */
+    .controls-panel {
+      margin-top: 16px;
+      display: flex;
+      gap: 10px;
+    }
+    .ctrl-btn {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: #F8E7D8;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .ctrl-btn:hover {
+      background: var(--brand-red);
+      border-color: var(--brand-red);
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="preview-header">
+    <div class="preview-title">
+      <span>千面虎工坊 · 新中式高级文创微信小程序</span>
+      <span class="seal-gold-mini">非遗专属</span>
+    </div>
+    <div class="preview-desc">河南浚县皮老虎非遗数字化展销平台 · 故宫红与宋锦绢帛色系</div>
+  </div>
+
+  <div class="phone-wrapper">
+    <div class="phone-notch">
+      <div class="camera-lens"></div>
+    </div>
+
+    <div class="phone-screen">
+      <!-- 微信头部导航栏 -->
+      <div class="wechat-header">
+        <div class="nav-title" id="pageTitle">工坊首页</div>
+        <div class="wechat-capsule">
+          <span>•••</span>
+          <span>◎</span>
+        </div>
+      </div>
+
+      <!-- 页面内容容器 -->
+      <div class="page-container">
+        <!-- 1. 首页 -->
+        <div class="page active" id="page-index">
+          <div class="banner-art-content">
+            <div class="banner-top-badge">
+              <span class="seal-mark">国家级非遗</span>
+              <span class="banner-subtitle">浚县皮老虎工坊 · 庚续传习</span>
+            </div>
+            <div class="banner-main-title">啸震四海 · 纳吉呈祥</div>
+            <div class="banner-caption">手拉风箱生虎啸 · 纯手工非遗皮老虎典藏</div>
+            <div class="banner-indicator-bar">
+              <div class="bar active"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+            </div>
+          </div>
+
+          <div class="heritage-intro bg-card">
+            <div class="intro-header">
+              <div class="line-ornament"></div>
+              <div class="header-seal">非遗</div>
+              <div class="intro-title">浚县皮老虎 · 掌上欢鸣</div>
+              <div class="line-ornament"></div>
+            </div>
+            <div class="intro-paragraph">
+              河南浚县“皮老虎”是流传千年的声学民俗玩具瑰宝。手艺人以细腻黄胶泥捏塑威严虎首，腹嵌柔韧生熟皮风箱，尾接通气泥哨。双手推拉之间，皮褶开合，发出一声声苍劲灵动的虎鸣。
+            </div>
+            <div class="craft-badges">
+              <div class="craft-item"><div class="craft-dot"></div>古法黄胶泥捏首</div>
+              <div class="craft-item"><div class="craft-dot"></div>牛皮手工褶扎风箱</div>
+              <div class="craft-item"><div class="craft-dot"></div>天然矿彩手工勾勒</div>
+            </div>
+          </div>
+
+          <div class="section-title-row">
+            <div>
+              <span class="main-heading">工坊好物</span>
+              <span class="sub-heading">匠人手斫 · 纯手工典藏款</span>
+            </div>
+            <span style="font-size: 11px; color: var(--text-muted);">全系皮老虎 ›</span>
+          </div>
+
+          <div class="goods-grid">
+            <div class="goods-card bg-card">
+              <div class="goods-img-box" style="background: linear-gradient(135deg, #C2382C 0%, #981E13 100%);">
+                <div class="art-seal-mini">朱砂赤纹</div>
+                <div class="art-sub">手工矿彩泥塑</div>
+                <div class="tag-floating">非遗传承款</div>
+              </div>
+              <div class="goods-detail">
+                <div class="goods-title">经典朱砂赤纹皮老虎</div>
+                <div class="goods-subtitle">古法黄胶泥捏首 · 牛皮风箱</div>
+                <div class="goods-footer">
+                  <div class="price-container"><span class="currency">¥</span><span class="amount">58</span><span class="cents">.00</span></div>
+                  <div class="btn-buy">加购物车</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="goods-card bg-card">
+              <div class="goods-img-box" style="background: linear-gradient(135deg, #2E5A44 0%, #1A3C2B 100%);">
+                <div class="art-seal-mini">青绿描金</div>
+                <div class="art-sub">金线勾勒彩绘</div>
+                <div class="tag-floating">典藏限定款</div>
+              </div>
+              <div class="goods-detail">
+                <div class="goods-title">国潮青绿金鳞皮老虎</div>
+                <div class="goods-subtitle">青绿泥首描金 · 浑厚虎鸣</div>
+                <div class="goods-footer">
+                  <div class="price-container"><span class="currency">¥</span><span class="amount">58</span><span class="cents">.00</span></div>
+                  <div class="btn-buy">加购物车</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="goods-card bg-card">
+              <div class="goods-img-box" style="background: linear-gradient(135deg, #BD8B4E 0%, #916127 100%);">
+                <div class="art-seal-mini">布艺刺绣</div>
+                <div class="art-sub">纯棉锦缎绒布</div>
+                <div class="tag-floating">民俗文创款</div>
+              </div>
+              <div class="goods-detail">
+                <div class="goods-title">纳福刺绣布艺皮老虎</div>
+                <div class="goods-subtitle">软绒刺绣虎首 · 柔韧风箱</div>
+                <div class="goods-footer">
+                  <div class="price-container"><span class="currency">¥</span><span class="amount">58</span><span class="cents">.00</span></div>
+                  <div class="btn-buy">加购物车</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="goods-card bg-card">
+              <div class="goods-img-box" style="background: linear-gradient(135deg, #6B4E7A 0%, #482C57 100%);">
+                <div class="art-seal-mini">双音泥哨</div>
+                <div class="art-sub">天然生熟牛皮</div>
+                <div class="tag-floating">大师手作款</div>
+              </div>
+              <div class="goods-detail">
+                <div class="goods-title">岁岁安康双音皮老虎</div>
+                <div class="goods-subtitle">双音泥哨开合 · 声如洪钟</div>
+                <div class="goods-footer">
+                  <div class="price-container"><span class="currency">¥</span><span class="amount">58</span><span class="cents">.00</span></div>
+                  <div class="btn-buy">加购物车</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. 定制工坊 (DIY) -->
+        <div class="page" id="page-diy">
+          <div class="stage-pedestal bg-card">
+            <div class="pedestal-corner top-left"></div>
+            <div class="pedestal-corner top-right"></div>
+            <div class="pedestal-corner bottom-left"></div>
+            <div class="pedestal-corner bottom-right"></div>
+
+            <div style="width: 100%;">
+              <div class="plinth-circle">
+                <div class="tiger-emblem-seal" id="tigerEmblem">
+                  <span class="emblem-glyph" id="emblemGlyph">泥</span>
+                </div>
+              </div>
+              <div class="caption-title">皮老虎实物拼装预览</div>
+              <div class="combo-pill">
+                <span class="combo-head" id="comboHead">传统泥头</span>
+                <span class="combo-cross">+</span>
+                <span class="combo-bellows" id="comboBellows">牛皮风箱</span>
+              </div>
+            </div>
+
+            <div class="spec-matrix-bar">
+              <div><span style="color: var(--text-muted);">首部：</span><b id="specHead">古法黄泥</b></div>
+              <div class="matrix-sep"></div>
+              <div><span style="color: var(--text-muted);">箱体：</span><b id="specBellows">天然黄牛皮</b></div>
+              <div class="matrix-sep"></div>
+              <div><span style="color: var(--text-muted);">声学：</span><b>手工陶哨</b></div>
+            </div>
+
+            <div class="pedestal-bottom-hint">
+              <span style="color: var(--brand-gold);">✦</span>
+              <span>选择下方非遗部件 · 实时联动装配工艺与差价</span>
+              <span style="color: var(--brand-gold);">✦</span>
+            </div>
+          </div>
+
+          <div class="custom-card bg-card">
+            <div class="luxury-tab-header">
+              <div class="tab-btn active" id="tabHeadBtn" onclick="switchDiyTab('head')">
+                <div class="tab-index-row"><span class="index-num">01</span><span class="tab-text">虎首选配</span></div>
+                <div class="tab-current-val" id="tabHeadTag">传统泥头</div>
+                <div class="active-indicator" id="indHead"></div>
+              </div>
+              <div class="tab-btn" id="tabBellowsBtn" onclick="switchDiyTab('bellows')">
+                <div class="tab-index-row"><span class="index-num">02</span><span class="tab-text">风箱选材</span></div>
+                <div class="tab-current-val" id="tabBellowsTag">牛皮风箱</div>
+                <div class="active-indicator" id="indBellows" style="display:none;"></div>
+              </div>
+            </div>
+
+            <!-- 虎首选项 -->
+            <div id="diyHeadGroup" class="diy-grid-3">
+              <div class="option-block is-selected" id="head-1" onclick="selectHead(1, '传统泥头', 0, '泥', '#B8281B', '古法黄泥')">
+                <div class="selected-seal">已选</div>
+                <div class="art-avatar-box" style="background: linear-gradient(135deg, #B8281B 0%, #8D180E 100%);">泥</div>
+                <div class="opt-title">传统泥头</div>
+                <div class="opt-desc">黄胶泥手工雕塑</div>
+                <div class="opt-price-tag"><span class="offset-base">标配标价</span></div>
+              </div>
+              <div class="option-block" id="head-2" onclick="selectHead(2, '萌系布头', 12, '布', '#BD8B4E', '刺绣织锦')">
+                <div class="selected-seal" style="display:none;">已选</div>
+                <div class="art-avatar-box" style="background: linear-gradient(135deg, #BD8B4E 0%, #916127 100%);">布</div>
+                <div class="opt-title">萌系布头</div>
+                <div class="opt-desc">织锦软绒刺绣</div>
+                <div class="opt-price-tag"><span class="offset-sign">+¥12.00</span></div>
+              </div>
+              <div class="option-block" id="head-3" onclick="selectHead(3, '国潮彩绘头', 20, '彩', '#2E5A44', '矿彩描金')">
+                <div class="selected-seal" style="display:none;">已选</div>
+                <div class="art-avatar-box" style="background: linear-gradient(135deg, #2E5A44 0%, #1A3C2B 100%);">彩</div>
+                <div class="opt-title">国潮彩绘头</div>
+                <div class="opt-desc">青绿金丝重彩</div>
+                <div class="opt-price-tag"><span class="offset-sign">+¥20.00</span></div>
+              </div>
+            </div>
+
+            <!-- 风箱选项 -->
+            <div id="diyBellowsGroup" class="diy-grid-2" style="display:none;">
+              <div class="option-block is-selected" id="bellows-1" onclick="selectBellows(1, '牛皮风箱', 0, '牛', '#7A4A28', '天然黄牛皮')">
+                <div class="selected-seal">已选</div>
+                <div class="art-avatar-box" style="background: linear-gradient(135deg, #7A4A28 0%, #543015 100%);">牛</div>
+                <div class="opt-title">牛皮风箱</div>
+                <div class="opt-desc">生熟黄牛皮·厚韧耐拉</div>
+                <div class="opt-price-tag"><span class="offset-base">标配标价</span></div>
+              </div>
+              <div class="option-block" id="bellows-2" onclick="selectBellows(2, '羊皮风箱', 10, '羊', '#9C7654', '特级白山羊皮')">
+                <div class="selected-seal" style="display:none;">已选</div>
+                <div class="art-avatar-box" style="background: linear-gradient(135deg, #9C7654 0%, #6E4D31 100%);">羊</div>
+                <div class="opt-title">羊皮风箱</div>
+                <div class="opt-desc">白山羊皮·鸣声清脆</div>
+                <div class="opt-price-tag"><span class="offset-sign">+¥10.00</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="diy-floating-footer bg-card">
+            <div>
+              <span style="font-size: 11px; color: var(--text-secondary);">定制总额：</span>
+              <span style="font-size: 12px; font-weight: bold; color: var(--brand-red);">¥</span>
+              <span class="price-bold-lg" id="diyTotalPrice">88</span>
+              <span style="font-size: 11px; font-weight: bold; color: var(--brand-red);">.00</span>
+              <span style="font-size: 10px; color: #9E938A; margin-left: 4px;">(底价¥88)</span>
+            </div>
+            <div class="btn-create-tiger" onclick="alert('🎉 恭喜！已生成您的专属皮老虎定制方案并加入购物车！')">生成我的皮老虎</div>
+          </div>
+        </div>
+
+        <!-- 3. 购物车 -->
+        <div class="page" id="page-cart">
+          <div class="service-notice">
+            <div style="display: flex; align-items: center;">
+              <span class="notice-badge">礼盒专送</span>
+              <span class="notice-text">非遗皮老虎手工作品 · 顺丰特快保价礼盒装发出</span>
+            </div>
+            <span style="font-size: 10px; color: #A88656;">说明 ›</span>
+          </div>
+
+          <div class="cart-list">
+            <div class="cart-card bg-card">
+              <div class="custom-checkbox checked"><div class="check-tick"></div></div>
+              <div class="goods-thumb-box" style="background: linear-gradient(135deg, #BD8B4E 0%, #916127 100%);">
+                <span class="thumb-char">萌趣</span>
+                <span class="thumb-sub">手作定制</span>
+              </div>
+              <div class="goods-info-col">
+                <div style="display: flex; justify-content: space-between;">
+                  <span class="goods-name">定制工坊 · 刺绣萌趣款皮老虎</span>
+                  <span style="font-size: 10px; color: #A89D93;">删除</span>
+                </div>
+                <div class="spec-capsule-tag">
+                  <span style="color: var(--text-muted);">定制：</span>
+                  <span style="color: var(--brand-red); font-weight: 600;">萌系布头 + 牛皮风箱</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span style="color: var(--brand-red); font-weight: 700; font-size: 15px;">¥ 100.00</span>
+                  <div class="luxury-stepper">
+                    <div class="step-ctrl">-</div>
+                    <div class="step-value">1</div>
+                    <div class="step-ctrl">+</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="cart-card bg-card">
+              <div class="custom-checkbox checked"><div class="check-tick"></div></div>
+              <div class="goods-thumb-box" style="background: linear-gradient(135deg, #2E5A44 0%, #1A3C2B 100%);">
+                <span class="thumb-char">青绿</span>
+                <span class="thumb-sub">手作定制</span>
+              </div>
+              <div class="goods-info-col">
+                <div style="display: flex; justify-content: space-between;">
+                  <span class="goods-name">定制工坊 · 青绿描金典藏款皮老虎</span>
+                  <span style="font-size: 10px; color: #A89D93;">删除</span>
+                </div>
+                <div class="spec-capsule-tag">
+                  <span style="color: var(--text-muted);">定制：</span>
+                  <span style="color: var(--brand-red); font-weight: 600;">国潮彩绘头 + 羊皮风箱</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span style="color: var(--brand-red); font-weight: 700; font-size: 15px;">¥ 118.00</span>
+                  <div class="luxury-stepper">
+                    <div class="step-ctrl">-</div>
+                    <div class="step-value">1</div>
+                    <div class="step-ctrl">+</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="diy-floating-footer bg-card">
+            <div style="display: flex; align-items: center;">
+              <div class="custom-checkbox checked" style="margin-right: 6px;"><div class="check-tick"></div></div>
+              <span style="font-size: 12px; color: var(--text-secondary);">全选 (2)</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <div style="text-align: right;">
+                <span style="font-size: 11px; color: var(--text-secondary);">合计：<b style="color: var(--brand-red); font-size: 16px;">¥ 218.00</b></span>
+                <div style="font-size: 9px; color: #9C7235;">已享工坊非遗礼盒保价</div>
+              </div>
+              <div class="btn-create-tiger">去结算 (2)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. 我的 -->
+        <div class="page" id="page-user">
+          <div class="profile-card bg-card">
+            <div class="profile-main-row">
+              <div class="avatar-vector-seal">
+                <span>虎</span>
+                <div class="avatar-gold-border"></div>
+              </div>
+              <div>
+                <div style="display: flex; align-items: center;">
+                  <span class="nickname">非遗守艺人</span>
+                  <span class="vip-seal-tag"><span class="tag-txt">天字号 · 传承人</span></span>
+                </div>
+                <span class="heritage-code">非遗编号：HN-JX-20260822</span>
+                <span class="craft-motto">“双手推拉引虎啸，一脉匠心续千年”</span>
+              </div>
+            </div>
+            <div class="stat-matrix-row">
+              <div class="stat-cell"><span class="cell-num">03</span><span class="cell-label">我的定制</span></div>
+              <div class="cell-sep"></div>
+              <div class="stat-cell"><span class="cell-num">12</span><span class="cell-label">工坊典藏</span></div>
+              <div class="cell-sep"></div>
+              <div class="stat-cell"><span class="cell-num">280</span><span class="cell-label">非遗积分</span></div>
+            </div>
+          </div>
+
+          <div class="order-panel bg-card">
+            <div class="panel-header">
+              <span class="panel-title">工坊订单</span>
+              <span style="font-size: 11px; color: var(--text-muted);">全部订单 ›</span>
+            </div>
+            <div class="order-status-row">
+              <div class="status-cell">
+                <div class="vector-icon-box">
+                  <div class="vector-badge-icon"><div class="icon-shape"></div></div>
+                  <div class="badge-bubble">1</div>
+                </div>
+                <span class="status-name">待付款</span>
+              </div>
+              <div class="status-cell">
+                <div class="vector-icon-box">
+                  <div class="vector-badge-icon"><div class="icon-shape" style="border-style: dashed;"></div></div>
+                  <div class="badge-bubble">1</div>
+                </div>
+                <span class="status-name">待发货</span>
+              </div>
+              <div class="status-cell">
+                <div class="vector-icon-box">
+                  <div class="vector-badge-icon"><div class="icon-shape" style="transform: rotate(45deg); border-color: #C59A58;"></div></div>
+                </div>
+                <span class="status-name">待收货</span>
+              </div>
+              <div class="status-cell">
+                <div class="vector-icon-box">
+                  <div class="vector-badge-icon"><div class="icon-shape" style="border-color: #8F857D; border-radius: 50% 50% 0 0;"></div></div>
+                </div>
+                <span class="status-name">退换售后</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="service-menu-panel bg-card">
+            <div class="menu-row">
+              <div style="display: flex; align-items: center;"><div class="menu-dot-ornament"></div><span>匠人手记与晒单</span></div>
+              <div><span class="menu-desc-tag">2 条典藏评价</span><span class="arrow">›</span></div>
+            </div>
+            <div class="menu-row">
+              <div style="display: flex; align-items: center;"><div class="menu-dot-ornament"></div><span>浚县皮老虎非遗研学</span></div>
+              <div><span class="menu-desc-tag">暑期传承特训营</span><span class="arrow">›</span></div>
+            </div>
+            <div class="menu-row">
+              <div style="display: flex; align-items: center;"><div class="menu-dot-ornament"></div><span>非遗工坊专属客服</span></div>
+              <div><span class="menu-desc-tag">09:00 - 22:00</span><span class="arrow">›</span></div>
+            </div>
+            <div class="menu-row">
+              <div style="display: flex; align-items: center;"><div class="menu-dot-ornament"></div><span>作品证书防伪查询</span></div>
+              <div><span class="menu-desc-tag">一物一码大师溯源</span><span class="arrow">›</span></div>
+            </div>
+          </div>
+
+          <div style="text-align: center; margin-top: 18px; font-size: 10px; color: #A3978C;">
+            ✦ 国家级非物质文化遗产 · 河南浚县皮老虎保护传承项目 ✦
+          </div>
+        </div>
+      </div>
+
+      <!-- 底部微信原生风格 TabBar -->
+      <div class="wechat-tabbar">
+        <div class="tabbar-item active" onclick="switchPage('index', '工坊首页')">
+          <div class="tabbar-seal">首</div>
+          <div class="tabbar-text">工坊首页</div>
+        </div>
+        <div class="tabbar-item" onclick="switchPage('diy', '定制工坊')">
+          <div class="tabbar-seal">定</div>
+          <div class="tabbar-text">定制工坊</div>
+        </div>
+        <div class="tabbar-item" onclick="switchPage('cart', '购物车')">
+          <div class="tabbar-seal">购</div>
+          <div class="tabbar-text">购物车</div>
+        </div>
+        <div class="tabbar-item" onclick="switchPage('user', '个人中心')">
+          <div class="tabbar-seal">我</div>
+          <div class="tabbar-text">我的</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls-panel">
+    <button class="ctrl-btn" onclick="switchPage('index', '工坊首页')">🏛️ 工坊首页</button>
+    <button class="ctrl-btn" onclick="switchPage('diy', '定制工坊')">🎨 定制工坊 (DIY)</button>
+    <button class="ctrl-btn" onclick="switchPage('cart', '购物车')">🛒 购物车</button>
+    <button class="ctrl-btn" onclick="switchPage('user', '个人中心')">📜 个人中心</button>
+  </div>
+
+  <script>
+    function switchPage(pageKey, title) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tabbar-item').forEach(t => t.classList.remove('active'));
+
+      const targetPage = document.getElementById('page-' + pageKey);
+      if (targetPage) targetPage.classList.add('active');
+
+      const tabIndex = ['index', 'diy', 'cart', 'user'].indexOf(pageKey);
+      if (tabIndex >= 0) {
+        document.querySelectorAll('.tabbar-item')[tabIndex].classList.add('active');
+      }
+
+      document.getElementById('pageTitle').innerText = title;
+    }
+
+    let currentHeadPrice = 0;
+    let currentBellowsPrice = 0;
+    let currentHeadName = "传统泥头";
+    let currentBellowsName = "牛皮风箱";
+
+    function switchDiyTab(tab) {
+      document.getElementById('tabHeadBtn').classList.toggle('active', tab === 'head');
+      document.getElementById('tabBellowsBtn').classList.toggle('active', tab === 'bellows');
+      document.getElementById('indHead').style.display = tab === 'head' ? 'block' : 'none';
+      document.getElementById('indBellows').style.display = tab === 'bellows' ? 'block' : 'none';
+      document.getElementById('diyHeadGroup').style.display = tab === 'head' ? 'grid' : 'none';
+      document.getElementById('diyBellowsGroup').style.display = tab === 'bellows' ? 'grid' : 'none';
+    }
+
+    function selectHead(id, name, price, char, color, mat) {
+      for (let i = 1; i <= 3; i++) {
+        const el = document.getElementById('head-' + i);
+        const badge = el.querySelector('.selected-seal');
+        if (i === id) {
+          el.classList.add('is-selected');
+          if (badge) badge.style.display = 'block';
+        } else {
+          el.classList.remove('is-selected');
+          if (badge) badge.style.display = 'none';
+        }
+      }
+      currentHeadPrice = price;
+      currentHeadName = name;
+      document.getElementById('tabHeadTag').innerText = name;
+      document.getElementById('comboHead').innerText = name;
+      document.getElementById('specHead').innerText = mat;
+      document.getElementById('emblemGlyph').innerText = char;
+      document.getElementById('emblemGlyph').style.color = color;
+      document.getElementById('tigerEmblem').style.borderColor = color;
+      updateDiyTotal();
+    }
+
+    function selectBellows(id, name, price, char, color, mat) {
+      for (let i = 1; i <= 2; i++) {
+        const el = document.getElementById('bellows-' + i);
+        const badge = el.querySelector('.selected-seal');
+        if (i === id) {
+          el.classList.add('is-selected');
+          if (badge) badge.style.display = 'block';
+        } else {
+          el.classList.remove('is-selected');
+          if (badge) badge.style.display = 'none';
+        }
+      }
+      currentBellowsPrice = price;
+      currentBellowsName = name;
+      document.getElementById('tabBellowsTag').innerText = name;
+      document.getElementById('comboBellows').innerText = name;
+      document.getElementById('specBellows').innerText = mat;
+      updateDiyTotal();
+    }
+
+    function updateDiyTotal() {
+      const total = 88 + currentHeadPrice + currentBellowsPrice;
+      document.getElementById('diyTotalPrice').innerText = total;
+    }
+  </script>
+</body>
+</html>

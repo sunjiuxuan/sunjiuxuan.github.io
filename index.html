@@ -1,624 +1,185 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="cyber">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CYBERSPACE // 个人未来主页与作品集</title>
-  <meta name="description" content="全栈工程师与创意思维者的未来科技感交互式个人主页与作品集展示。">
-  
-  <!-- Google Fonts -->
+  <title>AI 医疗与 AI 硬件 · 30天沉浸式学习看板与知识库</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,700;1,400&family=Outfit:wght@300;400;600;700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-  
-  <!-- FontAwesome Icons via CDN -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  
-  <!-- Custom Styles -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <!-- 粒子与矩阵雨背景 Canvas -->
-  <canvas id="bg-canvas"></canvas>
-  <canvas id="matrix-canvas"></canvas>
-
-  <!-- 氛围光晕层 -->
-  <div class="ambient-glow glow-top-left"></div>
-  <div class="ambient-glow glow-bottom-right"></div>
+<body class="dark-theme">
+  <!-- 背景动态光晕 -->
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+  <div class="glow-orb orb-3"></div>
 
   <!-- 顶部导航栏 -->
-  <header class="navbar-container">
-    <nav class="navbar glass-card" id="navbar">
-      <a href="#hero" class="logo">
-        <span class="logo-bracket">&lt;</span>
-        <span class="logo-text">ALEX.DEV</span>
-        <span class="logo-bracket">/&gt;</span>
-        <span class="status-dot" title="Available for hire"></span>
-      </a>
-
-      <ul class="nav-links" id="nav-links">
-        <li><a href="#hero" class="nav-item active"><i class="fa-solid fa-terminal"></i> <span>首页</span></a></li>
-        <li><a href="#about" class="nav-item"><i class="fa-regular fa-user"></i> <span>关于</span></a></li>
-        <li><a href="#skills" class="nav-item"><i class="fa-solid fa-microchip"></i> <span>技能</span></a></li>
-        <li><a href="#projects" class="nav-item"><i class="fa-solid fa-code-fork"></i> <span>项目</span></a></li>
-        <li><a href="#terminal-section" class="nav-item"><i class="fa-solid fa-square-terminal"></i> <span>终端</span></a></li>
-        <li><a href="#experience" class="nav-item"><i class="fa-solid fa-timeline"></i> <span>历程</span></a></li>
-        <li><a href="#contact" class="nav-item"><i class="fa-regular fa-envelope"></i> <span>联系</span></a></li>
-      </ul>
-
-      <div class="nav-actions">
-        <!-- 音效开关 -->
-        <button id="sound-toggle-btn" class="icon-btn" title="切换音效 (Web Audio)" aria-label="切换音效">
-          <i class="fa-solid fa-volume-high"></i>
-        </button>
-        <!-- 主题切换 -->
-        <div class="theme-selector-dropdown">
-          <button id="theme-menu-btn" class="icon-btn" title="选择界面主题" aria-label="主题">
-            <i class="fa-solid fa-palette"></i>
-          </button>
-          <div class="theme-menu glass-card" id="theme-menu">
-            <div class="theme-option active" data-set-theme="cyber">
-              <span class="color-preview cyber-color"></span> 赛博霓虹 (Cyber)
-            </div>
-            <div class="theme-option" data-set-theme="abyss">
-              <span class="color-preview abyss-color"></span> 深渊极光 (Abyss)
-            </div>
-            <div class="theme-option" data-set-theme="matrix">
-              <span class="color-preview matrix-color"></span> 矩阵黑客 (Matrix)
-            </div>
-          </div>
+  <header class="glass-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-logo">🧠</div>
+        <div class="brand-text">
+          <h1>AI Frontiers Hub</h1>
+          <span class="badge-tag">2026 Edition</span>
         </div>
-        <!-- 移动端菜单按钮 -->
-        <button id="mobile-menu-btn" class="icon-btn mobile-only" aria-label="打开菜单">
-          <i class="fa-solid fa-bars"></i>
+      </div>
+      <nav class="nav-links">
+        <button class="nav-btn active" data-tab="tab-tracker">
+          <span class="icon">📅</span> 30天学习计划
+        </button>
+        <button class="nav-btn" data-tab="tab-gallery">
+          <span class="icon">🖼️</span> 核心知识库 & 信息图
+        </button>
+        <button class="nav-btn" data-tab="tab-notebooks">
+          <span class="icon">📚</span> 全部 14 个笔记本索引
+        </button>
+      </nav>
+      <div class="header-actions">
+        <button id="btn-export-log" class="btn-outline">
+          <span>📥 导出打卡记录</span>
         </button>
       </div>
-    </nav>
+    </div>
   </header>
 
   <main class="main-content">
-    <!-- ==================== HERO 英雄区 ==================== -->
-    <section id="hero" class="hero-section">
-      <div class="hero-content">
-        <div class="hero-badge animate-badge">
-          <span class="pulse-light"></span>
-          <span class="badge-text">SYSTEM STATUS: ONLINE // CREATIVE CODER</span>
+    <!-- 顶部进度统计面板 -->
+    <section class="hero-stats-panel glass-panel">
+      <div class="stats-overview">
+        <div class="welcome-text">
+          <h2>AI 医疗 & AI 硬件/潮玩 · 30 天实战进阶</h2>
+          <p>每天 2 小时 · 1h NotebookLM 深度文献研读 + 1h 权威高播放量精选视频精听</p>
         </div>
-
-        <h1 class="hero-title">
-          探索数字世界的 <br>
-          <span class="gradient-text glitch-text" data-text="无限可能">无限可能</span>
-        </h1>
-
-        <div class="typewriter-container">
-          <span class="typewriter-prefix">&gt;&nbsp;我是一名 </span>
-          <span id="typewriter" class="typewriter-text"></span>
-          <span class="cursor">|</span>
-        </div>
-
-        <p class="hero-description">
-          专注于构建极致视觉表现、超高性能与颠覆性交互体验的 Web 3.0 & 全栈应用。
-          融合现代美学与硬核代码，把天马行空的灵感转化为触手可及的数字产品。
-        </p>
-
-        <div class="hero-cta-group">
-          <a href="#projects" class="btn btn-primary glow-button">
-            <i class="fa-solid fa-sparkles"></i> 浏览作品集
-          </a>
-          <a href="#terminal-section" class="btn btn-glass">
-            <i class="fa-solid fa-terminal"></i> 启动极客终端
-          </a>
-          <a href="#contact" class="btn btn-outline">
-            <i class="fa-regular fa-paper-plane"></i> 保持联系
-          </a>
-        </div>
-
-        <div class="social-links">
-          <a href="https://github.com" target="_blank" rel="noreferrer" class="social-icon" title="GitHub"><i class="fa-brands fa-github"></i></a>
-          <a href="https://twitter.com" target="_blank" rel="noreferrer" class="social-icon" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
-          <a href="https://linkedin.com" target="_blank" rel="noreferrer" class="social-icon" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-          <a href="mailto:contact@cyber.dev" class="social-icon" title="Email"><i class="fa-solid fa-envelope"></i></a>
-        </div>
-      </div>
-
-      <!-- 3D 悬浮卡片 -->
-      <div class="hero-visual">
-        <div class="avatar-card-3d glass-card tilt-element" id="hero-card">
-          <div class="card-glow-overlay"></div>
-          <div class="card-inner">
-            <div class="avatar-box">
-              <div class="avatar-ring"></div>
-              <div class="avatar-img-placeholder">
-                <i class="fa-solid fa-user-astronaut"></i>
-              </div>
-            </div>
-            <div class="card-user-info">
-              <h3 class="card-name">Alex Shen</h3>
-              <p class="card-role">Full-Stack Architect & UI Magician</p>
-              <div class="card-tags">
-                <span class="tag">TypeScript</span>
-                <span class="tag">Next.js</span>
-                <span class="tag">WebGL</span>
-                <span class="tag">AI Agent</span>
-              </div>
-            </div>
-            <div class="card-stats-row">
-              <div class="stat-item">
-                <span class="stat-num counter" data-target="5">0</span><span class="stat-plus">+</span>
-                <span class="stat-label">年实战经验</span>
-              </div>
-              <div class="stat-item">
-                <span class="stat-num counter" data-target="48">0</span><span class="stat-plus">+</span>
-                <span class="stat-label">开源项目</span>
-              </div>
-              <div class="stat-item">
-                <span class="stat-num counter" data-target="99">0</span><span class="stat-percent">%</span>
-                <span class="stat-label">交付好评率</span>
-              </div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">🔥</div>
+            <div class="stat-info">
+              <span class="stat-value" id="streak-days">0</span>
+              <span class="stat-label">连续打卡 (天)</span>
             </div>
           </div>
+          <div class="stat-card">
+            <div class="stat-icon">✅</div>
+            <div class="stat-info">
+              <span class="stat-value" id="completed-days">0 / 30</span>
+              <span class="stat-label">已完成天数</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">⏳</div>
+            <div class="stat-info">
+              <span class="stat-value" id="remaining-hours">60</span>
+              <span class="stat-label">剩余学习时长 (小时)</span>
+            </div>
+          </div>
+          <div class="stat-card ring-card">
+            <div class="progress-ring-container">
+              <svg class="progress-ring" width="70" height="70">
+                <circle class="progress-ring__circle-bg" stroke="rgba(255,255,255,0.1)" stroke-width="6" fill="transparent" r="28" cx="35" cy="35"/>
+                <circle class="progress-ring__circle" stroke="#38bdf8" stroke-width="6" stroke-linecap="round" fill="transparent" r="28" cx="35" cy="35"/>
+              </svg>
+              <span class="ring-text" id="ring-percent">0%</span>
+            </div>
+            <div class="stat-info">
+              <span class="stat-label">总体完成率</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 动态进度条 -->
+      <div class="progress-track-wrapper">
+        <div class="progress-labels">
+          <span>🚀 起点启航</span>
+          <span id="current-badge-name">🎖️ 称号：AI 破冰新手</span>
+          <span>🏆 终极目标：AI 医疗与硬件先锋</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="main-progress-bar" style="width: 0%;"></div>
         </div>
       </div>
     </section>
 
-    <!-- ==================== ABOUT & METRICS 关于与数据 ==================== -->
-    <section id="about" class="section-container">
+    <!-- Tab 1: 30天学习进度追踪看板 -->
+    <section id="tab-tracker" class="tab-pane active">
       <div class="section-header">
-        <span class="section-subtitle">// 01. ABOUT ME</span>
-        <h2 class="section-title">代码与艺术的交汇点</h2>
-        <div class="section-line"></div>
+        <div class="title-with-desc">
+          <h3>📅 30 天每日学习任务清单</h3>
+          <p>点击复选框即可标记完成，支持添加个人心得打卡并自动保存在浏览器中</p>
+        </div>
+        <div class="filter-controls">
+          <button class="filter-btn active" data-filter="all">全部周次</button>
+          <button class="filter-btn" data-filter="week1">Week 1 基础筑基</button>
+          <button class="filter-btn" data-filter="week2">Week 2 AI 医疗</button>
+          <button class="filter-btn" data-filter="week3">Week 3 AI 硬件/潮玩</button>
+          <button class="filter-btn" data-filter="week4">Week 4 前沿实战</button>
+        </div>
       </div>
 
-      <div class="about-grid">
-        <div class="about-text-card glass-card">
-          <div class="card-header-bar">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
-            <span class="window-title">bio.md</span>
-          </div>
-          <div class="card-body">
-            <p>
-              你好！我是 Alex，一名热衷于打磨极致用户体验的全栈工程师与界面交互设计师。
-            </p>
-            <p>
-              从复杂的高并发分布式后台，到像素级精致的 3D 网页图形交互，我致力于打破传统前端与后端的界限。我坚信优雅的架构能支撑起天马行空的创意，硬核的技术能让设计焕发生命力。
-            </p>
-            <div class="key-highlights">
-              <div class="highlight-item">
-                <i class="fa-solid fa-bolt highlight-icon"></i>
-                <div>
-                  <strong>极致性能调优</strong>
-                  <p>深耕 Core Web Vitals、60 FPS 流畅渲染与低延迟微服务。</p>
-                </div>
-              </div>
-              <div class="highlight-item">
-                <i class="fa-solid fa-wand-magic-sparkles highlight-icon"></i>
-                <div>
-                  <strong>次世代交互设计</strong>
-                  <p>融合玻璃拟态、动态粒子、平滑过渡与沉浸式声效设计。</p>
-                </div>
-              </div>
-              <div class="highlight-item">
-                <i class="fa-solid fa-robot highlight-icon"></i>
-                <div>
-                  <strong>AI 与 Agent 赋能</strong>
-                  <p>将大语言模型与自主智能体无缝集成进现代化业务产品中。</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-cards-wrapper">
-          <div class="stat-bento-card glass-card tilt-element">
-            <i class="fa-solid fa-code stat-bento-icon"></i>
-            <div class="stat-bento-data">
-              <span class="bento-num counter" data-target="250">0</span><span class="bento-suffix">k+</span>
-            </div>
-            <span class="bento-text">行精雕细琢的代码</span>
-          </div>
-          <div class="stat-bento-card glass-card tilt-element">
-            <i class="fa-solid fa-mug-hot stat-bento-icon"></i>
-            <div class="stat-bento-data">
-              <span class="bento-num counter" data-target="1200">0</span><span class="bento-suffix">+</span>
-            </div>
-            <span class="bento-text">杯深度萃取的咖啡</span>
-          </div>
-          <div class="stat-bento-card glass-card tilt-element">
-            <i class="fa-solid fa-star stat-bento-icon"></i>
-            <div class="stat-bento-data">
-              <span class="bento-num counter" data-target="3600">0</span><span class="bento-suffix">+</span>
-            </div>
-            <span class="bento-text">GitHub Stars 获赞</span>
-          </div>
-          <div class="stat-bento-card glass-card tilt-element">
-            <i class="fa-solid fa-clock-rotate-left stat-bento-icon"></i>
-            <div class="stat-bento-data">
-              <span class="bento-num">99.99</span><span class="bento-suffix">%</span>
-            </div>
-            <span class="bento-text">系统高可用在线率</span>
-          </div>
-        </div>
+      <!-- 周计划卡片流 -->
+      <div class="weeks-container" id="weeks-container">
+        <!-- 动态由 JS 渲染渲染 30 天任务列表 -->
       </div>
     </section>
 
-    <!-- ==================== SKILLS 技能矩阵 ==================== -->
-    <section id="skills" class="section-container">
+    <!-- Tab 2: 核心知识库 & 2K 信息图展厅 -->
+    <section id="tab-gallery" class="tab-pane">
       <div class="section-header">
-        <span class="section-subtitle">// 02. TECH STACK & MATRIX</span>
-        <h2 class="section-title">全栈技能武器库</h2>
-        <div class="section-line"></div>
+        <div class="title-with-desc">
+          <h3>🖼️ 5 大核心领域知识库 & 2K 超高清全景信息图</h3>
+          <p>基于 NotebookLM 深度研究生成的中文架构全景图，点击卡片可全屏高清缩放查看或直达笔记本</p>
+        </div>
       </div>
-
-      <div class="skills-grid">
-        <!-- 前端与视觉 -->
-        <div class="skill-category glass-card">
-          <div class="skill-cat-header">
-            <i class="fa-brands fa-react cat-icon"></i>
-            <h3>前端 & 视觉表现</h3>
-          </div>
-          <div class="skill-list">
-            <div class="skill-row">
-              <div class="skill-info"><span>TypeScript / JavaScript ES6+</span><span>96%</span></div>
-              <div class="skill-progress-bg"><div class="skill-progress-bar" data-width="96%"></div></div>
-            </div>
-            <div class="skill-row">
-              <div class="skill-info"><span>React.js / Next.js / Vue 3</span><span>92%</span></div>
-              <div class="skill-progress-bg"><div class="skill-progress-bar" data-width="92%"></div></div>
-            </div>
-            <div class="skill-row">
-              <div class="skill-info"><span>WebGL / Three.js / Canvas 2D</span><span>85%</span></div>
-              <div class="skill-progress-bg"><div class="skill-progress-bar" data-width="85%"></div></div>
-            </div>
-            <div class="skill-row">
-              <div class="skill-info"><span>CSS3 动效 / Tailwind / Glassmorphism</span><span>95%</span></div>
-              <div class="skill-progress-bg"><div class="skill-progress-bar" data-width="95%"></div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 后端与云原生 -->
-        <div class="skill-category glass-card">
-          <div class="skill-cat-header">
-            <i class="fa-solid fa-server cat-icon"></i>
-            <h3>后端 & 分布式架构</h3>
-          </div>
-          <div class="skill-list">
-            <div class="skill-row">
-              <div class="skill-info"><span>Node.js / Express / NestJS</span><span>90%</span></div>
-              <div class="skill-progress-bg"><div class="skill-progress-bar" data-width="90%"></div></div>
-            </div>
-            <div class="skill-row">
-              <div class="skill-info"><span>Python / FastAPI / PyTorch</span><span>88%</span></div>
-              <div class="skill-progress-bg"><div class="skill-progress-bar" data-width="88%"></div></div>
-            </div>
-            <div class="skill-row">
-              <div class="skill-info"><span>PostgreSQL / Redis / MongoDB</span><span>86%</span></div>
-              <div class="skill-progress-bg"><div class="skill-progress-bar" data-width="86%"></div></div>
-            </div>
-            <div class="skill-row">
-              <div class="skill-info"><span>Docker / K8s / CI/CD 自动化</span><span>82%</span></div>
-              <div class="skill-progress-bg"><div class="skill-progress-bar" data-width="82%"></div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- AI与前沿工程 -->
-        <div class="skill-category glass-card">
-          <div class="skill-cat-header">
-            <i class="fa-solid fa-brain cat-icon"></i>
-            <h3>AI & 前沿工程</h3>
-          </div>
-          <div class="skill-list">
-            <div class="skill-row">
-              <div class="skill-info"><span>LLM Agent / LangChain / RAG</span><span>90%</span></div>
-              <div class="skill-progress-bg"><div class="skill-progress-bar" data-width="90%"></div></div>
-            </div>
-            <div class="skill-row">
-              <div class="skill-info"><span>Prompt Engineering & Fine-tuning</span><span>88%</span></div>
-              <div class="skill-progress-bg"><div class="skill-progress-bar" data-width="88%"></div></div>
-            </div>
-            <div class="skill-row">
-              <div class="skill-info"><span>Web Audio API & 音效合成</span><span>85%</span></div>
-              <div class="skill-progress-bg"><div class="skill-progress-bar" data-width="85%"></div></div>
-            </div>
-            <div class="skill-row">
-              <div class="skill-info"><span>WebRTC & WebSocket 实时通信</span><span>89%</span></div>
-              <div class="skill-progress-bg"><div class="skill-progress-bar" data-width="89%"></div></div>
-            </div>
-          </div>
-        </div>
+      <div class="gallery-grid" id="gallery-grid">
+        <!-- 由 JS 渲染 5 个核心信息图卡片 -->
       </div>
     </section>
 
-    <!-- ==================== PROJECTS 精选项目 ==================== -->
-    <section id="projects" class="section-container">
+    <!-- Tab 3: 全部 14 个笔记本索引 -->
+    <section id="tab-notebooks" class="tab-pane">
       <div class="section-header">
-        <span class="section-subtitle">// 03. FEATURED WORK</span>
-        <h2 class="section-title">精选创意与实战项目</h2>
-        <div class="section-line"></div>
-      </div>
-
-      <!-- 项目筛选分类 -->
-      <div class="project-filter-bar">
-        <button class="filter-btn active" data-filter="all">全部项目 (All)</button>
-        <button class="filter-btn" data-filter="web">Web 应用</button>
-        <button class="filter-btn" data-filter="ai">AI 智能体</button>
-        <button class="filter-btn" data-filter="visual">3D / 创意视觉</button>
-      </div>
-
-      <div class="projects-grid" id="projects-grid">
-        <!-- 项目 1 -->
-        <article class="project-card glass-card tilt-element" data-category="ai web">
-          <div class="project-img-box">
-            <div class="project-overlay">
-              <span class="project-badge">AI + WebApp</span>
-            </div>
-            <div class="card-banner-graphic banner-1">
-              <i class="fa-solid fa-network-wired"></i>
-            </div>
-          </div>
-          <div class="project-info">
-            <h3 class="project-title">NeuroFlow - 多智能体协同工作流引擎</h3>
-            <p class="project-desc">
-              基于大语言模型与 DAG 拓扑执行的可视化 AI Agent 编排平台，支持毫秒级状态同步与分布式执行流监控。
-            </p>
-            <div class="project-tags">
-              <span>TypeScript</span>
-              <span>Next.js 14</span>
-              <span>Python</span>
-              <span>WebSocket</span>
-            </div>
-            <div class="project-links">
-              <a href="https://github.com" target="_blank" rel="noreferrer" class="p-link"><i class="fa-brands fa-github"></i> 源码</a>
-              <a href="javascript:void(0)" class="p-link demo-trigger" data-demo="NeuroFlow 智能体平台"><i class="fa-solid fa-arrow-up-right-from-square"></i> 在线演示</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- 项目 2 -->
-        <article class="project-card glass-card tilt-element" data-category="visual web">
-          <div class="project-img-box">
-            <div class="project-overlay">
-              <span class="project-badge">WebGL 3D</span>
-            </div>
-            <div class="card-banner-graphic banner-2">
-              <i class="fa-solid fa-cube"></i>
-            </div>
-          </div>
-          <div class="project-info">
-            <h3 class="project-title">CyberVerse 3D - 赛博空间元宇宙沙盒</h3>
-            <p class="project-desc">
-              基于 WebGL 和 Three.js 构建的次世代网页端 3D 沉浸式互动虚拟展厅，拥有光追反射与空间音频系统。
-            </p>
-            <div class="project-tags">
-              <span>Three.js</span>
-              <span>GLSL Shader</span>
-              <span>Web Audio</span>
-              <span>Vite</span>
-            </div>
-            <div class="project-links">
-              <a href="https://github.com" target="_blank" rel="noreferrer" class="p-link"><i class="fa-brands fa-github"></i> 源码</a>
-              <a href="javascript:void(0)" class="p-link demo-trigger" data-demo="CyberVerse 3D 空间"><i class="fa-solid fa-arrow-up-right-from-square"></i> 在线演示</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- 项目 3 -->
-        <article class="project-card glass-card tilt-element" data-category="web">
-          <div class="project-img-box">
-            <div class="project-overlay">
-              <span class="project-badge">SaaS Cloud</span>
-            </div>
-            <div class="card-banner-graphic banner-3">
-              <i class="fa-solid fa-gauge-high"></i>
-            </div>
-          </div>
-          <div class="project-info">
-            <h3 class="project-title">PulseMetrics - 实时微服务 APM 监控大盘</h3>
-            <p class="project-desc">
-              面向高并发微服务的高性能实时指标可视化平台，支持百万 QPS 级别流量穿透分析与智能故障报警。
-            </p>
-            <div class="project-tags">
-              <span>React</span>
-              <span>ECharts</span>
-              <span>Go</span>
-              <span>ClickHouse</span>
-            </div>
-            <div class="project-links">
-              <a href="https://github.com" target="_blank" rel="noreferrer" class="p-link"><i class="fa-brands fa-github"></i> 源码</a>
-              <a href="javascript:void(0)" class="p-link demo-trigger" data-demo="PulseMetrics 监控中心"><i class="fa-solid fa-arrow-up-right-from-square"></i> 在线演示</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- 项目 4 -->
-        <article class="project-card glass-card tilt-element" data-category="ai">
-          <div class="project-img-box">
-            <div class="project-overlay">
-              <span class="project-badge">Open Source AI</span>
-            </div>
-            <div class="card-banner-graphic banner-4">
-              <i class="fa-solid fa-microchip"></i>
-            </div>
-          </div>
-          <div class="project-info">
-            <h3 class="project-title">OmniSynthetix - 跨模态知识图谱挖掘器</h3>
-            <p class="project-desc">
-              自动解析学术论文、技术文档并自动构建动态知识图谱与向量语义检索库的高效工具集。
-            </p>
-            <div class="project-tags">
-              <span>Python</span>
-              <span>FastAPI</span>
-              <span>Neo4j</span>
-              <span>Qdrant</span>
-            </div>
-            <div class="project-links">
-              <a href="https://github.com" target="_blank" rel="noreferrer" class="p-link"><i class="fa-brands fa-github"></i> 源码</a>
-              <a href="javascript:void(0)" class="p-link demo-trigger" data-demo="OmniSynthetix 挖掘器"><i class="fa-solid fa-arrow-up-right-from-square"></i> 在线演示</a>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- ==================== INTERACTIVE TERMINAL 极客终端 ==================== -->
-    <section id="terminal-section" class="section-container">
-      <div class="section-header">
-        <span class="section-subtitle">// 04. GEEK INTERACTIVE CLI</span>
-        <h2 class="section-title">极客交互式控制台</h2>
-        <div class="section-line"></div>
-      </div>
-
-      <div class="terminal-wrapper glass-card">
-        <div class="terminal-topbar">
-          <div class="terminal-actions">
-            <span class="t-dot close" id="term-close"></span>
-            <span class="t-dot minimize"></span>
-            <span class="t-dot maximize" id="term-max"></span>
-          </div>
-          <div class="terminal-title">guest@alex-cyber-os: ~ (zsh)</div>
-          <div class="terminal-hint">输入 <code>help</code> 查看可用命令</div>
+        <div class="title-with-desc">
+          <h3>📚 NotebookLM 全量知识库索引（14 个笔记本 · 489 篇来源）</h3>
+          <p>实时检索并可直达个人所有课程、考试、竞赛与前沿研究笔记本</p>
         </div>
-        <div class="terminal-body" id="terminal-body">
-          <div class="terminal-output" id="terminal-output">
-            <div class="t-line text-cyan">CYBER_OS Kernel v4.2.0-release (x86_64-apple-darwin)</div>
-            <div class="t-line text-muted">欢迎进入终端控制台！你可以输入命令行指令与系统进行深度互动。</div>
-            <div class="t-line">输入 <span class="text-highlight">help</span> 列出所有指令，或输入 <span class="text-highlight">matrix</span> 开启黑客帝国数字雨。</div>
-          </div>
-          <div class="terminal-input-row">
-            <span class="t-prompt text-green">guest@cyber-os:~$</span>
-            <input type="text" id="terminal-input" autocomplete="off" spellcheck="false" placeholder="输入命令..." />
-          </div>
+        <div class="search-box">
+          <input type="text" id="notebook-search-input" placeholder="🔍 搜索笔记本名称或领域关键字...">
         </div>
       </div>
-    </section>
-
-    <!-- ==================== EXPERIENCE 历程与时间轴 ==================== -->
-    <section id="experience" class="section-container">
-      <div class="section-header">
-        <span class="section-subtitle">// 05. CAREER MILESTONES</span>
-        <h2 class="section-title">历程与里程碑</h2>
-        <div class="section-line"></div>
-      </div>
-
-      <div class="timeline-container">
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content glass-card">
-            <span class="timeline-date">2024 - 至今</span>
-            <h3 class="timeline-role">Lead Full-Stack & AI Architect</h3>
-            <h4 class="timeline-company">@ CyberNext Labs</h4>
-            <p>主导新一代生成式 AI 应用中台与多智能体自动化引擎研发，负责核心架构演进及前端高阶动效标准建设。</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content glass-card">
-            <span class="timeline-date">2022 - 2024</span>
-            <h3 class="timeline-role">Senior Frontend Specialist</h3>
-            <h4 class="timeline-company">@ Horizon Tech</h4>
-            <p>负责云原生可观测性大盘及 3D 数据可视化中枢的前端架构，主导 WebGL 渲染管线重构，提升渲染帧率 120%。</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content glass-card">
-            <span class="timeline-date">2020 - 2022</span>
-            <h3 class="timeline-role">Full-Stack Engineer</h3>
-            <h4 class="timeline-company">@ Quantum Byte</h4>
-            <p>参与高并发微服务 API 网关、分布式任务调度与现代单页 Web 应用研发，从 0 到 1 打造多个核心产品线。</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== CONTACT 联系与留言 ==================== -->
-    <section id="contact" class="section-container">
-      <div class="section-header">
-        <span class="section-subtitle">// 06. GET IN TOUCH</span>
-        <h2 class="section-title">开启下一场合作</h2>
-        <div class="section-line"></div>
-      </div>
-
-      <div class="contact-grid">
-        <div class="contact-info-card glass-card">
-          <h3>随时向我发送信号</h3>
-          <p>
-            无论是新项目合作、技术交流、架构咨询，还是仅仅想打个招呼，我都会尽快回复你！
-          </p>
-          
-          <div class="contact-details">
-            <div class="contact-row">
-              <i class="fa-solid fa-location-dot contact-icon"></i>
-              <div>
-                <strong>坐标</strong>
-                <p>上海 / 远程可就职全球</p>
-              </div>
-            </div>
-            <div class="contact-row">
-              <i class="fa-solid fa-envelope contact-icon"></i>
-              <div>
-                <strong>电子邮箱</strong>
-                <p>alex.shen@cyberpace.dev</p>
-              </div>
-            </div>
-            <div class="contact-row">
-              <i class="fa-solid fa-shield-halved contact-icon"></i>
-              <div>
-                <strong>PGP 指纹</strong>
-                <p class="pgp-text">4A89 9C21 88DF 00B1 9A55</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <form id="contact-form" class="contact-form glass-card">
-          <div class="form-group">
-            <label for="form-name">你的称呼</label>
-            <input type="text" id="form-name" placeholder="例如：Neo / 开发者伙伴" required>
-          </div>
-          <div class="form-group">
-            <label for="form-email">你的邮箱</label>
-            <input type="email" id="form-email" placeholder="name@domain.com" required>
-          </div>
-          <div class="form-group">
-            <label for="form-message">留言内容</label>
-            <textarea id="form-message" rows="4" placeholder="写下你的想法、项目需求或任何你想聊的..." required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary glow-button submit-btn">
-            <i class="fa-solid fa-paper-plane"></i> <span>发送加密信息</span>
-          </button>
-          <div id="form-feedback" class="form-feedback"></div>
-        </form>
+      <div class="notebooks-grid" id="notebooks-grid">
+        <!-- 由 JS 渲染全部 14 个笔记本卡片 -->
       </div>
     </section>
   </main>
 
-  <!-- 页脚 -->
-  <footer class="footer-container">
-    <div class="footer-content">
-      <div class="footer-logo">
-        <span class="logo-bracket">&lt;</span>
-        <span class="logo-text">ALEX.DEV</span>
-        <span class="logo-bracket">/&gt;</span>
+  <!-- 全屏信息图预览模态框 Modal -->
+  <div id="image-modal" class="modal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content glass-panel">
+      <div class="modal-header">
+        <h4 id="modal-title">信息图全景预览</h4>
+        <div class="modal-actions">
+          <a id="modal-download-btn" href="#" target="_blank" class="btn-primary" download>
+            📥 下载 2K 高清原图
+          </a>
+          <a id="modal-open-nb-btn" href="#" target="_blank" class="btn-outline">
+            📓 直达对应笔记本
+          </a>
+          <button id="modal-close-btn" class="btn-icon">✕</button>
+        </div>
       </div>
-      <p class="footer-text">
-        © 2026 Alex Shen. Crafted with <i class="fa-solid fa-heart text-pink"></i>, Vanilla CSS & Modern JS.
-      </p>
-      <a href="#hero" class="back-to-top" title="回到顶部">
-        <i class="fa-solid fa-chevron-up"></i>
-      </a>
+      <div class="modal-body">
+        <img id="modal-image" src="" alt="信息图预览">
+      </div>
     </div>
+  </div>
+
+  <footer class="glass-footer">
+    <p>Powered by Google NotebookLM & Antigravity IDE · 2026 AI Learning Hub</p>
   </footer>
 
-  <!-- 提示弹窗 (Toast) -->
-  <div id="toast" class="toast glass-card"></div>
-
-  <!-- Custom Scripts -->
-  <script src="script.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

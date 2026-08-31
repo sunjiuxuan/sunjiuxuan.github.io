@@ -1,0 +1,41 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/diy/diy",
+    "pages/cart/cart",
+    "pages/user/user"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#B8281B",
+    "navigationBarTitleText": "千面虎工坊",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#FAF8F5"
+  },
+  "tabBar": {
+    "color": "#8F857D",
+    "selectedColor": "#B8281B",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "工坊首页"
+      },
+      {
+        "pagePath": "pages/diy/diy",
+        "text": "定制工坊"
+      },
+      {
+        "pagePath": "pages/cart/cart",
+        "text": "购物车"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

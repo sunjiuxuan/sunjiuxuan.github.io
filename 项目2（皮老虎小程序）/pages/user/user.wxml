@@ -1,0 +1,95 @@
+<view class="user-page">
+  <!-- 1. 顶部：新中式典雅守艺人档案卡片 -->
+  <view class="profile-card bg-card">
+    <view class="profile-main-row">
+      <!-- 圆形非遗头像容器（支持真实头像与国风印记） -->
+      <view class="avatar-wrapper">
+        <image class="avatar-real-img" src="/images/avatar/user_avatar.png" mode="aspectFill" wx:if="{{hasAvatar}}"></image>
+        <view class="avatar-vector-seal" wx:else>
+          <text class="avatar-char">虎</text>
+          <view class="avatar-gold-border"></view>
+        </view>
+      </view>
+
+      <view class="user-meta-col">
+        <view class="name-badge-row">
+          <text class="nickname">{{userInfo.nickname}}</text>
+          <view class="vip-seal-tag">
+            <text class="tag-txt">天字号 · 传承人</text>
+          </view>
+        </view>
+        <text class="heritage-code">非遗编号：HN-JX-20260822</text>
+        <text class="craft-motto">“双手推拉引虎啸，一脉匠心续千年”</text>
+      </view>
+    </view>
+
+    <!-- 守艺人数据统计矩阵 -->
+    <view class="stat-matrix-row">
+      <view class="stat-cell">
+        <text class="cell-num">03</text>
+        <text class="cell-label">我的定制</text>
+      </view>
+      <view class="cell-sep"></view>
+      <view class="stat-cell">
+        <text class="cell-num">12</text>
+        <text class="cell-label">工坊典藏</text>
+      </view>
+      <view class="cell-sep"></view>
+      <view class="stat-cell">
+        <text class="cell-num">280</text>
+        <text class="cell-label">非遗积分</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 2. 中间：工坊订单管理矩阵 -->
+  <view class="order-panel bg-card">
+    <view class="panel-header">
+      <text class="panel-title">工坊订单</text>
+      <view class="all-orders-link">
+        <text>全部订单</text>
+        <text class="arrow">›</text>
+      </view>
+    </view>
+
+    <view class="order-status-row">
+      <block wx:for="{{orderStatusList}}" wx:key="name">
+        <view class="status-cell">
+          <view class="vector-icon-box">
+            <!-- 矢量微图标 -->
+            <view class="vector-badge-icon">
+              <view class="icon-shape shape-{{item.iconType}}"></view>
+            </view>
+            <view class="badge-bubble" wx:if="{{item.count > 0}}">{{item.count}}</view>
+          </view>
+          <text class="status-name">{{item.name}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 3. 底部：专属非遗权益服务列表 -->
+  <view class="service-menu-panel bg-card">
+    <block wx:for="{{menuList}}" wx:key="title">
+      <view class="menu-row">
+        <view class="menu-left-part">
+          <view class="menu-dot-ornament"></view>
+          <text class="menu-text">{{item.title}}</text>
+        </view>
+        <view class="menu-right-part">
+          <text class="menu-desc-tag" wx:if="{{item.desc}}">{{item.desc}}</text>
+          <text class="arrow">›</text>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 底部官方非遗背书文案 -->
+  <view class="heritage-footer">
+    <view class="footer-seal-line">
+      <text class="dot-sym">✦</text>
+      <text class="footer-txt">国家级非物质文化遗产 · 河南浚县皮老虎保护传承项目</text>
+      <text class="dot-sym">✦</text>
+    </view>
+  </view>
+</view>

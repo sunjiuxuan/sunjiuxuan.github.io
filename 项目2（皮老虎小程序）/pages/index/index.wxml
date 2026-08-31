@@ -1,0 +1,103 @@
+<view class="container">
+  <!-- 1. 顶部非遗艺术展大图/轮播区 -->
+  <view class="banner-wrapper">
+    <view class="banner-box">
+      <!-- 预留真实图片容器，如未放图片自动呈现高级国风底色与纹理 -->
+      <image class="banner-real-img" src="/images/banner/home_banner.png" mode="aspectFill" wx:if="{{hasBannerImg}}"></image>
+      <view class="banner-art-content" wx:else>
+        <view class="banner-top-badge">
+          <view class="seal-mark">国家级非遗</view>
+          <text class="banner-subtitle">浚县皮老虎工坊 · 庚续传习</text>
+        </view>
+        <view class="banner-main-title">啸震四海 · 纳吉呈祥</view>
+        <view class="banner-caption">手拉风箱生虎啸 · 纯手工非遗皮老虎典藏</view>
+        <view class="banner-indicator-bar">
+          <view class="bar active"></view>
+          <view class="bar"></view>
+          <view class="bar"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 2. 非遗历史与工艺简介（已完全剥离泥咕咕，纯粹聚焦皮老虎） -->
+  <view class="heritage-intro bg-card">
+    <view class="intro-header">
+      <view class="line-ornament"></view>
+      <view class="header-seal">
+        <text class="seal-char">非</text>
+        <text class="seal-char">遗</text>
+      </view>
+      <text class="intro-title">浚县皮老虎 · 掌上欢鸣</text>
+      <view class="line-ornament right"></view>
+    </view>
+    <view class="intro-body">
+      <text class="intro-paragraph">
+        河南浚县“皮老虎”是流传千年的声学民俗玩具瑰宝。手艺人以细腻黄胶泥捏塑威严虎首，腹嵌柔韧生熟皮风箱，尾接通气泥哨。双手推拉之间，皮褶开合，发出一声声苍劲灵动的虎鸣。
+      </text>
+    </view>
+    <view class="craft-badges">
+      <view class="craft-item">
+        <view class="craft-dot"></view>
+        <text>古法黄胶泥捏首</text>
+      </view>
+      <view class="craft-item">
+        <view class="craft-dot"></view>
+        <text>牛皮手工褶扎风箱</text>
+      </view>
+      <view class="craft-item">
+        <view class="craft-dot"></view>
+        <text>天然矿彩手工勾勒</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 3. 工坊好物精选区 -->
+  <view class="goods-section">
+    <view class="section-title-row">
+      <view class="title-left">
+        <text class="main-heading">工坊好物</text>
+        <text class="sub-heading">匠人手斫 · 纯手工典藏款</text>
+      </view>
+      <view class="filter-pill">
+        <text>全系皮老虎</text>
+        <text class="arrow">›</text>
+      </view>
+    </view>
+
+    <view class="goods-grid">
+      <block wx:for="{{goodsList}}" wx:key="id">
+        <view class="goods-card bg-card">
+          <!-- 商品主图容器（预留真实图片接口） -->
+          <view class="goods-img-box" style="background: {{item.bgGradient}};">
+            <image class="goods-img" src="{{item.imagePath}}" mode="aspectFill" wx:if="{{item.hasImg}}"></image>
+            <view class="goods-placeholder-art" wx:else>
+              <view class="art-seal-mini">{{item.series}}</view>
+              <view class="art-sub">{{item.craftTag}}</view>
+            </view>
+            <view class="tag-floating">{{item.editionTag}}</view>
+          </view>
+          
+          <!-- 商品文字与价格信息 -->
+          <view class="goods-detail">
+            <view class="name-row">
+              <text class="goods-title">{{item.name}}</text>
+            </view>
+            <text class="goods-subtitle">{{item.desc}}</text>
+            
+            <view class="goods-footer">
+              <view class="price-container">
+                <text class="currency">¥</text>
+                <text class="amount">{{item.price}}</text>
+                <text class="cents">.00</text>
+              </view>
+              <view class="btn-buy">
+                <text>加购物车</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

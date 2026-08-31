@@ -1,0 +1,84 @@
+<view class="cart-page">
+  <!-- 顶部尊享非遗礼盒装服务通知 -->
+  <view class="service-notice">
+    <view class="notice-left">
+      <view class="notice-badge">礼盒专送</view>
+      <text class="notice-text">非遗皮老虎手工作品 · 顺丰特快保价礼盒装发出</text>
+    </view>
+    <text class="notice-more">说明 ›</text>
+  </view>
+
+  <!-- 购物车清单列表 (2 条定制数据) -->
+  <view class="cart-list">
+    <block wx:for="{{cartItems}}" wx:key="id">
+      <view class="cart-card bg-card">
+        <!-- 矢量复选框 -->
+        <view class="custom-checkbox {{item.selected ? 'checked' : ''}}">
+          <view class="check-tick" wx:if="{{item.selected}}"></view>
+        </view>
+
+        <!-- 商品图片/艺术印记容器 -->
+        <view class="goods-thumb-box" style="background: {{item.bgGradient}};">
+          <image class="thumb-img" src="{{item.imagePath}}" mode="aspectFill" wx:if="{{item.hasImg}}"></image>
+          <view class="thumb-art" wx:else>
+            <text class="thumb-char">{{item.shortTag}}</text>
+            <text class="thumb-sub">手作定制</text>
+          </view>
+        </view>
+
+        <!-- 商品详细定制信息 -->
+        <view class="goods-info-col">
+          <view class="title-row">
+            <text class="goods-name">{{item.name}}</text>
+            <text class="delete-link">删除</text>
+          </view>
+          
+          <view class="spec-capsule-tag">
+            <text class="spec-prefix">定制：</text>
+            <text class="spec-content">{{item.specs}}</text>
+          </view>
+
+          <view class="card-bottom-row">
+            <view class="price-box">
+              <text class="sym">¥</text>
+              <text class="val">{{item.price}}</text>
+              <text class="dot">.00</text>
+            </view>
+
+            <!-- 极简高质感步进器 -->
+            <view class="luxury-stepper">
+              <view class="step-ctrl minus">-</view>
+              <view class="step-value">{{item.count}}</view>
+              <view class="step-ctrl plus">+</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 购物车底部结算悬浮栏 -->
+  <view class="cart-footer-bar bg-card">
+    <view class="footer-select-all">
+      <view class="custom-checkbox checked">
+        <view class="check-tick"></view>
+      </view>
+      <text class="select-all-label">全选 (2)</text>
+    </view>
+
+    <view class="footer-checkout-right">
+      <view class="total-summary">
+        <view class="sum-line">
+          <text class="sum-label">合计：</text>
+          <text class="sum-sym">¥</text>
+          <text class="sum-amount">{{totalAmount}}</text>
+          <text class="sum-dot">.00</text>
+        </view>
+        <text class="sum-benefit">已享工坊非遗礼盒保价</text>
+      </view>
+      <view class="btn-checkout btn-primary-luxury">
+        <text>去结算 (2)</text>
+      </view>
+    </view>
+  </view>
+</view>

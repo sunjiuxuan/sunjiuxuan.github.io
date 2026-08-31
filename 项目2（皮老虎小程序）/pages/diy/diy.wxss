@@ -1,0 +1,388 @@
+.diy-page {
+  padding: 24rpx;
+  padding-bottom: 160rpx;
+}
+
+/* 展台预览区 */
+.preview-stage-wrap {
+  margin-bottom: 24rpx;
+}
+
+.stage-pedestal {
+  height: 440rpx;
+  background: radial-gradient(circle at 50% 30%, #FFFFFF 0%, #FBF7F0 100%);
+  border: 2rpx solid #E5DC CE;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30rpx 20rpx 16rpx;
+  overflow: hidden;
+}
+
+/* 仿宋四角铜纹 */
+.pedestal-corner {
+  position: absolute;
+  width: 20rpx;
+  height: 20rpx;
+  border: 3rpx solid #C59A58;
+}
+.top-left { top: 12rpx; left: 12rpx; border-right: none; border-bottom: none; }
+.top-right { top: 12rpx; right: 12rpx; border-left: none; border-bottom: none; }
+.bottom-left { bottom: 12rpx; left: 12rpx; border-right: none; border-top: none; }
+.bottom-right { bottom: 12rpx; right: 12rpx; border-left: none; border-top: none; }
+
+.art-tiger-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.tiger-live-img {
+  width: 280rpx;
+  height: 220rpx;
+}
+
+.vector-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.plinth-circle {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  background: #FAF5ED;
+  box-shadow: inset 0 2rpx 8rpx rgba(0,0,0,0.06), 0 6rpx 20rpx rgba(197, 154, 88, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14rpx;
+}
+
+.tiger-emblem-seal {
+  width: 86rpx;
+  height: 86rpx;
+  border-radius: 50%;
+  border: 3rpx solid #B8281B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: #FFFFFF;
+}
+
+.emblem-glyph {
+  font-size: 42rpx;
+  font-weight: bold;
+  font-family: "Songti SC", "SimSun", serif;
+}
+
+.preview-main-caption {
+  text-align: center;
+  margin-bottom: 16rpx;
+}
+
+.caption-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #1D1917;
+  letter-spacing: 3rpx;
+  display: block;
+  margin-bottom: 6rpx;
+}
+
+.combo-pill {
+  display: inline-flex;
+  align-items: center;
+  background: #F4ECE1;
+  padding: 4rpx 18rpx;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+  color: #5C524B;
+  border: 1rpx solid #E8DFD3;
+}
+
+.combo-head {
+  color: #B8281B;
+  font-weight: 600;
+}
+
+.combo-cross {
+  margin: 0 8rpx;
+  color: #B0A59A;
+  font-size: 20rpx;
+}
+
+.combo-bellows {
+  color: #8C6F48;
+  font-weight: 600;
+}
+
+/* 规格矩阵栏 */
+.spec-matrix-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16rpx;
+  background: #FFFFFF;
+  padding: 8rpx 24rpx;
+  border-radius: 30rpx;
+  border: 1rpx solid #EFE9E0;
+}
+
+.matrix-item {
+  font-size: 20rpx;
+}
+
+.matrix-item .lbl {
+  color: #8F857D;
+}
+
+.matrix-item .val {
+  color: #1D1917;
+  font-weight: 500;
+}
+
+.matrix-sep {
+  width: 1rpx;
+  height: 20rpx;
+  background: #E5DDD2;
+}
+
+.pedestal-bottom-hint {
+  font-size: 20rpx;
+  color: #9E938A;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.sparkle {
+  color: #C59A58;
+}
+
+/* 定制选项卡卡片 */
+.custom-card {
+  padding: 24rpx;
+}
+
+.luxury-tab-header {
+  display: flex;
+  border-bottom: 2rpx solid #F0EAE0;
+  margin-bottom: 24rpx;
+}
+
+.tab-btn {
+  flex: 1;
+  text-align: center;
+  padding-bottom: 18rpx;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tab-index-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8rpx;
+}
+
+.index-num {
+  font-size: 20rpx;
+  color: #BDB2A7;
+  font-weight: bold;
+}
+
+.tab-text {
+  font-size: 30rpx;
+  color: #5C524B;
+  font-weight: 600;
+}
+
+.tab-current-val {
+  font-size: 20rpx;
+  color: #8F857D;
+  margin-top: 4rpx;
+}
+
+.tab-btn.active .index-num {
+  color: #C59A58;
+}
+
+.tab-btn.active .tab-text {
+  color: #B8281B;
+}
+
+.tab-btn.active .tab-current-val {
+  color: #B8281B;
+}
+
+.active-indicator {
+  position: absolute;
+  bottom: -2rpx;
+  width: 80rpx;
+  height: 4rpx;
+  background: #B8281B;
+  border-radius: 2rpx;
+}
+
+/* 部件选项网格 */
+.option-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16rpx;
+}
+
+.option-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20rpx;
+}
+
+.option-block {
+  background: #FAF8F5;
+  border: 2rpx solid #EBE4D8;
+  border-radius: 16rpx;
+  padding: 20rpx 10rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+/* 红色高级选中状态 */
+.option-block.is-selected {
+  border-color: #B8281B;
+  background: #FFF9F7;
+  box-shadow: 0 4rpx 16rpx rgba(184, 40, 27, 0.12);
+}
+
+.selected-seal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #B8281B;
+  color: #FFFFFF;
+  font-size: 18rpx;
+  padding: 2rpx 10rpx;
+  border-bottom-left-radius: 10rpx;
+  border-top-right-radius: 14rpx;
+  font-weight: 500;
+}
+
+.art-avatar-box {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12rpx;
+  box-shadow: 0 4rpx 10rpx rgba(0,0,0,0.1);
+}
+
+.art-char {
+  color: #FFFFFF;
+  font-size: 32rpx;
+  font-weight: bold;
+  font-family: "Songti SC", serif;
+}
+
+.opt-title {
+  font-size: 26rpx;
+  font-weight: 700;
+  color: #1D1917;
+  margin-bottom: 4rpx;
+}
+
+.opt-desc {
+  font-size: 20rpx;
+  color: #8F857D;
+  margin-bottom: 10rpx;
+  text-align: center;
+}
+
+.opt-price-tag {
+  font-size: 22rpx;
+}
+
+.offset-sign {
+  color: #B8281B;
+  font-weight: 700;
+}
+
+.offset-base {
+  color: #8F857D;
+  font-size: 20rpx;
+}
+
+/* 底部悬浮栏 */
+.diy-floating-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120rpx;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32rpx;
+  border-top: 1rpx solid #EBE4D8;
+  z-index: 100;
+  box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.05);
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.price-row {
+  display: flex;
+  align-items: baseline;
+}
+
+.price-title {
+  font-size: 24rpx;
+  color: #5C524B;
+  margin-right: 6rpx;
+}
+
+.cur {
+  font-size: 26rpx;
+  color: #B8281B;
+  font-weight: bold;
+}
+
+.price-bold {
+  font-size: 46rpx;
+  font-weight: 800;
+  color: #B8281B;
+  line-height: 1;
+}
+
+.price-dot {
+  font-size: 24rpx;
+  color: #B8281B;
+  font-weight: bold;
+}
+
+.price-detail-tip {
+  font-size: 20rpx;
+  color: #9E938A;
+  margin-top: 2rpx;
+}
+
+.btn-create-tiger {
+  padding: 22rpx 44rpx;
+  font-size: 28rpx;
+  letter-spacing: 1rpx;
+}

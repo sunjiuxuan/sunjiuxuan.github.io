@@ -1,0 +1,330 @@
+.user-page {
+  padding: 24rpx;
+  padding-bottom: 60rpx;
+}
+
+/* 守艺人档案卡片 */
+.profile-card {
+  padding: 32rpx 24rpx 24rpx;
+  margin-bottom: 24rpx;
+  background: linear-gradient(180deg, #FFFFFF 0%, #FAF6EE 100%);
+}
+
+.profile-main-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 28rpx;
+}
+
+.avatar-wrapper {
+  width: 124rpx;
+  height: 124rpx;
+  border-radius: 50%;
+  position: relative;
+  margin-right: 24rpx;
+  flex-shrink: 0;
+  box-shadow: 0 6rpx 16rpx rgba(184, 40, 27, 0.2);
+}
+
+.avatar-real-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.avatar-vector-seal {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #B8281B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.avatar-char {
+  color: #FFFFFF;
+  font-size: 54rpx;
+  font-weight: bold;
+  font-family: "Songti SC", "SimSun", serif;
+}
+
+.avatar-gold-border {
+  position: absolute;
+  top: -4rpx;
+  left: -4rpx;
+  right: -4rpx;
+  bottom: -4rpx;
+  border-radius: 50%;
+  border: 2rpx dashed #C59A58;
+}
+
+.user-meta-col {
+  flex: 1;
+}
+
+.name-badge-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6rpx;
+}
+
+.nickname {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #1D1917;
+  margin-right: 12rpx;
+}
+
+.vip-seal-tag {
+  background: #F4E8D6;
+  border: 1rpx solid #DEC5A2;
+  padding: 2rpx 12rpx;
+  border-radius: 20rpx;
+}
+
+.tag-txt {
+  font-size: 18rpx;
+  color: #8C5C26;
+  font-weight: 600;
+  letter-spacing: 1rpx;
+}
+
+.heritage-code {
+  font-size: 20rpx;
+  color: #8F857D;
+  margin-bottom: 8rpx;
+  display: block;
+  letter-spacing: 1rpx;
+}
+
+.craft-motto {
+  font-size: 20rpx;
+  color: #9C7235;
+  font-style: italic;
+  display: block;
+}
+
+/* 统计数据矩阵 */
+.stat-matrix-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-top: 1rpx solid #EFE8DE;
+  padding-top: 22rpx;
+}
+
+.stat-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cell-num {
+  font-size: 34rpx;
+  font-weight: 800;
+  color: #1D1917;
+  font-family: -apple-system, Helvetica;
+}
+
+.cell-label {
+  font-size: 20rpx;
+  color: #8F857D;
+  margin-top: 4rpx;
+}
+
+.cell-sep {
+  width: 1rpx;
+  height: 40rpx;
+  background: #EAE2D7;
+}
+
+/* 订单面板 */
+.order-panel {
+  padding: 24rpx;
+  margin-bottom: 24rpx;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24rpx;
+}
+
+.panel-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #1D1917;
+}
+
+.all-orders-link {
+  font-size: 22rpx;
+  color: #8F857D;
+  display: flex;
+  align-items: center;
+}
+
+.order-status-row {
+  display: flex;
+  justify-content: space-around;
+}
+
+.status-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.vector-icon-box {
+  position: relative;
+  width: 64rpx;
+  height: 64rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8rpx;
+}
+
+.vector-badge-icon {
+  width: 52rpx;
+  height: 52rpx;
+  border-radius: 14rpx;
+  background: #FAF7F2;
+  border: 1.5rpx solid #EAE1D3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 纯 CSS 绘制的高级矢量图标形态 */
+.icon-shape {
+  width: 22rpx;
+  height: 22rpx;
+  border: 2.5rpx solid #B8281B;
+  border-radius: 4rpx;
+}
+.shape-pay {
+  border-radius: 50%;
+  position: relative;
+}
+.shape-pay::after {
+  content: '¥';
+  position: absolute;
+  top: -3rpx;
+  left: 2rpx;
+  font-size: 16rpx;
+  color: #B8281B;
+  font-weight: bold;
+}
+.shape-send {
+  border-style: dashed;
+}
+.shape-receive {
+  transform: rotate(45deg);
+  border-color: #C59A58;
+}
+.shape-service {
+  border-radius: 50% 50% 0 0;
+  border-color: #8F857D;
+}
+
+.badge-bubble {
+  position: absolute;
+  top: -6rpx;
+  right: -8rpx;
+  background: #B8281B;
+  color: #FFFFFF;
+  font-size: 18rpx;
+  height: 28rpx;
+  min-width: 28rpx;
+  border-radius: 14rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6rpx;
+  font-weight: bold;
+  box-shadow: 0 2rpx 6rpx rgba(184, 40, 27, 0.3);
+}
+
+.status-name {
+  font-size: 22rpx;
+  color: #5C524B;
+}
+
+/* 服务菜单面板 */
+.service-menu-panel {
+  padding: 0 24rpx;
+}
+
+.menu-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #F4EDE5;
+}
+
+.menu-row:last-child {
+  border-bottom: none;
+}
+
+.menu-left-part {
+  display: flex;
+  align-items: center;
+}
+
+.menu-dot-ornament {
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 50%;
+  background: #C59A58;
+  margin-right: 18rpx;
+}
+
+.menu-text {
+  font-size: 28rpx;
+  color: #1D1917;
+  font-weight: 500;
+}
+
+.menu-right-part {
+  display: flex;
+  align-items: center;
+}
+
+.menu-desc-tag {
+  font-size: 22rpx;
+  color: #9C7235;
+  margin-right: 8rpx;
+}
+
+.arrow {
+  font-size: 28rpx;
+  color: #BDB2A7;
+}
+
+/* 底部背书 */
+.heritage-footer {
+  text-align: center;
+  margin-top: 40rpx;
+}
+
+.footer-seal-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10rpx;
+}
+
+.dot-sym {
+  color: #C59A58;
+  font-size: 16rpx;
+}
+
+.footer-txt {
+  font-size: 20rpx;
+  color: #A3978C;
+  letter-spacing: 1rpx;
+}

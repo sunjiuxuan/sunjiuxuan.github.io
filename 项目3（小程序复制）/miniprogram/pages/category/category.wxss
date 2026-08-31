@@ -1,0 +1,237 @@
+.category-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #fff;
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  height: 44px;
+  background-color: #fff;
+  position: relative;
+  z-index: 10;
+}
+
+.logo-box-black {
+  font-size: 24px;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-right: 15px;
+  color: #333;
+}
+
+.search-bar {
+  flex: 1;
+  height: 32px;
+  background-color: #f5f5f5;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  margin-right: 100px; /* 避开右侧胶囊按钮 */
+}
+
+.search-icon {
+  font-size: 14px;
+  margin-right: 6px;
+  color: #999;
+}
+
+.search-text {
+  font-size: 13px;
+  color: #999;
+}
+
+.category-body {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  border-top: 1px solid #f0f0f0;
+}
+
+.side-nav {
+  width: 90px;
+  background-color: #f8f8f8;
+  height: 100%;
+}
+
+.nav-item {
+  height: 55px;
+  line-height: 55px;
+  text-align: center;
+  font-size: 13px;
+  color: #666;
+  position: relative;
+}
+
+.nav-item.active {
+  background-color: #7a101b;
+  color: #fff;
+  font-weight: bold;
+}
+
+.main-content {
+  flex: 1;
+  padding: 15px;
+  height: 100%;
+  box-sizing: border-box;
+  background-color: #fff;
+  overflow-y: auto;
+}
+
+.banner-card {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.beige-bg {
+  background: linear-gradient(180deg, #f5efe6 0%, #e8ddc9 100%);
+  height: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.banner-placeholder {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ring-large {
+  font-size: 80px;
+  text-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.banner-text-box {
+  text-align: center;
+  color: #fff;
+}
+
+.banner-title {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+}
+
+.banner-subtitle {
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.bag-icon-small {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  background: rgba(255,255,255,0.3);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  margin: 10px 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dot {
+  font-size: 10px;
+  margin: 0 8px;
+}
+
+.red-bg-card {
+  background: linear-gradient(135deg, #7a101b 0%, #4a0003 100%);
+  height: 160px;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.two-rings {
+  font-size: 40px;
+  margin-right: 15px;
+  transform: rotate(-15deg);
+}
+
+.red-card-text {
+  flex: 1;
+  color: #fff;
+}
+
+.red-card-title {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.red-card-subtitle {
+  font-size: 11px;
+  opacity: 0.8;
+  margin-bottom: 15px;
+}
+
+.btn-detail {
+  display: inline-block;
+  border: 1px solid rgba(255,255,255,0.6);
+  padding: 4px 12px;
+  font-size: 11px;
+  border-radius: 2px;
+}
+
+.crown-bg-card {
+  background: linear-gradient(135deg, #6c1b35 0%, #3a0b1b 100%);
+  height: 120px;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  margin-bottom: 0;
+}
+
+.crown-icon {
+  font-size: 50px;
+  margin-right: 15px;
+}
+
+.crown-card-text {
+  flex: 1;
+  color: #fff;
+  text-align: right;
+}
+
+.crown-title {
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #ffd700;
+}
+
+.crown-subtitle {
+  font-size: 10px;
+  opacity: 0.8;
+}
+
+.bottom-spacer {
+  height: 50px;
+}

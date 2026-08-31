@@ -1,0 +1,4 @@
+.DS_Store
+*.log
+scratch_notebooks_summary.json
+node_modules/

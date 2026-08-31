@@ -1,0 +1,65 @@
+<scroll-view scroll-y class="page-container">
+  <!-- 头部区域 -->
+  <view class="header-section">
+    <view class="nav-bar">
+      <view class="left-actions">
+        <view class="icon-box"><text class="icon-search">🔍</text></view>
+        <view class="icon-box"><text class="icon-bag">🛍️</text></view>
+        <view class="icon-box"><text class="icon-msg">🔔</text></view>
+      </view>
+      <view class="logo-box">DR</view>
+    </view>
+    
+    <view class="hero-content">
+      <view class="jewelry-placeholder">
+        <view class="circle-gold"></view>
+        <view class="rose-gold"></view>
+      </view>
+      <view class="slogan-main">真心为誓 相伴一生</view>
+      <view class="slogan-sub">DR诠释爱的滋养与呵护</view>
+      <view class="btn-explore">即刻探索</view>
+    </view>
+  </view>
+
+  <!-- 金刚区 -->
+  <view class="grid-section">
+    <view class="grid-item">
+      <view class="icon-wrapper red-bg">💍</view>
+      <text class="grid-text">求婚钻戒</text>
+    </view>
+    <view class="grid-item">
+      <view class="icon-wrapper red-bg">🤝</view>
+      <text class="grid-text">结婚对戒</text>
+    </view>
+    <view class="grid-item">
+      <view class="icon-wrapper red-bg">🐯</view>
+      <text class="grid-text">黄金</text>
+    </view>
+    <view class="grid-item">
+      <view class="icon-wrapper red-bg">🎁</view>
+      <text class="grid-text">纪念日礼物</text>
+    </view>
+  </view>
+
+  <!-- 推荐展示区 -->
+  <view class="recommend-section">
+    <view class="card-item dark-card">
+      <view class="card-img-placeholder">
+        <view class="box-open">💍</view>
+      </view>
+      <text class="card-title">专属指纹印刻</text>
+    </view>
+    <view class="card-item red-card">
+      <view class="card-img-placeholder">
+        <view class="box-closed">🎀</view>
+      </view>
+      <text class="card-title">甄选推荐</text>
+    </view>
+    <view class="card-item dark-card">
+      <view class="card-img-placeholder">
+        <view class="butterfly">🦋</view>
+      </view>
+      <text class="card-title">重磅上新</text>
+    </view>
+  </view>
+</scroll-view>

@@ -1,0 +1,156 @@
+<view class="diy-page">
+  <!-- 1. 上半部：工坊定制实时展台预览区 -->
+  <view class="preview-stage-wrap">
+    <view class="stage-pedestal bg-card">
+      <!-- 仿宋金线角花装饰 -->
+      <view class="pedestal-corner top-left"></view>
+      <view class="pedestal-corner top-right"></view>
+      <view class="pedestal-corner bottom-left"></view>
+      <view class="pedestal-corner bottom-right"></view>
+
+      <!-- 实时预览主体（支持真实拼装图与矢量渲染） -->
+      <view class="art-tiger-preview">
+        <!-- 预留真实渲染图 -->
+        <image class="tiger-live-img" src="{{currentPreviewImg}}" mode="aspectFit" wx:if="{{hasCustomImg}}"></image>
+        
+        <!-- 矢量高保真艺术展台 -->
+        <view class="vector-display" wx:else>
+          <view class="plinth-circle">
+            <view class="tiger-emblem-seal" style="border-color: {{currentHead.accentColor}};">
+              <text class="emblem-glyph" style="color: {{currentHead.accentColor}};">虎</text>
+              <view class="emblem-ring"></view>
+            </view>
+          </view>
+          
+          <view class="preview-main-caption">
+            <text class="caption-title">皮老虎实物拼装预览</text>
+            <view class="combo-pill">
+              <text class="combo-head">{{currentHead.name}}</text>
+              <text class="combo-cross">+</text>
+              <text class="combo-bellows">{{currentBellows.name}}</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- 实时装配规格微标 -->
+        <view class="spec-matrix-bar">
+          <view class="matrix-item">
+            <text class="lbl">首部：</text>
+            <text class="val">{{currentHead.material}}</text>
+          </view>
+          <view class="matrix-sep"></view>
+          <view class="matrix-item">
+            <text class="lbl">箱体：</text>
+            <text class="val">{{currentBellows.material}}</text>
+          </view>
+          <view class="matrix-sep"></view>
+          <view class="matrix-item">
+            <text class="lbl">声学：</text>
+            <text class="val">手工陶哨</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="pedestal-bottom-hint">
+        <text class="sparkle">✦</text>
+        <text>选择下方非遗部件 · 实时联动装配工艺与差价</text>
+        <text class="sparkle">✦</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 2. 下半部：定制工坊部件库 -->
+  <view class="custom-card bg-card">
+    <!-- 奢华双段式 Tab 切换 -->
+    <view class="luxury-tab-header">
+      <view 
+        class="tab-btn {{activeTab === 'head' ? 'active' : ''}}" 
+        bindtap="switchTab" 
+        data-tab="head"
+      >
+        <view class="tab-index-row">
+          <text class="index-num">01</text>
+          <text class="tab-text">虎首选配</text>
+        </view>
+        <view class="tab-current-val">{{currentHead.name}}</view>
+        <view class="active-indicator" wx:if="{{activeTab === 'head'}}"></view>
+      </view>
+
+      <view 
+        class="tab-btn {{activeTab === 'bellows' ? 'active' : ''}}" 
+        bindtap="switchTab" 
+        data-tab="bellows"
+      >
+        <view class="tab-index-row">
+          <text class="index-num">02</text>
+          <text class="tab-text">风箱选材</text>
+        </view>
+        <view class="tab-current-val">{{currentBellows.name}}</view>
+        <view class="active-indicator" wx:if="{{activeTab === 'bellows'}}"></view>
+      </view>
+    </view>
+
+    <!-- 选项卡内容区 -->
+    <view class="options-container">
+      <!-- 虎首模块 (3个选项) -->
+      <view class="option-grid-3" wx:if="{{activeTab === 'head'}}">
+        <block wx:for="{{headOptions}}" wx:key="id">
+          <view 
+            class="option-block {{selectedHeadId === item.id ? 'is-selected' : ''}}"
+            bindtap="selectHead"
+            data-id="{{item.id}}"
+          >
+            <view class="selected-seal" wx:if="{{selectedHeadId === item.id}}">已选</view>
+            <view class="art-avatar-box" style="background: {{item.bgGradient}};">
+              <text class="art-char">{{item.shortChar}}</text>
+            </view>
+            <text class="opt-title">{{item.name}}</text>
+            <text class="opt-desc">{{item.desc}}</text>
+            <view class="opt-price-tag">
+              <text class="offset-sign" wx:if="{{item.priceOffset > 0}}">+¥{{item.priceOffset}}</text>
+              <text class="offset-base" wx:else>标配标价</text>
+            </view>
+          </view>
+        </block>
+      </view>
+
+      <!-- 风箱模块 (2个选项) -->
+      <view class="option-grid-2" wx:if="{{activeTab === 'bellows'}}">
+        <block wx:for="{{bellowsOptions}}" wx:key="id">
+          <view 
+            class="option-block {{selectedBellowsId === item.id ? 'is-selected' : ''}}"
+            bindtap="selectBellows"
+            data-id="{{item.id}}"
+          >
+            <view class="selected-seal" wx:if="{{selectedBellowsId === item.id}}">已选</view>
+            <view class="art-avatar-box" style="background: {{item.bgGradient}};">
+              <text class="art-char">{{item.shortChar}}</text>
+            </view>
+            <text class="opt-title">{{item.name}}</text>
+            <text class="opt-desc">{{item.desc}}</text>
+            <view class="opt-price-tag">
+              <text class="offset-sign" wx:if="{{item.priceOffset > 0}}">+¥{{item.priceOffset}}</text>
+              <text class="offset-base" wx:else>标配标价</text>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <!-- 3. 底部悬浮定制结算栏 -->
+  <view class="diy-floating-footer bg-card">
+    <view class="footer-left">
+      <view class="price-row">
+        <text class="price-title">定制总额</text>
+        <text class="cur">¥</text>
+        <text class="price-bold">{{totalPrice}}</text>
+        <text class="price-dot">.00</text>
+      </view>
+      <text class="price-detail-tip">基础底价¥88 + 部件差价</text>
+    </view>
+    <view class="btn-create-tiger btn-primary-luxury">
+      <text>生成我的皮老虎</text>
+    </view>
+  </view>
+</view>

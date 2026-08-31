@@ -1,0 +1,75 @@
+<view class="page-container category-page">
+  <!-- 头部搜索区 -->
+  <view class="category-header">
+    <view class="logo-box-black">DR</view>
+    <view class="search-bar">
+      <text class="search-icon">🔍</text>
+      <text class="search-text">搜索</text>
+    </view>
+  </view>
+
+  <!-- 主体内容 -->
+  <view class="category-body">
+    <!-- 左侧导航 -->
+    <scroll-view class="side-nav" scroll-y>
+      <view class="nav-item active">甄选专区</view>
+      <view class="nav-item">浪漫礼物</view>
+      <view class="nav-item">会员日专区</view>
+      <view class="nav-item">品牌新作</view>
+      <view class="nav-item">极速发货</view>
+      <view class="nav-item">钻戒</view>
+      <view class="nav-item">对戒</view>
+      <view class="nav-item">黄金</view>
+      <view class="nav-item">饰品</view>
+    </scroll-view>
+
+    <!-- 右侧内容 -->
+    <scroll-view class="main-content" scroll-y>
+      <!-- 卡片1: 顶部大 Banner (圣洁教堂) -->
+      <view class="banner-card beige-bg">
+        <view class="banner-placeholder">
+          <view class="ring-large">💍</view>
+        </view>
+        <view class="banner-text-box">
+          <view class="banner-title">圣洁教堂 见证真爱</view>
+          <view class="banner-subtitle">DR美学作品 尽显璀璨</view>
+        </view>
+        <view class="bag-icon-small">🛍️</view>
+      </view>
+
+      <!-- 标题: 会员日专区 -->
+      <view class="section-title">
+        <text class="dot">•</text> 会员日专区 <text class="dot">•</text>
+      </view>
+
+      <!-- 卡片2: 会员日专区 (红色背景双戒) -->
+      <view class="banner-card red-bg-card">
+        <view class="two-rings">
+          <text>💍</text><text>💍</text>
+        </view>
+        <view class="red-card-text">
+          <view class="red-card-title">每月20日 让爱发生</view>
+          <view class="red-card-subtitle">甄选下单礼遇</view>
+          <view class="btn-detail">查看详情</view>
+        </view>
+      </view>
+
+      <!-- 标题: 品牌新作 -->
+      <view class="section-title">
+        <text class="dot">•</text> 品牌新作 <text class="dot">•</text>
+      </view>
+
+      <!-- 卡片3: 品牌新作 (千金冠) -->
+      <view class="banner-card crown-bg-card">
+        <view class="crown-icon">👑</view>
+        <view class="crown-card-text">
+          <view class="crown-title">DR千金冠</view>
+          <view class="crown-subtitle">婚嫁五金天花板 | 明星大婚甄选</view>
+        </view>
+      </view>
+      
+      <!-- 底部留白 -->
+      <view class="bottom-spacer"></view>
+    </scroll-view>
+  </view>
+</view>

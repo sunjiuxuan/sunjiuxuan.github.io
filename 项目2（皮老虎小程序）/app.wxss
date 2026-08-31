@@ -1,0 +1,78 @@
+/** 
+ * 千面虎工坊 · 新中式高级文创视觉规范
+ * 全局样式体系
+ **/
+page {
+  background-color: #FAF8F5;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Noto Sans SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  color: #1D1917;
+  box-sizing: border-box;
+  font-size: 28rpx;
+  -webkit-font-smoothing: antialiased;
+}
+
+view, text, image, navigator {
+  box-sizing: border-box;
+}
+
+/* 高级非遗色系 */
+.text-cinnabar { color: #B8281B; }  /* 故宫朱砂红 */
+.text-gold { color: #C59A58; }      /* 沉香古铜金 */
+.text-dark { color: #1D1917; }      /* 松烟墨黑 */
+.text-secondary { color: #5C524B; } /* 黛赭褐 */
+.text-muted { color: #8F857D; }     /* 绢布灰 */
+
+/* 商业级高级卡片质感：多层次微阴影 + 极细微绢纸边框 */
+.bg-card { 
+  background: #FFFFFF; 
+  border-radius: 20rpx; 
+  border: 1rpx solid #ECE5D8;
+  box-shadow: 0 4rpx 20rpx -2rpx rgba(78, 44, 25, 0.05), 0 2rpx 6rpx -1rpx rgba(78, 44, 25, 0.03); 
+}
+
+/* 经典国风篆印/印章徽章 */
+.seal-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5rpx solid #B8281B;
+  color: #B8281B;
+  font-size: 20rpx;
+  padding: 2rpx 10rpx;
+  border-radius: 6rpx;
+  background: rgba(184, 40, 27, 0.04);
+  font-weight: 500;
+  letter-spacing: 1rpx;
+}
+
+.gold-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5rpx solid #C59A58;
+  color: #9C7235;
+  font-size: 20rpx;
+  padding: 2rpx 10rpx;
+  border-radius: 6rpx;
+  background: rgba(197, 154, 88, 0.08);
+  font-weight: 500;
+}
+
+/* 商业级朱砂红鎏金高质感按钮 */
+.btn-primary-luxury {
+  background: linear-gradient(135deg, #C93022 0%, #A81F14 100%);
+  color: #FFFFFF;
+  font-weight: 600;
+  border-radius: 40rpx;
+  box-shadow: 0 6rpx 18rpx rgba(184, 40, 27, 0.25);
+  border: 1rpx solid rgba(255, 255, 255, 0.25);
+  transition: all 0.2s ease;
+}
+
+/* 通用无缝图片容器（支持真实图片与高阶Fallback） */
+.img-fill {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
