@@ -1,10 +1,9 @@
 /**
- * NotebookLM 30-Day AI Learning Dashboard (1:1 Edition)
- * Full Interactive & LocalStorage Persistence
+ * NotebookLM 30-Day AI Learning Dashboard (Super Enhanced Interaction)
  */
 
 const STUDY_PLAN = [
-  // ================= WEEK 1 (7 Days) =================
+  // ================= WEEK 1 (Day 1 - 7) =================
   {
     day: 1, week: 1,
     title: "大模型 2026 演进趋势与推理算力格局",
@@ -69,7 +68,7 @@ const STUDY_PLAN = [
     ytUrl: "https://www.youtube.com/results?search_query=NotebookLM+Studio+Audio+Overview"
   },
 
-  // ================= WEEK 2 (7 Days) =================
+  // ================= WEEK 2 (Day 8 - 14) =================
   {
     day: 8, week: 2,
     title: "企业级医疗 AI 落地与临床痛点分析",
@@ -134,7 +133,7 @@ const STUDY_PLAN = [
     ytUrl: "https://www.youtube.com/results?search_query=Building+RAG+Clinical+Healthcare"
   },
 
-  // ================= WEEK 3 (7 Days) =================
+  // ================= WEEK 3 (Day 15 - 21) =================
   {
     day: 15, week: 3,
     title: "2026 AI 独立硬件成败复盘与行业反思",
@@ -199,7 +198,7 @@ const STUDY_PLAN = [
     ytUrl: "https://www.youtube.com/results?search_query=Build+AI+Hardware+Product+2026"
   },
 
-  // ================= WEEK 4 (9 Days) =================
+  // ================= WEEK 4 (Day 22 - 30) =================
   {
     day: 22, week: 4,
     title: "端侧算力芯片（NVIDIA Jetson Thor / 高通）",
@@ -283,8 +282,7 @@ const STUDY_PLAN = [
   }
 ];
 
-// 5 大 2K 全景信息图
-const INFOGRAPHICS_DATA = [
+const INFOGRAPHICS = [
   {
     title: "1. 智能体工程与工作流编排全景图",
     img: "https://lh3.googleusercontent.com/notebooklm/AKYWMX9quDEH5fOOL9zCDeXP6ZqjAcEY8yeC4wpjeIcRpQJlqQZ49R6joZPKud8sRsn-gSM1Qfi57ZtiRgVhoFEp5ZiYHlP-OxyCz9pGkKcT06PGHg9LqKyns7bQQVgUssBdh6qo8JVmdGmztDaIGlg2hVBDMd7Q3A=w2752-d-h1536-mp2",
@@ -313,18 +311,31 @@ const INFOGRAPHICS_DATA = [
 ];
 
 const STORAGE_KEY = "ai_tang_study_progress_v2";
-let progressState = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+let progressState = {};
 
-document.addEventListener("DOMContentLoaded", () => {
+try {
+  progressState = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+} catch(e) {
+  progressState = {};
+}
+
+function initDashboard() {
   renderTimeline();
   renderInfographics();
   updateGlobalStats();
   initActions();
-});
+}
 
-// 渲染 4 周手风琴
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initDashboard);
+} else {
+  initDashboard();
+}
+
+// 渲染周列表 (默认全部展开，一目了然)
 function renderTimeline() {
   const container = document.getElementById("timeline-container");
+  if (!container) return;
   container.innerHTML = "";
 
   const weeksConfig = [
@@ -334,9 +345,9 @@ function renderTimeline() {
     { num: 4, title: "Week 4: 前沿融合与端到端产品实战 (Day 22 - 30)", days: STUDY_PLAN.filter(d => d.week === 4) }
   ];
 
-  weeksConfig.forEach((w, idx) => {
+  weeksConfig.forEach(w => {
     const acc = document.createElement("div");
-    acc.className = `week-accordion ${idx === 0 ? 'open' : ''}`;
+    acc.className = "week-accordion open"; // 默认直接展开
     
     acc.innerHTML = `
       <div class="week-accordion-header">
@@ -351,7 +362,7 @@ function renderTimeline() {
       </div>
     `;
 
-    // 绑定手风琴展开收起
+    // 点击周标题折叠/展开
     acc.querySelector(".week-accordion-header").addEventListener("click", () => {
       acc.classList.toggle("open");
     });
@@ -359,7 +370,6 @@ function renderTimeline() {
     container.appendChild(acc);
   });
 
-  // 绑定 Checkbox 与 展开详情 事件
   attachDayEvents();
 }
 
@@ -368,28 +378,32 @@ function renderDayRow(d) {
 
   return `
     <div class="day-row-card ${isDone ? 'completed' : ''}" id="day-row-${d.day}">
-      <div class="day-row-main">
-        <input type="checkbox" class="day-checkbox-custom" data-day="${d.day}" ${isDone ? 'checked' : ''}>
-        <div class="day-info-wrap" data-expand-day="${d.day}">
+      <div class="day-row-main" onclick="toggleDayDetails(${d.day})">
+        <input type="checkbox" class="day-checkbox-custom" data-day="${d.day}" ${isDone ? 'checked' : ''} onclick="event.stopPropagation();">
+        <div class="day-info-wrap">
           <div class="day-tag-title">
             <span class="day-tag">DAY ${String(d.day).padStart(2, '0')}</span>
             <span class="day-heading">${d.title}</span>
           </div>
           <p class="day-summary-text">${d.desc}</p>
-          <div style="font-size:0.75rem; color:#38bdf8; display:flex; align-items:center; gap:4px;">
-            <span>点击展开资料链接 ➔</span>
-          </div>
+        </div>
+        <div class="expand-btn-badge" id="expand-badge-${d.day}">
+          <span>展开详情 ▾</span>
         </div>
       </div>
-      <div class="day-details-expand">
+      <div class="day-details-expand" id="details-${d.day}">
         <div class="links-grid-box">
           <div class="link-item-row">
-            <span class="link-type-badge badge-nb">📓 NotebookLM 研读</span>
-            <a href="${d.nbUrl}" target="_blank" class="link-anchor">${d.nbTitle} ↗</a>
+            <span class="link-type-badge badge-nb">📓 研读库</span>
+            <a href="${d.nbUrl}" target="_blank" rel="noopener noreferrer" class="link-anchor" onclick="event.stopPropagation();">
+              ${d.nbTitle} ↗
+            </a>
           </div>
           <div class="link-item-row">
-            <span class="link-type-badge badge-yt">🎬 精选必看视频</span>
-            <a href="${d.ytUrl}" target="_blank" class="link-anchor">${d.ytTitle} ↗</a>
+            <span class="link-type-badge badge-yt">🎬 必看视频</span>
+            <a href="${d.ytUrl}" target="_blank" rel="noopener noreferrer" class="link-anchor" onclick="event.stopPropagation();">
+              ${d.ytTitle} ↗
+            </a>
           </div>
         </div>
       </div>
@@ -397,32 +411,35 @@ function renderDayRow(d) {
   `;
 }
 
+// 点击展开/折叠单天详情
+window.toggleDayDetails = function(day) {
+  const card = document.getElementById(`day-row-${day}`);
+  const badge = document.getElementById(`expand-badge-${day}`);
+  if (!card) return;
+  card.classList.toggle("expanded");
+  if (badge) {
+    badge.innerHTML = card.classList.contains("expanded") ? "<span>收起详情 ▴</span>" : "<span>展开详情 ▾</span>";
+  }
+};
+
 function attachDayEvents() {
   document.querySelectorAll(".day-checkbox-custom").forEach(cb => {
     cb.addEventListener("change", (e) => {
-      e.stopPropagation();
       const day = e.target.getAttribute("data-day");
       const card = document.getElementById(`day-row-${day}`);
 
       if (e.target.checked) {
         progressState[day] = true;
-        card.classList.add("completed");
+        if (card) card.classList.add("completed");
       } else {
         delete progressState[day];
-        card.classList.remove("completed");
+        if (card) card.classList.remove("completed");
       }
 
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(progressState));
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(progressState));
+      } catch(err){}
       updateGlobalStats();
-    });
-  });
-
-  // 点击展开详情
-  document.querySelectorAll("[data-expand-day]").forEach(el => {
-    el.addEventListener("click", () => {
-      const day = el.getAttribute("data-expand-day");
-      const card = document.getElementById(`day-row-${day}`);
-      card.classList.toggle("expanded");
     });
   });
 }
@@ -433,34 +450,41 @@ function updateGlobalStats() {
   const percent = Math.round((completed / total) * 100);
   const remaining = (total - completed) * 2;
 
-  // 四周分别统计
   const w1Count = STUDY_PLAN.filter(d => d.week === 1 && progressState[d.day]).length;
   const w2Count = STUDY_PLAN.filter(d => d.week === 2 && progressState[d.day]).length;
   const w3Count = STUDY_PLAN.filter(d => d.week === 3 && progressState[d.day]).length;
   const w4Count = STUDY_PLAN.filter(d => d.week === 4 && progressState[d.day]).length;
 
-  document.getElementById("stat-w1").textContent = `${w1Count} / 7`;
-  document.getElementById("stat-w2").textContent = `${w2Count} / 7`;
-  document.getElementById("stat-w3").textContent = `${w3Count} / 7`;
-  document.getElementById("stat-w4").textContent = `${w4Count} / 9`;
+  const elW1 = document.getElementById("stat-w1");
+  const elW2 = document.getElementById("stat-w2");
+  const elW3 = document.getElementById("stat-w3");
+  const elW4 = document.getElementById("stat-w4");
+  const elPercent = document.getElementById("global-percent");
+  const elFill = document.getElementById("main-fill-bar");
+  const elRemain = document.getElementById("remaining-hours");
+  const elStreak = document.getElementById("streak-num");
 
-  document.getElementById("global-percent").textContent = `${percent}%`;
-  document.getElementById("main-fill-bar").style.width = `${percent}%`;
-  document.getElementById("remaining-hours").textContent = `${remaining}`;
+  if (elW1) elW1.textContent = `${w1Count} / 7`;
+  if (elW2) elW2.textContent = `${w2Count} / 7`;
+  if (elW3) elW3.textContent = `${w3Count} / 7`;
+  if (elW4) elW4.textContent = `${w4Count} / 9`;
 
-  // 计算连续打卡
+  if (elPercent) elPercent.textContent = `${percent}%`;
+  if (elFill) elFill.style.width = `${percent}%`;
+  if (elRemain) elRemain.textContent = `${remaining}`;
+
   let streak = 0;
   for (let i = 1; i <= total; i++) {
     if (progressState[i]) streak++;
     else if (i <= completed) streak = 0;
   }
-  document.getElementById("streak-num").textContent = `${streak}`;
+  if (elStreak) elStreak.textContent = `${streak}`;
 }
 
-// 底部 2K 画廊
 function renderInfographics() {
   const grid = document.getElementById("infographics-grid");
-  grid.innerHTML = INFOGRAPHICS_DATA.map(item => `
+  if (!grid) return;
+  grid.innerHTML = INFOGRAPHICS.map(item => `
     <div class="info-card">
       <div class="info-img-box">
         <img src="${item.img}" alt="${item.title}" class="info-thumb" loading="lazy">
@@ -468,8 +492,8 @@ function renderInfographics() {
       <div class="info-card-body">
         <h4 class="info-card-title">${item.title}</h4>
         <div style="display:flex; gap:0.5rem;">
-          <a href="${item.img}" target="_blank" class="info-card-btn" style="flex:1;">查看 2K 原图</a>
-          <a href="${item.url}" target="_blank" class="info-card-btn" style="flex:1;">研读库 ↗</a>
+          <a href="${item.img}" target="_blank" rel="noopener noreferrer" class="info-card-btn" style="flex:1;">查看 2K 原图</a>
+          <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="info-card-btn" style="flex:1;">研读库 ↗</a>
         </div>
       </div>
     </div>
@@ -477,37 +501,41 @@ function renderInfographics() {
 }
 
 function initActions() {
-  // 重置进度
-  document.getElementById("btn-reset").addEventListener("click", () => {
-    if (confirm("确定要重置全部 30 天学习打卡进度吗？此操作无法撤销。")) {
-      progressState = {};
-      localStorage.removeItem(STORAGE_KEY);
-      renderTimeline();
-      updateGlobalStats();
-    }
-  });
-
-  // 导出 Markdown 日志
-  document.getElementById("btn-export").addEventListener("click", () => {
-    const completed = Object.keys(progressState).length;
-    let md = `# 🎓 AI 零基础 30 天学习计划打卡日志\n\n`;
-    md += `- **完成进度**：${completed} / 30 天 (${Math.round((completed/30)*100)}%)\n`;
-    md += `- **生成时间**：${new Date().toLocaleString()}\n\n---\n\n`;
-
-    STUDY_PLAN.forEach(d => {
-      const isDone = progressState[d.day] ? "✅ 已完成" : "⬜ 未完成";
-      md += `### DAY ${String(d.day).padStart(2, '0')}: ${d.title} [${isDone}]\n`;
-      md += `- **简介**：${d.desc}\n`;
-      md += `- **NotebookLM**：[${d.nbTitle}](${d.nbUrl})\n`;
-      md += `- **精选视频**：[${d.ytTitle}](${d.ytUrl})\n\n`;
+  const btnReset = document.getElementById("btn-reset");
+  if (btnReset) {
+    btnReset.addEventListener("click", () => {
+      if (confirm("确定要重置全部 30 天学习打卡进度吗？")) {
+        progressState = {};
+        localStorage.removeItem(STORAGE_KEY);
+        renderTimeline();
+        updateGlobalStats();
+      }
     });
+  }
 
-    const blob = new Blob([md], { type: "text/markdown;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `AI_30天学习计划打卡_${new Date().toISOString().slice(0, 10)}.md`;
-    a.click();
-    URL.revokeObjectURL(url);
-  });
+  const btnExport = document.getElementById("btn-export");
+  if (btnExport) {
+    btnExport.addEventListener("click", () => {
+      const completed = Object.keys(progressState).length;
+      let md = `# 🎓 AI 零基础 30 天学习计划打卡日志\n\n`;
+      md += `- **完成进度**：${completed} / 30 天 (${Math.round((completed/30)*100)}%)\n`;
+      md += `- **生成时间**：${new Date().toLocaleString()}\n\n---\n\n`;
+
+      STUDY_PLAN.forEach(d => {
+        const isDone = progressState[d.day] ? "✅ 已完成" : "⬜ 未完成";
+        md += `### DAY ${String(d.day).padStart(2, '0')}: ${d.title} [${isDone}]\n`;
+        md += `- **简介**：${d.desc}\n`;
+        md += `- **NotebookLM**：[${d.nbTitle}](${d.nbUrl})\n`;
+        md += `- **精选视频**：[${d.ytTitle}](${d.ytUrl})\n\n`;
+      });
+
+      const blob = new Blob([md], { type: "text/markdown;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `AI_30天打卡日志_${new Date().toISOString().slice(0, 10)}.md`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+  }
 }
