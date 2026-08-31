@@ -674,10 +674,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-
-/* ==========================================================================
-   AI Study Plan & NotebookLM Module Integration
-   ========================================================================== */
 /**
  * AI Frontiers Learning Hub & NotebookLM 30-Day Dashboard
  * Fully Interactive with LocalStorage Persistence
@@ -1280,7 +1276,7 @@ let userProgress = JSON.parse(localStorage.getItem(STORAGE_KEY_PROGRESS) || "{}"
 let userNotes = JSON.parse(localStorage.getItem(STORAGE_KEY_NOTES) || "{}");
 
 // 初始化页面
-function initAIStudyHub() {
+document.addEventListener("DOMContentLoaded", () => {
   initNavigation();
   renderTracker();
   renderGallery();
@@ -1623,40 +1619,79 @@ function initExport() {
 }
 
 
-// 自动挂载到主站初始化流
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
-    try { initAIStudyHub(); } catch(e) { console.error('AI Hub init error:', e); }
-  });
-} else {
-  try { initAIStudyHub(); } catch(e) { console.error('AI Hub init error:', e); }
-}
 
-// SubTab 切换支持
-document.addEventListener('click', (e) => {
-  const btn = e.target.closest('.ai-tab-btn');
-  if (btn) {
-    document.querySelectorAll('.ai-tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.ai-subtab-pane').forEach(p => p.style.display = 'none');
-    
-    btn.classList.add('active');
-    const targetId = btn.getAttribute('data-subtab');
-    const targetPane = document.getElementById(targetId);
-    if (targetPane) targetPane.style.display = 'block';
+/* ==========================================================================
+   Master View Switcher Logic (Portfolio <-> AI Hub)
+   ========================================================================== */
+function initMasterViewSwitcher() {
+  const btnPortfolio = document.getElementById('btn-switch-portfolio');
+  const btnAiHub = document.getElementById('btn-switch-ai-hub');
+  const viewPortfolio = document.getElementById('view-portfolio-container');
+  const viewAiHub = document.getElementById('view-ai-hub-container');
+  const portfolioNav = document.getElementById('portfolio-nav-links');
+  const aiHubNav = document.getElementById('ai-hub-nav-links');
+  const brandLogoBtn = document.getElementById('brand-logo-btn');
+
+  function switchView(viewName) {
+    if (viewName === 'ai-hub') {
+      btnPortfolio.classList.remove('active');
+      btnAiHub.classList.add('active');
+      
+      viewPortfolio.style.display = 'none';
+      viewAiHub.style.display = 'block';
+      
+      portfolioNav.style.display = 'none';
+      aiHubNav.style.display = 'flex';
+      
+      window.location.hash = '#ai-hub';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      btnAiHub.classList.remove('active');
+      btnPortfolio.classList.add('active');
+      
+      viewAiHub.style.display = 'none';
+      viewPortfolio.style.display = 'block';
+      
+      aiHubNav.style.display = 'none';
+      portfolioNav.style.display = 'flex';
+      
+      window.location.hash = '#portfolio';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 
-  // WeekFilter 切换支持
-  const wbtn = e.target.closest('[data-weekfilter]');
-  if (wbtn) {
-    document.querySelectorAll('[data-weekfilter]').forEach(b => b.classList.remove('active'));
-    wbtn.classList.add('active');
-    const filter = wbtn.getAttribute('data-weekfilter');
-    document.querySelectorAll('.week-block').forEach(wb => {
-      if (filter === 'all' || wb.classList.contains(`week-${filter}`)) {
-        wb.style.display = 'block';
-      } else {
-        wb.style.display = 'none';
-      }
+  if (btnPortfolio && btnAiHub) {
+    btnPortfolio.addEventListener('click', () => switchView('portfolio'));
+    btnAiHub.addEventListener('click', () => switchView('ai-hub'));
+  }
+
+  if (brandLogoBtn) {
+    brandLogoBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      switchView('portfolio');
     });
+  }
+
+  // 顶栏导出按钮与内部导出按钮联动
+  const topExportBtn = document.getElementById('btn-export-log-top');
+  const innerExportBtn = document.getElementById('btn-export-log');
+  if (topExportBtn && innerExportBtn) {
+    topExportBtn.addEventListener('click', () => innerExportBtn.click());
+  }
+
+  // 监听 Hash 初始加载
+  if (window.location.hash === '#ai-hub') {
+    switchView('ai-hub');
+  } else {
+    switchView('portfolio');
+  }
+}
+
+// 启动 Master 控制器
+document.addEventListener('DOMContentLoaded', () => {
+  try {
+    initMasterViewSwitcher();
+  } catch(e) {
+    console.error('Master View Switcher error:', e);
   }
 });

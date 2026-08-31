@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CYBERSPACE // 个人未来主页与作品集</title>
-  <meta name="description" content="全栈工程师与创意思维者的未来科技感交互式个人主页与作品集展示。">
+  <title>CYBERSPACE // 个人未来主页 × AI 30天学习看板</title>
+  <meta name="description" content="全栈工程师未来科技感个人主页与 2026 AI 医疗与硬件 30 天沉浸式学习看板整合平台。">
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,700;1,400&family=Outfit:wght@300;400;600;700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,300;0,400;0,700;1,400&family=Outfit:wght@300;400;600;700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
   
-  <!-- FontAwesome Icons via CDN -->
+  <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
-  <!-- Custom Styles -->
+  <!-- Custom Integrated Styles -->
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="dark-theme">
   <!-- 粒子与矩阵雨背景 Canvas -->
   <canvas id="bg-canvas"></canvas>
   <canvas id="matrix-canvas"></canvas>
@@ -25,21 +25,36 @@
   <!-- 氛围光晕层 -->
   <div class="ambient-glow glow-top-left"></div>
   <div class="ambient-glow glow-bottom-right"></div>
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+  <div class="glow-orb orb-3"></div>
 
-  <!-- 顶部导航栏 -->
+  <!-- 全局超级顶部导航栏 -->
   <header class="navbar-container">
     <nav class="navbar glass-card" id="navbar">
-      <a href="#hero" class="logo">
+      <!-- 品牌 Logo -->
+      <a href="#hero" class="logo" id="brand-logo-btn">
         <span class="logo-bracket">&lt;</span>
         <span class="logo-text">ALEX.DEV</span>
         <span class="logo-bracket">/&gt;</span>
         <span class="status-dot" title="Available for hire"></span>
       </a>
 
-      <ul class="nav-links" id="nav-links">
+      <!-- 核心模式切换器 (Master View Switcher) -->
+      <div class="master-view-switcher">
+        <button class="view-switch-btn active" id="btn-switch-portfolio" data-view="portfolio">
+          <i class="fa-solid fa-layer-group"></i> <span>个人主页 & 作品集</span>
+        </button>
+        <button class="view-switch-btn" id="btn-switch-ai-hub" data-view="ai-hub">
+          <i class="fa-solid fa-brain"></i> <span>AI 30天学习看板</span>
+          <span class="switch-badge">2026 AI</span>
+        </button>
+      </div>
+
+      <!-- 个人主页子导航 -->
+      <ul class="nav-links" id="portfolio-nav-links">
         <li><a href="#hero" class="nav-item active"><i class="fa-solid fa-terminal"></i> <span>首页</span></a></li>
         <li><a href="#about" class="nav-item"><i class="fa-regular fa-user"></i> <span>关于</span></a></li>
-                <li><a href="#ai-plan" class="nav-item nav-ai-hub" style="background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.3);"><i class="fa-solid fa-brain" style="color: #38bdf8;"></i> <span style="color: #38bdf8; font-weight: 600;">AI 计划看板</span></a></li>
         <li><a href="#skills" class="nav-item"><i class="fa-solid fa-microchip"></i> <span>技能</span></a></li>
         <li><a href="#projects" class="nav-item"><i class="fa-solid fa-code-fork"></i> <span>项目</span></a></li>
         <li><a href="#terminal-section" class="nav-item"><i class="fa-solid fa-square-terminal"></i> <span>终端</span></a></li>
@@ -47,6 +62,15 @@
         <li><a href="#contact" class="nav-item"><i class="fa-regular fa-envelope"></i> <span>联系</span></a></li>
       </ul>
 
+      <!-- AI 学习看板子导航 (在 AI 模式下激活) -->
+      <ul class="nav-links" id="ai-hub-nav-links" style="display:none;">
+        <li><button class="nav-btn active" data-tab="tab-tracker"><i class="fa-solid fa-calendar-check"></i> <span>30天计划</span></button></li>
+        <li><button class="nav-btn" data-tab="tab-gallery"><i class="fa-solid fa-image"></i> <span>核心库&信息图</span></button></li>
+        <li><button class="nav-btn" data-tab="tab-notebooks"><i class="fa-solid fa-book-bookmark"></i> <span>14个笔记本索引</span></button></li>
+        <li><button id="btn-export-log-top" class="nav-btn btn-export-highlight"><i class="fa-solid fa-download"></i> <span>导出打卡记录</span></button></li>
+      </ul>
+
+      <!-- 快捷工具按钮 -->
       <div class="nav-actions">
         <!-- 音效开关 -->
         <button id="sound-toggle-btn" class="icon-btn" title="切换音效 (Web Audio)" aria-label="切换音效">
@@ -59,25 +83,35 @@
           </button>
           <div class="theme-menu glass-card" id="theme-menu">
             <div class="theme-option active" data-set-theme="cyber">
-              <span class="color-preview cyber-color"></span> 赛博霓虹 (Cyber)
-            </div>
-            <div class="theme-option" data-set-theme="abyss">
-              <span class="color-preview abyss-color"></span> 深渊极光 (Abyss)
+              <span class="theme-color-preview preview-cyber"></span>
+              <span>赛博霓虹 (Cyber)</span>
             </div>
             <div class="theme-option" data-set-theme="matrix">
-              <span class="color-preview matrix-color"></span> 矩阵黑客 (Matrix)
+              <span class="theme-color-preview preview-matrix"></span>
+              <span>黑客帝国 (Matrix)</span>
+            </div>
+            <div class="theme-option" data-set-theme="aurora">
+              <span class="theme-color-preview preview-aurora"></span>
+              <span>极光紫幻 (Aurora)</span>
+            </div>
+            <div class="theme-option" data-set-theme="mono">
+              <span class="theme-color-preview preview-mono"></span>
+              <span>极简暗黑 (Mono)</span>
             </div>
           </div>
         </div>
-        <!-- 移动端菜单按钮 -->
-        <button id="mobile-menu-btn" class="icon-btn mobile-only" aria-label="打开菜单">
+        <!-- 移动端汉堡菜单 -->
+        <button id="mobile-menu-btn" class="icon-btn mobile-only" aria-label="菜单">
           <i class="fa-solid fa-bars"></i>
         </button>
       </div>
     </nav>
   </header>
 
-  <main class="main-content">
+  <!-- ==================== 视图 1: 个人主页 & 作品集 (完整 Site 1) ==================== -->
+  <div id="view-portfolio-container" class="master-view-pane active">
+    <main class="main-content">
+      
     <!-- ==================== HERO 英雄区 ==================== -->
     <section id="hero" class="hero-section">
       <div class="hero-content">
@@ -350,36 +384,6 @@
       </div>
 
       <div class="projects-grid" id="projects-grid">
-        <!-- 核心推荐：AI 学习计划看板 -->
-        <article class="project-card glass-card tilt-element featured-ai-card" data-category="ai web" style="border-color: rgba(56, 189, 248, 0.4); box-shadow: 0 0 25px rgba(56, 189, 248, 0.15);">
-          <div class="project-img-box">
-            <div class="project-overlay">
-              <span class="project-badge" style="background: linear-gradient(135deg, #38bdf8, #818cf8); color:#fff;">🔥 核心原生集成</span>
-            </div>
-            <div class="card-banner-graphic banner-1" style="background: radial-gradient(circle at center, #1e293b, #0f172a);">
-              <i class="fa-solid fa-brain" style="font-size: 3rem; color: #38bdf8;"></i>
-            </div>
-          </div>
-          <div class="project-info">
-            <h3 class="project-title" style="color: #38bdf8;">AI 医疗与硬件 · 30天沉浸式学习看板</h3>
-            <p class="project-desc">
-              基于 Google NotebookLM 5 大核心前沿知识库（489 篇权威文献）深度构建的沉浸式打卡系统。包含 30 天每日交互打卡、2K 全景信息图画廊、精选 YouTube 权威视频与 LocalStorage 记忆。
-            </p>
-            <div class="project-tech-tags">
-              <span class="tech-tag">NotebookLM</span>
-              <span class="tech-tag">Medical AI</span>
-              <span class="tech-tag">Embodied AI</span>
-              <span class="tech-tag">LocalStorage</span>
-              <span class="tech-tag">2K Infographics</span>
-            </div>
-            <div class="project-links" style="margin-top: 1rem;">
-              <a href="#ai-plan" class="btn btn-primary btn-sm" style="background: linear-gradient(135deg, #38bdf8, #818cf8); border:none; color:#fff;">
-                <i class="fa-solid fa-arrow-down"></i> 直接进入看板
-              </a>
-            </div>
-          </div>
-        </article>
-
         <!-- 项目 1 -->
         <article class="project-card glass-card tilt-element" data-category="ai web">
           <div class="project-img-box">
@@ -627,29 +631,146 @@
         </form>
       </div>
     </section>
-  </main>
+  
+    </main>
+    
+  </div>
 
-  <!-- 页脚 -->
-  <footer class="footer-container">
-    <div class="footer-content">
-      <div class="footer-logo">
-        <span class="logo-bracket">&lt;</span>
-        <span class="logo-text">ALEX.DEV</span>
-        <span class="logo-bracket">/&gt;</span>
+  <!-- ==================== 视图 2: AI 30天学习看板与知识库 (完整 Site 2) ==================== -->
+  <div id="view-ai-hub-container" class="master-view-pane" style="display:none;">
+    <div class="ai-hub-wrapper">
+      <main class="main-content">
+        
+    <!-- 顶部进度统计面板 -->
+    <section class="hero-stats-panel glass-panel">
+      <div class="stats-overview">
+        <div class="welcome-text">
+          <h2>AI 医疗 & AI 硬件/潮玩 · 30 天实战进阶</h2>
+          <p>每天 2 小时 · 1h NotebookLM 深度文献研读 + 1h 权威高播放量精选视频精听</p>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">🔥</div>
+            <div class="stat-info">
+              <span class="stat-value" id="streak-days">0</span>
+              <span class="stat-label">连续打卡 (天)</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">✅</div>
+            <div class="stat-info">
+              <span class="stat-value" id="completed-days">0 / 30</span>
+              <span class="stat-label">已完成天数</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">⏳</div>
+            <div class="stat-info">
+              <span class="stat-value" id="remaining-hours">60</span>
+              <span class="stat-label">剩余学习时长 (小时)</span>
+            </div>
+          </div>
+          <div class="stat-card ring-card">
+            <div class="progress-ring-container">
+              <svg class="progress-ring" width="70" height="70">
+                <circle class="progress-ring__circle-bg" stroke="rgba(255,255,255,0.1)" stroke-width="6" fill="transparent" r="28" cx="35" cy="35"/>
+                <circle class="progress-ring__circle" stroke="#38bdf8" stroke-width="6" stroke-linecap="round" fill="transparent" r="28" cx="35" cy="35"/>
+              </svg>
+              <span class="ring-text" id="ring-percent">0%</span>
+            </div>
+            <div class="stat-info">
+              <span class="stat-label">总体完成率</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <p class="footer-text">
-        © 2026 Alex Shen. Crafted with <i class="fa-solid fa-heart text-pink"></i>, Vanilla CSS & Modern JS.
-      </p>
-      <a href="#hero" class="back-to-top" title="回到顶部">
-        <i class="fa-solid fa-chevron-up"></i>
-      </a>
+      
+      <!-- 动态进度条 -->
+      <div class="progress-track-wrapper">
+        <div class="progress-labels">
+          <span>🚀 起点启航</span>
+          <span id="current-badge-name">🎖️ 称号：AI 破冰新手</span>
+          <span>🏆 终极目标：AI 医疗与硬件先锋</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="main-progress-bar" style="width: 0%;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 1: 30天学习进度追踪看板 -->
+    <section id="tab-tracker" class="tab-pane active">
+      <div class="section-header">
+        <div class="title-with-desc">
+          <h3>📅 30 天每日学习任务清单</h3>
+          <p>点击复选框即可标记完成，支持添加个人心得打卡并自动保存在浏览器中</p>
+        </div>
+        <div class="filter-controls">
+          <button class="filter-btn active" data-filter="all">全部周次</button>
+          <button class="filter-btn" data-filter="week1">Week 1 基础筑基</button>
+          <button class="filter-btn" data-filter="week2">Week 2 AI 医疗</button>
+          <button class="filter-btn" data-filter="week3">Week 3 AI 硬件/潮玩</button>
+          <button class="filter-btn" data-filter="week4">Week 4 前沿实战</button>
+        </div>
+      </div>
+
+      <!-- 周计划卡片流 -->
+      <div class="weeks-container" id="weeks-container">
+        <!-- 动态由 JS 渲染渲染 30 天任务列表 -->
+      </div>
+    </section>
+
+    <!-- Tab 2: 核心知识库 & 2K 信息图展厅 -->
+    <section id="tab-gallery" class="tab-pane">
+      <div class="section-header">
+        <div class="title-with-desc">
+          <h3>🖼️ 5 大核心领域知识库 & 2K 超高清全景信息图</h3>
+          <p>基于 NotebookLM 深度研究生成的中文架构全景图，点击卡片可全屏高清缩放查看或直达笔记本</p>
+        </div>
+      </div>
+      <div class="gallery-grid" id="gallery-grid">
+        <!-- 由 JS 渲染 5 个核心信息图卡片 -->
+      </div>
+    </section>
+
+    <!-- Tab 3: 全部 14 个笔记本索引 -->
+    <section id="tab-notebooks" class="tab-pane">
+      <div class="section-header">
+        <div class="title-with-desc">
+          <h3>📚 NotebookLM 全量知识库索引（14 个笔记本 · 489 篇来源）</h3>
+          <p>实时检索并可直达个人所有课程、考试、竞赛与前沿研究笔记本</p>
+        </div>
+        <div class="search-box">
+          <input type="text" id="notebook-search-input" placeholder="🔍 搜索笔记本名称或领域关键字...">
+        </div>
+      </div>
+      <div class="notebooks-grid" id="notebooks-grid">
+        <!-- 由 JS 渲染全部 14 个笔记本卡片 -->
+      </div>
+    </section>
+  
+      </main>
     </div>
-  </footer>
+  </div>
 
-  <!-- 提示弹窗 (Toast) -->
-  <div id="toast" class="toast glass-card"></div>
+  <!-- 全局 Modal 弹窗 -->
+  <div id="image-modal" class="modal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content glass-panel">
+      <div class="modal-header">
+        <h4 id="modal-title">信息图全景预览</h4>
+        <div class="modal-actions">
+          <a id="modal-download-btn" href="#" target="_blank" class="btn-primary" download>
+            📥 下载 2K 高清原图
+          </a>
+          <a id="modal-open-nb-btn" href="#" target="_blank" class="btn-outline">
+            📓 直达对应笔记本
+          </a>
+          <button id="modal-close-btn" class="btn-icon">✕</button>
+        </div>
+      </div>
 
-  <!-- Custom Scripts -->
+  <!-- Scripts -->
   <script src="script.js"></script>
 </body>
 </html>
