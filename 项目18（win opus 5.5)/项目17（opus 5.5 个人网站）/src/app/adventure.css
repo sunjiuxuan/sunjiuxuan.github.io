@@ -1,0 +1,715 @@
+/* The exploration view uses a game HUD; reading and management keep their quiet paper surfaces. */
+.realm-app[data-view="explore"] {
+  --hud-ivory: #fff7df;
+  --hud-gold: #ecd59b;
+  --hud-shadow: #143645;
+}
+.realm-app[data-view="explore"] .paper-grain {
+  display: none;
+}
+.realm-app[data-view="explore"] .site-header {
+  height: 88px;
+  color: var(--hud-ivory);
+  background: linear-gradient(#173e5455, transparent);
+  text-shadow: 0 2px 8px #163b4b80;
+}
+.realm-app[data-view="explore"] .brand > svg {
+  color: #fff4d1;
+  filter: drop-shadow(0 2px 5px #183d57aa);
+}
+.realm-app[data-view="explore"] .brand small {
+  color: #e7f3ea;
+}
+.realm-app[data-view="explore"] .view-switch {
+  background: #1f3c527d;
+  border: 1px solid #e5dab76b;
+  backdrop-filter: blur(12px);
+  border-radius: 5px;
+  padding: 4px;
+}
+.realm-app[data-view="explore"] .view-switch button {
+  color: #e1e8e3;
+  border-radius: 3px;
+}
+.realm-app[data-view="explore"] .view-switch button.active {
+  color: #394b56;
+  background: #fff4d9;
+  box-shadow: 0 0 18px #f5e4b220;
+}
+.realm-app[data-view="explore"] .header-note {
+  color: #fff4db;
+}
+.realm-app[data-view="explore"] .header-note i {
+  background: #b8edaf;
+  box-shadow: 0 0 8px #aaf8a3;
+}
+.realm-app[data-view="explore"] .header-actions .icon-button {
+  color: #fff4dc;
+  background: #25485b60;
+  border: 1px solid #f1dfb844;
+}
+.realm-app[data-view="explore"] .site-footer {
+  color: #eef4e4;
+  background: linear-gradient(transparent, #13374d6b);
+  text-shadow: 0 1px 5px #13374d;
+}
+.realm-app[data-view="explore"] .footer-links small {
+  color: #edf0df;
+}
+.realm-app[data-view="explore"] .entrance-copy {
+  top: 26%;
+  left: 8%;
+  max-width: 470px;
+  color: #fff9e9;
+  text-shadow: 0 3px 16px #173b5990;
+}
+.realm-app[data-view="explore"] .entrance-copy:before {
+  inset: -100px -70px -110px -180px;
+  background: radial-gradient(
+    ellipse at left,
+    #163f5a8c 10%,
+    #173d5b42 52%,
+    transparent 75%
+  );
+}
+.realm-app[data-view="explore"] .entrance-copy .eyebrow {
+  color: #f3e3b9;
+  font-size: 9px;
+  letter-spacing: 2.7px;
+}
+.realm-app[data-view="explore"] .entrance-copy .eyebrow i {
+  background: #f5dd99;
+}
+.realm-app[data-view="explore"] .entrance-copy h1 {
+  font-weight: 600;
+  font-size: clamp(48px, 4.8vw, 76px);
+  line-height: 1.4;
+  margin: 25px 0 22px;
+  letter-spacing: 6px;
+}
+.realm-app[data-view="explore"] .entrance-copy h1 span {
+  color: #ffe7aa;
+}
+.realm-app[data-view="explore"] .entrance-copy > p {
+  color: #edf4ea;
+  line-height: 2.1;
+  font-size: 13px;
+}
+.realm-app[data-view="explore"] .entrance-copy .primary-button {
+  background: #fff2ce;
+  color: #3a5061;
+  border: 1px solid #fffbed;
+  border-radius: 30px;
+  padding: 15px 28px;
+  box-shadow:
+    0 3px 20px #102f4838,
+    inset 0 0 0 3px #c8b67a33;
+  text-shadow: none;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+.realm-app[data-view="explore"] .entrance-copy .primary-button:hover {
+  background: #fff9e7;
+  box-shadow: 0 0 25px #fff0ac66;
+}
+.realm-app[data-view="explore"] .quiet-button {
+  color: #e8efe4;
+  margin-left: 12px;
+}
+.realm-app[data-view="explore"] .entrance-sign > span {
+  color: #f0e7c9;
+}
+.realm-app[data-view="explore"] .entrance-sign b {
+  color: #ffedc4;
+  border-color: #ffe5a4;
+}
+.realm-app[data-view="explore"] .explore-sidebar {
+  top: 100px;
+  bottom: 77px;
+  left: 32px;
+  padding: 0;
+  width: 234px;
+  background: none;
+  color: #fff5da;
+  pointer-events: none;
+}
+.realm-app[data-view="explore"] .explore-sidebar button {
+  pointer-events: auto;
+}
+.realm-map {
+  width: 162px;
+  margin: 0 0 20px 5px;
+  pointer-events: auto;
+}
+.map-dial {
+  width: 162px;
+  height: 162px;
+  border-radius: 50%;
+  position: relative;
+  border: 3px solid #f6eacbcc;
+  padding: 4px;
+  box-shadow:
+    0 2px 18px #163c4c55,
+    inset 0 0 0 1px #1b4e62;
+  background: #355c64;
+}
+.map-dial > svg:first-of-type {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.map-north {
+  position: absolute;
+  top: -13px;
+  left: calc(50% - 5px);
+  font-family: var(--serif);
+  font-size: 11px;
+  color: #fff5d9;
+  text-shadow: 0 1px 3px #163e55;
+  z-index: 2;
+}
+.map-point {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  padding: 5px;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+}
+.map-point > span {
+  width: 9px;
+  height: 9px;
+  background: #bcf8ff;
+  border: 1px solid #fff7de;
+  box-shadow: 0 0 5px #2b6c8a;
+  transform: rotate(45deg);
+}
+.map-point:hover > span,
+.map-point.active > span {
+  background: #fff0a8;
+  box-shadow: 0 0 10px #fff6bc;
+  outline: 2px solid #fff1be88;
+  outline-offset: 3px;
+}
+.map-player {
+  position: absolute;
+  left: 52%;
+  top: 59%;
+  transform: translate(-50%, -50%) rotate(-22deg);
+  color: white;
+  filter: drop-shadow(0 1px 3px #355c64);
+  pointer-events: none;
+}
+.map-caption {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 9px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #fff5dc;
+  text-shadow: 0 2px 5px #1c435d;
+}
+.map-caption button {
+  padding: 2px;
+  color: #fff2c5;
+}
+.realm-app[data-view="explore"] .sidebar-intro {
+  display: none;
+}
+.realm-app[data-view="explore"] .realm-nav {
+  margin-top: 0;
+  padding: 12px 14px;
+  background: linear-gradient(90deg, #183d539e, #284f6338);
+  border-left: 2px solid #e2ce8e;
+  border-radius: 0 5px 5px 0;
+  backdrop-filter: blur(5px);
+}
+.realm-app[data-view="explore"] .nav-caption {
+  color: #f4de9f;
+  border-bottom: 1px solid #c6d6cf33;
+  font-size: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 4px;
+}
+.realm-app[data-view="explore"] .nav-caption > span {
+  font-size: 5px;
+  color: #dbe7dc;
+  letter-spacing: 1px;
+}
+.realm-app[data-view="explore"] .zone-button {
+  color: #fff5e0;
+  padding: 10px 3px;
+  gap: 9px;
+}
+.realm-app[data-view="explore"] .zone-name {
+  font-size: 13px;
+  letter-spacing: 1px;
+  gap: 10px;
+}
+.realm-app[data-view="explore"] .zone-name small {
+  color: #e4e9df;
+  font-size: 8px;
+}
+.realm-app[data-view="explore"] .zone-number {
+  display: none;
+}
+.realm-app[data-view="explore"] .zone-count {
+  color: #ebdeb9;
+  font-size: 8px;
+}
+.realm-app[data-view="explore"] .zone-button:hover,
+.realm-app[data-view="explore"] .zone-button.active {
+  background: #f4e9c323;
+  color: #ffe7a7;
+}
+.realm-app[data-view="explore"] .sidebar-profile {
+  border-top: 0;
+  padding: 0 6px;
+  margin-top: 20px;
+  color: #fff5d8;
+  filter: drop-shadow(0 2px 4px #153d57);
+}
+.realm-app[data-view="explore"] .profile-avatar {
+  background: #33536599;
+  color: #fff0c8;
+  border-color: #e0d3acaa;
+}
+.realm-app[data-view="explore"] .sidebar-profile small {
+  color: #e4edde;
+}
+.realm-app[data-view="explore"] .sidebar-profile .icon-button {
+  color: #fff3ca;
+}
+.realm-app[data-view="explore"] .landscape-note {
+  writing-mode: horizontal-tb;
+  top: 119px;
+  right: 38px;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 8px;
+  color: #fff7df;
+  text-align: right;
+  text-shadow: 0 2px 10px #153e5c;
+}
+.realm-app[data-view="explore"] .landscape-note > span {
+  color: #fff6dc;
+  font-size: 27px;
+  letter-spacing: 4px;
+}
+.realm-app[data-view="explore"] .landscape-note > small {
+  color: #e7f2e9;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+.realm-app[data-view="explore"] .landscape-note:after {
+  content: "✦  自由探索区域";
+  font-size: 8px;
+  color: #ffedb1;
+  letter-spacing: 2px;
+  margin-top: 7px;
+}
+.realm-app[data-view="explore"] .discovery-tray {
+  left: auto;
+  right: 34px;
+  bottom: 96px;
+  width: 325px;
+  padding: 15px 18px;
+  background: #193c52ba;
+  border: 1px solid #d9dfc45c;
+  border-radius: 6px;
+  color: #fff5df;
+  box-shadow: 0 6px 22px #14384720;
+  backdrop-filter: blur(14px);
+}
+.realm-app[data-view="explore"] .tray-heading {
+  margin-bottom: 9px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid #e5d6aa3b;
+}
+.realm-app[data-view="explore"] .tray-heading > div > span {
+  font-size: 12px;
+}
+.realm-app[data-view="explore"] .tray-heading small {
+  display: none;
+}
+.realm-app[data-view="explore"] .tray-heading .text-button {
+  color: #f4dc9b;
+  font-size: 9px;
+}
+.realm-app[data-view="explore"] .tray-items {
+  grid-template-columns: 1fr;
+}
+.realm-app[data-view="explore"] .tray-items > button {
+  display: flex;
+  padding: 9px 0;
+  border-left: 0;
+  gap: 12px;
+}
+.realm-app[data-view="explore"] .tray-items > button:nth-child(3) {
+  display: none;
+}
+.realm-app[data-view="explore"] .tray-items strong {
+  font-size: 11px;
+  font-weight: 500;
+}
+.realm-app[data-view="explore"] .tray-items small {
+  font-size: 9px;
+  color: #dae3d7;
+  margin-top: 5px;
+}
+.realm-app[data-view="explore"] .tray-index,
+.realm-app[data-view="explore"] .tray-items > button > svg {
+  color: #efd38f;
+}
+.realm-app[data-view="explore"] .tray-items > button:hover strong {
+  color: #ffe8a5;
+}
+.realm-app[data-view="explore"] .scene-tools {
+  bottom: 47px;
+  right: 35px;
+  flex-direction: row;
+}
+.realm-app[data-view="explore"] .scene-tools .icon-button {
+  width: 36px;
+  height: 36px;
+  background: #24465bab;
+  color: #fff4d4;
+  border: 1px solid #f0deaa99;
+}
+.realm-app[data-view="explore"] .scene-tools .selected {
+  background: #647c57;
+}
+.realm-app[data-view="explore"] .scene-hint {
+  left: 35px;
+  bottom: 45px;
+  color: #fff5db;
+  font-size: 9px;
+  text-shadow: 0 1px 5px #163b50;
+}
+.adventure-status {
+  position: absolute;
+  bottom: 54px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 8;
+  color: #fff5db;
+  width: 218px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  column-gap: 9px;
+  row-gap: 6px;
+  text-shadow: 0 1px 5px #17374a;
+  pointer-events: none;
+}
+.adventure-status > span:first-child {
+  color: #ffe9aa;
+  font-size: 16px;
+}
+.adventure-status strong {
+  font-family: var(--serif);
+  letter-spacing: 2px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.adventure-status small {
+  font-size: 8px;
+  color: #e7f4e1;
+}
+.adventure-status i {
+  height: 4px;
+  width: 100%;
+  background: #233d4880;
+  border: 1px solid #eff7d577;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 1px 5px #224a5533;
+}
+.adventure-status i b {
+  display: block;
+  background: linear-gradient(90deg, #99cf78, #cce890);
+  width: 100%;
+  height: 100%;
+}
+.adventure-status > span:last-child {
+  font-size: 7px;
+  letter-spacing: 2px;
+  opacity: 0.8;
+}
+.realm-app[data-view="explore"] .node-label {
+  color: #fff4cf;
+  background: #204356c9;
+  border-color: #f4e4b36b;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px #14394c33;
+}
+.realm-app[data-view="explore"] .node-label > span {
+  color: #f8df99;
+}
+.realm-app[data-view="explore"] .node-label.active {
+  background: #365b66;
+  border-color: #ffe7a9;
+}
+.realm-app[data-view="explore"] .entering-caption {
+  color: #fff5d8;
+  text-shadow: 0 2px 10px #173d5b;
+}
+@media (max-height: 720px) and (min-width: 601px) {
+  .realm-map {
+    width: 134px;
+    margin-bottom: 15px;
+  }
+  .map-dial {
+    width: 134px;
+    height: 134px;
+  }
+  .realm-app[data-view="explore"] .zone-button {
+    padding: 8px 3px;
+  }
+  .realm-app[data-view="explore"] .sidebar-profile {
+    margin-top: 15px;
+  }
+}
+@media (max-width: 900px) {
+  .realm-app[data-view="explore"] .site-header {
+    padding: 0 24px;
+  }
+  .realm-app[data-view="explore"] .explore-sidebar {
+    left: 24px;
+    width: 205px;
+  }
+  .realm-app[data-view="explore"] .realm-nav {
+    padding: 10px;
+  }
+  .realm-app[data-view="explore"] .zone-name {
+    font-size: 12px;
+    gap: 7px;
+  }
+  .realm-app[data-view="explore"] .discovery-tray {
+    right: 24px;
+    width: 285px;
+  }
+  .realm-app[data-view="explore"] .scene-hint {
+    left: 24px;
+    max-width: 200px;
+    flex-wrap: wrap;
+    font-size: 8px;
+  }
+  .adventure-status {
+    width: 180px;
+  }
+}
+@media (max-width: 600px) {
+  .realm-app[data-view="explore"] .site-header {
+    height: 76px;
+    padding: 0 18px;
+  }
+  .realm-app[data-view="explore"] .brand small {
+    font-size: 5px;
+  }
+  .realm-app[data-view="explore"] .view-switch {
+    padding: 3px;
+    margin-right: 8px;
+  }
+  .realm-app[data-view="explore"] .entrance-copy {
+    left: 27px;
+    right: 20px;
+    top: 28%;
+  }
+  .realm-app[data-view="explore"] .entrance-copy h1 {
+    font-size: 46px;
+    letter-spacing: 4px;
+  }
+  .realm-app[data-view="explore"] .entrance-copy .eyebrow {
+    font-size: 6px;
+    letter-spacing: 1.6px;
+  }
+  .realm-app[data-view="explore"] .entrance-copy > p {
+    font-size: 11px;
+  }
+  .realm-app[data-view="explore"] .entrance-copy .primary-button {
+    font-size: 12px;
+    padding: 13px 23px;
+  }
+  .realm-app[data-view="explore"] .entrance-sign {
+    margin-top: 30px;
+  }
+  .realm-app[data-view="explore"] .explore-sidebar {
+    top: 90px;
+    left: 18px;
+    right: 18px;
+    width: auto;
+    bottom: auto;
+  }
+  .realm-map {
+    width: 114px;
+    margin: 0;
+  }
+  .map-dial {
+    width: 114px;
+    height: 114px;
+    border-width: 2px;
+    padding: 3px;
+  }
+  .map-caption {
+    font-size: 9px;
+    gap: 8px;
+    margin-top: 7px;
+  }
+  .map-north {
+    font-size: 9px;
+    top: -11px;
+  }
+  .map-point {
+    width: 22px;
+    height: 22px;
+  }
+  .map-point > span {
+    width: 7px;
+    height: 7px;
+  }
+  .map-player {
+    width: 13px;
+  }
+  .realm-app[data-view="explore"] .explore-sidebar .realm-nav {
+    position: fixed;
+    bottom: 196px;
+    left: 18px;
+    right: 18px;
+    padding: 5px;
+    margin: 0;
+    border: 1px solid #e8d7a27a;
+    background: #1d4156b8;
+    backdrop-filter: blur(12px);
+    border-radius: 5px;
+  }
+  .realm-app[data-view="explore"] .zone-button {
+    padding: 9px 2px !important;
+    gap: 7px;
+  }
+  .realm-app[data-view="explore"] .zone-name {
+    font-size: 10px;
+  }
+  .realm-app[data-view="explore"] .zone-name small {
+    display: none;
+  }
+  .realm-app[data-view="explore"] .discovery-tray {
+    left: 18px;
+    right: 18px;
+    bottom: 78px;
+    width: auto;
+    padding: 12px 15px;
+  }
+  .realm-app[data-view="explore"] .tray-items > button:nth-child(2) {
+    display: none;
+  }
+  .realm-app[data-view="explore"] .tray-items > button {
+    padding: 6px 0;
+  }
+  .realm-app[data-view="explore"] .landscape-note {
+    top: 110px;
+    right: 20px;
+    max-width: 200px;
+    gap: 5px;
+  }
+  .realm-app[data-view="explore"] .landscape-note > span {
+    font-size: 21px;
+    letter-spacing: 2px;
+  }
+  .realm-app[data-view="explore"] .landscape-note > small {
+    font-size: 8px;
+    letter-spacing: 0.5px;
+    max-width: 170px;
+  }
+  .realm-app[data-view="explore"] .landscape-note:after {
+    font-size: 6px;
+  }
+  .realm-app[data-view="explore"] .scene-tools {
+    bottom: 278px;
+    right: 18px;
+  }
+  .realm-app[data-view="explore"] .scene-tools .icon-button {
+    width: 31px;
+    height: 31px;
+  }
+  .realm-app[data-view="explore"] .scene-hint {
+    bottom: 47px;
+    left: 19px;
+    font-size: 7px;
+    max-width: none;
+  }
+  .realm-app[data-view="explore"] .scene-hint > span:first-of-type {
+    font-size: 0;
+  }
+  .realm-app[data-view="explore"] .scene-hint > span:first-of-type:after {
+    content: "拖动环顾";
+    font-size: 7px;
+  }
+  .adventure-status {
+    display: none;
+  }
+  .realm-app[data-view="explore"] .mobile-open {
+    background: #1e4358f2;
+    padding: 18px;
+    border: 1px solid #e3d8b783;
+    z-index: 25;
+  }
+  .realm-app[data-view="explore"] .mobile-open .realm-map {
+    display: none;
+  }
+  .realm-app[data-view="explore"] .mobile-open .sidebar-intro {
+    display: block;
+  }
+  .realm-app[data-view="explore"] .mobile-open .sidebar-intro h1 {
+    font-size: 24px;
+    color: #fff4db;
+  }
+  .realm-app[data-view="explore"] .mobile-open .sidebar-intro h1 span {
+    color: #ffe6a1;
+  }
+  .realm-app[data-view="explore"] .mobile-open .sidebar-intro p,
+  .realm-app[data-view="explore"] .mobile-open .eyebrow {
+    color: #e4eddf;
+    text-shadow: none;
+  }
+  .realm-app[data-view="explore"] .mobile-open .realm-nav {
+    position: static;
+    background: none;
+    border: 0;
+    margin-top: 12px;
+  }
+  .realm-app[data-view="explore"] .mobile-open .zone-name {
+    font-size: 13px;
+  }
+  .realm-app[data-view="explore"] .mobile-open .zone-name small {
+    display: block;
+  }
+  .realm-app[data-view="explore"] .mobile-open .sidebar-profile {
+    margin-top: 15px;
+  }
+}
+@media (max-height: 560px) {
+  .realm-map {
+    display: none;
+  }
+  .realm-app[data-view="explore"] .explore-sidebar {
+    top: 90px;
+  }
+  .realm-app[data-view="explore"] .sidebar-profile {
+    display: none;
+  }
+  .realm-app[data-view="explore"] .entrance-copy {
+    top: 100px;
+  }
+  .realm-app[data-view="explore"] .entrance-copy h1 {
+    font-size: 34px;
+    margin: 10px 0;
+  }
+  .adventure-status {
+    display: none;
+  }
+}

@@ -1,624 +1,75 @@
-<!DOCTYPE html>
-<html lang="zh-CN" data-theme="cyber">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CYBERSPACE // 个人未来主页与作品集</title>
-  <meta name="description" content="全栈工程师与创意思维者的未来科技感交互式个人主页与作品集展示。">
-  
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,700;1,400&family=Outfit:wght@300;400;600;700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-  
-  <!-- FontAwesome Icons via CDN -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  
-  <!-- Custom Styles -->
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <!-- 粒子与矩阵雨背景 Canvas -->
-  <canvas id="bg-canvas"></canvas>
-  <canvas id="matrix-canvas"></canvas>
-
-  <!-- 氛围光晕层 -->
-  <div class="ambient-glow glow-top-left"></div>
-  <div class="ambient-glow glow-bottom-right"></div>
-
-  <!-- 顶部导航栏 -->
-  <header class="navbar-container">
-    <nav class="navbar glass-card" id="navbar">
-      <a href="#hero" class="logo">
-        <span class="logo-bracket">&lt;</span>
-        <span class="logo-text">ALEX.DEV</span>
-        <span class="logo-bracket">/&gt;</span>
-        <span class="status-dot" title="Available for hire"></span>
-      </a>
-
-      <ul class="nav-links" id="nav-links">
-        <li><a href="#hero" class="nav-item active"><i class="fa-solid fa-terminal"></i> <span>首页</span></a></li>
-        <li><a href="#about" class="nav-item"><i class="fa-regular fa-user"></i> <span>关于</span></a></li>
-        <li><a href="#skills" class="nav-item"><i class="fa-solid fa-microchip"></i> <span>技能</span></a></li>
-        <li><a href="#projects" class="nav-item"><i class="fa-solid fa-code-fork"></i> <span>项目</span></a></li>
-        <li><a href="#terminal-section" class="nav-item"><i class="fa-solid fa-square-terminal"></i> <span>终端</span></a></li>
-        <li><a href="#experience" class="nav-item"><i class="fa-solid fa-timeline"></i> <span>历程</span></a></li>
-        <li><a href="#contact" class="nav-item"><i class="fa-regular fa-envelope"></i> <span>联系</span></a></li>
-      </ul>
-
-      <div class="nav-actions">
-        <!-- 音效开关 -->
-        <button id="sound-toggle-btn" class="icon-btn" title="切换音效 (Web Audio)" aria-label="切换音效">
-          <i class="fa-solid fa-volume-high"></i>
-        </button>
-        <!-- 主题切换 -->
-        <div class="theme-selector-dropdown">
-          <button id="theme-menu-btn" class="icon-btn" title="选择界面主题" aria-label="主题">
-            <i class="fa-solid fa-palette"></i>
-          </button>
-          <div class="theme-menu glass-card" id="theme-menu">
-            <div class="theme-option active" data-set-theme="cyber">
-              <span class="color-preview cyber-color"></span> 赛博霓虹 (Cyber)
-            </div>
-            <div class="theme-option" data-set-theme="abyss">
-              <span class="color-preview abyss-color"></span> 深渊极光 (Abyss)
-            </div>
-            <div class="theme-option" data-set-theme="matrix">
-              <span class="color-preview matrix-color"></span> 矩阵黑客 (Matrix)
-            </div>
-          </div>
-        </div>
-        <!-- 移动端菜单按钮 -->
-        <button id="mobile-menu-btn" class="icon-btn mobile-only" aria-label="打开菜单">
-          <i class="fa-solid fa-bars"></i>
-        </button>
-      </div>
-    </nav>
-  </header>
-
-  <main class="main-content">
-    <!-- ==================== HERO 英雄区 ==================== -->
-    <section id="hero" class="hero-section">
-      <div class="hero-content">
-        <div class="hero-badge animate-badge">
-          <span class="pulse-light"></span>
-          <span class="badge-text">SYSTEM STATUS: ONLINE // CREATIVE CODER</span>
-        </div>
-
-        <h1 class="hero-title">
-          探索数字世界的 <br>
-          <span class="gradient-text glitch-text" data-text="无限可能">无限可能</span>
-        </h1>
-
-        <div class="typewriter-container">
-          <span class="typewriter-prefix">&gt;&nbsp;我是一名 </span>
-          <span id="typewriter" class="typewriter-text"></span>
-          <span class="cursor">|</span>
-        </div>
-
-        <p class="hero-description">
-          专注于构建极致视觉表现、超高性能与颠覆性交互体验的 Web 3.0 & 全栈应用。
-          融合现代美学与硬核代码，把天马行空的灵感转化为触手可及的数字产品。
-        </p>
-
-        <div class="hero-cta-group">
-          <a href="#projects" class="btn btn-primary glow-button">
-            <i class="fa-solid fa-sparkles"></i> 浏览作品集
-          </a>
-          <a href="#terminal-section" class="btn btn-glass">
-            <i class="fa-solid fa-terminal"></i> 启动极客终端
-          </a>
-          <a href="#contact" class="btn btn-outline">
-            <i class="fa-regular fa-paper-plane"></i> 保持联系
-          </a>
-        </div>
-
-        <div class="social-links">
-          <a href="https://github.com" target="_blank" rel="noreferrer" class="social-icon" title="GitHub"><i class="fa-brands fa-github"></i></a>
-          <a href="https://twitter.com" target="_blank" rel="noreferrer" class="social-icon" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
-          <a href="https://linkedin.com" target="_blank" rel="noreferrer" class="social-icon" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-          <a href="mailto:contact@cyber.dev" class="social-icon" title="Email"><i class="fa-solid fa-envelope"></i></a>
-        </div>
-      </div>
-
-      <!-- 3D 悬浮卡片 -->
-      <div class="hero-visual">
-        <div class="avatar-card-3d glass-card tilt-element" id="hero-card">
-          <div class="card-glow-overlay"></div>
-          <div class="card-inner">
-            <div class="avatar-box">
-              <div class="avatar-ring"></div>
-              <div class="avatar-img-placeholder">
-                <i class="fa-solid fa-user-astronaut"></i>
-              </div>
-            </div>
-            <div class="card-user-info">
-              <h3 class="card-name">Alex Shen</h3>
-              <p class="card-role">Full-Stack Architect & UI Magician</p>
-              <div class="card-tags">
-                <span class="tag">TypeScript</span>
-                <span class="tag">Next.js</span>
-                <span class="tag">WebGL</span>
-                <span class="tag">AI Agent</span>
-              </div>
-            </div>
-            <div class="card-stats-row">
-              <div class="stat-item">
-                <span class="stat-num counter" data-target="5">0</span><span class="stat-plus">+</span>
-                <span class="stat-label">年实战经验</span>
-              </div>
-              <div class="stat-item">
-                <span class="stat-num counter" data-target="48">0</span><span class="stat-plus">+</span>
-                <span class="stat-label">开源项目</span>
-              </div>
-              <div class="stat-item">
-                <span class="stat-num counter" data-target="99">0</span><span class="stat-percent">%</span>
-                <span class="stat-label">交付好评率</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== ABOUT & METRICS 关于与数据 ==================== -->
-    <section id="about" class="section-container">
-      <div class="section-header">
-        <span class="section-subtitle">// 01. ABOUT ME</span>
-        <h2 class="section-title">代码与艺术的交汇点</h2>
-        <div class="section-line"></div>
-      </div>
-
-      <div class="about-grid">
-        <div class="about-text-card glass-card">
-          <div class="card-header-bar">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
-            <span class="window-title">bio.md</span>
-          </div>
-          <div class="card-body">
-            <p>
-              你好！我是 Alex，一名热衷于打磨极致用户体验的全栈工程师与界面交互设计师。
-            </p>
-            <p>
-              从复杂的高并发分布式后台，到像素级精致的 3D 网页图形交互，我致力于打破传统前端与后端的界限。我坚信优雅的架构能支撑起天马行空的创意，硬核的技术能让设计焕发生命力。
-            </p>
-            <div class="key-highlights">
-              <div class="highlight-item">
-                <i class="fa-solid fa-bolt highlight-icon"></i>
-                <div>
-                  <strong>极致性能调优</strong>
-                  <p>深耕 Core Web Vitals、60 FPS 流畅渲染与低延迟微服务。</p>
-                </div>
-              </div>
-              <div class="highlight-item">
-                <i class="fa-solid fa-wand-magic-sparkles highlight-icon"></i>
-                <div>
-                  <strong>次世代交互设计</strong>
-                  <p>融合玻璃拟态、动态粒子、平滑过渡与沉浸式声效设计。</p>
-                </div>
-              </div>
-              <div class="highlight-item">
-                <i class="fa-solid fa-robot highlight-icon"></i>
-                <div>
-                  <strong>AI 与 Agent 赋能</strong>
-                  <p>将大语言模型与自主智能体无缝集成进现代化业务产品中。</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="stats-cards-wrapper">
-          <div class="stat-bento-card glass-card tilt-element">
-            <i class="fa-solid fa-code stat-bento-icon"></i>
-            <div class="stat-bento-data">
-              <span class="bento-num counter" data-target="250">0</span><span class="bento-suffix">k+</span>
-            </div>
-            <span class="bento-text">行精雕细琢的代码</span>
-          </div>
-          <div class="stat-bento-card glass-card tilt-element">
-            <i class="fa-solid fa-mug-hot stat-bento-icon"></i>
-            <div class="stat-bento-data">
-              <span class="bento-num counter" data-target="1200">0</span><span class="bento-suffix">+</span>
-            </div>
-            <span class="bento-text">杯深度萃取的咖啡</span>
-          </div>
-          <div class="stat-bento-card glass-card tilt-element">
-            <i class="fa-solid fa-star stat-bento-icon"></i>
-            <div class="stat-bento-data">
-              <span class="bento-num counter" data-target="3600">0</span><span class="bento-suffix">+</span>
-            </div>
-            <span class="bento-text">GitHub Stars 获赞</span>
-          </div>
-          <div class="stat-bento-card glass-card tilt-element">
-            <i class="fa-solid fa-clock-rotate-left stat-bento-icon"></i>
-            <div class="stat-bento-data">
-              <span class="bento-num">99.99</span><span class="bento-suffix">%</span>
-            </div>
-            <span class="bento-text">系统高可用在线率</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== SKILLS 技能矩阵 ==================== -->
-    <section id="skills" class="section-container">
-      <div class="section-header">
-        <span class="section-subtitle">// 02. TECH STACK & MATRIX</span>
-        <h2 class="section-title">全栈技能武器库</h2>
-        <div class="section-line"></div>
-      </div>
-
-      <div class="skills-grid">
-        <!-- 前端与视觉 -->
-        <div class="skill-category glass-card">
-          <div class="skill-cat-header">
-            <i class="fa-brands fa-react cat-icon"></i>
-            <h3>前端 & 视觉表现</h3>
-          </div>
-          <div class="skill-list">
-            <div class="skill-row">
-              <div class="skill-info"><span>TypeScript / JavaScript ES6+</span><span>96%</span></div>
-              <div class="skill-progress-bg"><div class="skill-progress-bar" data-width="96%"></div></div>
-            </div>
-            <div class="skill-row">
-              <div class="skill-info"><span>React.js / Next.js / Vue 3</span><span>92%</span></div>
-              <div class="skill-progress-bg"><div class="skill-progress-bar" data-width="92%"></div></div>
-            </div>
-            <div class="skill-row">
-              <div class="skill-info"><span>WebGL / Three.js / Canvas 2D</span><span>85%</span></div>
-              <div class="skill-progress-bg"><div class="skill-progress-bar" data-width="85%"></div></div>
-            </div>
-            <div class="skill-row">
-              <div class="skill-info"><span>CSS3 动效 / Tailwind / Glassmorphism</span><span>95%</span></div>
-              <div class="skill-progress-bg"><div class="skill-progress-bar" data-width="95%"></div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 后端与云原生 -->
-        <div class="skill-category glass-card">
-          <div class="skill-cat-header">
-            <i class="fa-solid fa-server cat-icon"></i>
-            <h3>后端 & 分布式架构</h3>
-          </div>
-          <div class="skill-list">
-            <div class="skill-row">
-              <div class="skill-info"><span>Node.js / Express / NestJS</span><span>90%</span></div>
-              <div class="skill-progress-bg"><div class="skill-progress-bar" data-width="90%"></div></div>
-            </div>
-            <div class="skill-row">
-              <div class="skill-info"><span>Python / FastAPI / PyTorch</span><span>88%</span></div>
-              <div class="skill-progress-bg"><div class="skill-progress-bar" data-width="88%"></div></div>
-            </div>
-            <div class="skill-row">
-              <div class="skill-info"><span>PostgreSQL / Redis / MongoDB</span><span>86%</span></div>
-              <div class="skill-progress-bg"><div class="skill-progress-bar" data-width="86%"></div></div>
-            </div>
-            <div class="skill-row">
-              <div class="skill-info"><span>Docker / K8s / CI/CD 自动化</span><span>82%</span></div>
-              <div class="skill-progress-bg"><div class="skill-progress-bar" data-width="82%"></div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- AI与前沿工程 -->
-        <div class="skill-category glass-card">
-          <div class="skill-cat-header">
-            <i class="fa-solid fa-brain cat-icon"></i>
-            <h3>AI & 前沿工程</h3>
-          </div>
-          <div class="skill-list">
-            <div class="skill-row">
-              <div class="skill-info"><span>LLM Agent / LangChain / RAG</span><span>90%</span></div>
-              <div class="skill-progress-bg"><div class="skill-progress-bar" data-width="90%"></div></div>
-            </div>
-            <div class="skill-row">
-              <div class="skill-info"><span>Prompt Engineering & Fine-tuning</span><span>88%</span></div>
-              <div class="skill-progress-bg"><div class="skill-progress-bar" data-width="88%"></div></div>
-            </div>
-            <div class="skill-row">
-              <div class="skill-info"><span>Web Audio API & 音效合成</span><span>85%</span></div>
-              <div class="skill-progress-bg"><div class="skill-progress-bar" data-width="85%"></div></div>
-            </div>
-            <div class="skill-row">
-              <div class="skill-info"><span>WebRTC & WebSocket 实时通信</span><span>89%</span></div>
-              <div class="skill-progress-bg"><div class="skill-progress-bar" data-width="89%"></div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== PROJECTS 精选项目 ==================== -->
-    <section id="projects" class="section-container">
-      <div class="section-header">
-        <span class="section-subtitle">// 03. FEATURED WORK</span>
-        <h2 class="section-title">精选创意与实战项目</h2>
-        <div class="section-line"></div>
-      </div>
-
-      <!-- 项目筛选分类 -->
-      <div class="project-filter-bar">
-        <button class="filter-btn active" data-filter="all">全部项目 (All)</button>
-        <button class="filter-btn" data-filter="web">Web 应用</button>
-        <button class="filter-btn" data-filter="ai">AI 智能体</button>
-        <button class="filter-btn" data-filter="visual">3D / 创意视觉</button>
-      </div>
-
-      <div class="projects-grid" id="projects-grid">
-        <!-- 项目 1 -->
-        <article class="project-card glass-card tilt-element" data-category="ai web">
-          <div class="project-img-box">
-            <div class="project-overlay">
-              <span class="project-badge">AI + WebApp</span>
-            </div>
-            <div class="card-banner-graphic banner-1">
-              <i class="fa-solid fa-network-wired"></i>
-            </div>
-          </div>
-          <div class="project-info">
-            <h3 class="project-title">NeuroFlow - 多智能体协同工作流引擎</h3>
-            <p class="project-desc">
-              基于大语言模型与 DAG 拓扑执行的可视化 AI Agent 编排平台，支持毫秒级状态同步与分布式执行流监控。
-            </p>
-            <div class="project-tags">
-              <span>TypeScript</span>
-              <span>Next.js 14</span>
-              <span>Python</span>
-              <span>WebSocket</span>
-            </div>
-            <div class="project-links">
-              <a href="https://github.com" target="_blank" rel="noreferrer" class="p-link"><i class="fa-brands fa-github"></i> 源码</a>
-              <a href="javascript:void(0)" class="p-link demo-trigger" data-demo="NeuroFlow 智能体平台"><i class="fa-solid fa-arrow-up-right-from-square"></i> 在线演示</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- 项目 2 -->
-        <article class="project-card glass-card tilt-element" data-category="visual web">
-          <div class="project-img-box">
-            <div class="project-overlay">
-              <span class="project-badge">WebGL 3D</span>
-            </div>
-            <div class="card-banner-graphic banner-2">
-              <i class="fa-solid fa-cube"></i>
-            </div>
-          </div>
-          <div class="project-info">
-            <h3 class="project-title">CyberVerse 3D - 赛博空间元宇宙沙盒</h3>
-            <p class="project-desc">
-              基于 WebGL 和 Three.js 构建的次世代网页端 3D 沉浸式互动虚拟展厅，拥有光追反射与空间音频系统。
-            </p>
-            <div class="project-tags">
-              <span>Three.js</span>
-              <span>GLSL Shader</span>
-              <span>Web Audio</span>
-              <span>Vite</span>
-            </div>
-            <div class="project-links">
-              <a href="https://github.com" target="_blank" rel="noreferrer" class="p-link"><i class="fa-brands fa-github"></i> 源码</a>
-              <a href="javascript:void(0)" class="p-link demo-trigger" data-demo="CyberVerse 3D 空间"><i class="fa-solid fa-arrow-up-right-from-square"></i> 在线演示</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- 项目 3 -->
-        <article class="project-card glass-card tilt-element" data-category="web">
-          <div class="project-img-box">
-            <div class="project-overlay">
-              <span class="project-badge">SaaS Cloud</span>
-            </div>
-            <div class="card-banner-graphic banner-3">
-              <i class="fa-solid fa-gauge-high"></i>
-            </div>
-          </div>
-          <div class="project-info">
-            <h3 class="project-title">PulseMetrics - 实时微服务 APM 监控大盘</h3>
-            <p class="project-desc">
-              面向高并发微服务的高性能实时指标可视化平台，支持百万 QPS 级别流量穿透分析与智能故障报警。
-            </p>
-            <div class="project-tags">
-              <span>React</span>
-              <span>ECharts</span>
-              <span>Go</span>
-              <span>ClickHouse</span>
-            </div>
-            <div class="project-links">
-              <a href="https://github.com" target="_blank" rel="noreferrer" class="p-link"><i class="fa-brands fa-github"></i> 源码</a>
-              <a href="javascript:void(0)" class="p-link demo-trigger" data-demo="PulseMetrics 监控中心"><i class="fa-solid fa-arrow-up-right-from-square"></i> 在线演示</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- 项目 4 -->
-        <article class="project-card glass-card tilt-element" data-category="ai">
-          <div class="project-img-box">
-            <div class="project-overlay">
-              <span class="project-badge">Open Source AI</span>
-            </div>
-            <div class="card-banner-graphic banner-4">
-              <i class="fa-solid fa-microchip"></i>
-            </div>
-          </div>
-          <div class="project-info">
-            <h3 class="project-title">OmniSynthetix - 跨模态知识图谱挖掘器</h3>
-            <p class="project-desc">
-              自动解析学术论文、技术文档并自动构建动态知识图谱与向量语义检索库的高效工具集。
-            </p>
-            <div class="project-tags">
-              <span>Python</span>
-              <span>FastAPI</span>
-              <span>Neo4j</span>
-              <span>Qdrant</span>
-            </div>
-            <div class="project-links">
-              <a href="https://github.com" target="_blank" rel="noreferrer" class="p-link"><i class="fa-brands fa-github"></i> 源码</a>
-              <a href="javascript:void(0)" class="p-link demo-trigger" data-demo="OmniSynthetix 挖掘器"><i class="fa-solid fa-arrow-up-right-from-square"></i> 在线演示</a>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- ==================== INTERACTIVE TERMINAL 极客终端 ==================== -->
-    <section id="terminal-section" class="section-container">
-      <div class="section-header">
-        <span class="section-subtitle">// 04. GEEK INTERACTIVE CLI</span>
-        <h2 class="section-title">极客交互式控制台</h2>
-        <div class="section-line"></div>
-      </div>
-
-      <div class="terminal-wrapper glass-card">
-        <div class="terminal-topbar">
-          <div class="terminal-actions">
-            <span class="t-dot close" id="term-close"></span>
-            <span class="t-dot minimize"></span>
-            <span class="t-dot maximize" id="term-max"></span>
-          </div>
-          <div class="terminal-title">guest@alex-cyber-os: ~ (zsh)</div>
-          <div class="terminal-hint">输入 <code>help</code> 查看可用命令</div>
-        </div>
-        <div class="terminal-body" id="terminal-body">
-          <div class="terminal-output" id="terminal-output">
-            <div class="t-line text-cyan">CYBER_OS Kernel v4.2.0-release (x86_64-apple-darwin)</div>
-            <div class="t-line text-muted">欢迎进入终端控制台！你可以输入命令行指令与系统进行深度互动。</div>
-            <div class="t-line">输入 <span class="text-highlight">help</span> 列出所有指令，或输入 <span class="text-highlight">matrix</span> 开启黑客帝国数字雨。</div>
-          </div>
-          <div class="terminal-input-row">
-            <span class="t-prompt text-green">guest@cyber-os:~$</span>
-            <input type="text" id="terminal-input" autocomplete="off" spellcheck="false" placeholder="输入命令..." />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== EXPERIENCE 历程与时间轴 ==================== -->
-    <section id="experience" class="section-container">
-      <div class="section-header">
-        <span class="section-subtitle">// 05. CAREER MILESTONES</span>
-        <h2 class="section-title">历程与里程碑</h2>
-        <div class="section-line"></div>
-      </div>
-
-      <div class="timeline-container">
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content glass-card">
-            <span class="timeline-date">2024 - 至今</span>
-            <h3 class="timeline-role">Lead Full-Stack & AI Architect</h3>
-            <h4 class="timeline-company">@ CyberNext Labs</h4>
-            <p>主导新一代生成式 AI 应用中台与多智能体自动化引擎研发，负责核心架构演进及前端高阶动效标准建设。</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content glass-card">
-            <span class="timeline-date">2022 - 2024</span>
-            <h3 class="timeline-role">Senior Frontend Specialist</h3>
-            <h4 class="timeline-company">@ Horizon Tech</h4>
-            <p>负责云原生可观测性大盘及 3D 数据可视化中枢的前端架构，主导 WebGL 渲染管线重构，提升渲染帧率 120%。</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content glass-card">
-            <span class="timeline-date">2020 - 2022</span>
-            <h3 class="timeline-role">Full-Stack Engineer</h3>
-            <h4 class="timeline-company">@ Quantum Byte</h4>
-            <p>参与高并发微服务 API 网关、分布式任务调度与现代单页 Web 应用研发，从 0 到 1 打造多个核心产品线。</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== CONTACT 联系与留言 ==================== -->
-    <section id="contact" class="section-container">
-      <div class="section-header">
-        <span class="section-subtitle">// 06. GET IN TOUCH</span>
-        <h2 class="section-title">开启下一场合作</h2>
-        <div class="section-line"></div>
-      </div>
-
-      <div class="contact-grid">
-        <div class="contact-info-card glass-card">
-          <h3>随时向我发送信号</h3>
-          <p>
-            无论是新项目合作、技术交流、架构咨询，还是仅仅想打个招呼，我都会尽快回复你！
-          </p>
-          
-          <div class="contact-details">
-            <div class="contact-row">
-              <i class="fa-solid fa-location-dot contact-icon"></i>
-              <div>
-                <strong>坐标</strong>
-                <p>上海 / 远程可就职全球</p>
-              </div>
-            </div>
-            <div class="contact-row">
-              <i class="fa-solid fa-envelope contact-icon"></i>
-              <div>
-                <strong>电子邮箱</strong>
-                <p>alex.shen@cyberpace.dev</p>
-              </div>
-            </div>
-            <div class="contact-row">
-              <i class="fa-solid fa-shield-halved contact-icon"></i>
-              <div>
-                <strong>PGP 指纹</strong>
-                <p class="pgp-text">4A89 9C21 88DF 00B1 9A55</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <form id="contact-form" class="contact-form glass-card">
-          <div class="form-group">
-            <label for="form-name">你的称呼</label>
-            <input type="text" id="form-name" placeholder="例如：Neo / 开发者伙伴" required>
-          </div>
-          <div class="form-group">
-            <label for="form-email">你的邮箱</label>
-            <input type="email" id="form-email" placeholder="name@domain.com" required>
-          </div>
-          <div class="form-group">
-            <label for="form-message">留言内容</label>
-            <textarea id="form-message" rows="4" placeholder="写下你的想法、项目需求或任何你想聊的..." required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary glow-button submit-btn">
-            <i class="fa-solid fa-paper-plane"></i> <span>发送加密信息</span>
-          </button>
-          <div id="form-feedback" class="form-feedback"></div>
-        </form>
-      </div>
-    </section>
-  </main>
-
-  <!-- 页脚 -->
-  <footer class="footer-container">
-    <div class="footer-content">
-      <div class="footer-logo">
-        <span class="logo-bracket">&lt;</span>
-        <span class="logo-text">ALEX.DEV</span>
-        <span class="logo-bracket">/&gt;</span>
-      </div>
-      <p class="footer-text">
-        © 2026 Alex Shen. Crafted with <i class="fa-solid fa-heart text-pink"></i>, Vanilla CSS & Modern JS.
-      </p>
-      <a href="#hero" class="back-to-top" title="回到顶部">
-        <i class="fa-solid fa-chevron-up"></i>
-      </a>
-    </div>
-  </footer>
-
-  <!-- 提示弹窗 (Toast) -->
-  <div id="toast" class="toast glass-card"></div>
-
-  <!-- Custom Scripts -->
-  <script src="script.js"></script>
-</body>
-</html>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/_next/static/chunks/2l9qizuf8q028.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/_next/static/chunks/31cgqj_-l15yt.js"/><script src="/_next/static/chunks/0fmu2fmeyw7p-.js" async=""></script><script src="/_next/static/chunks/2lmvech1n3o5k.js" async=""></script><script src="/_next/static/chunks/34wvn5zw0a69w.js" async=""></script><script src="/_next/static/chunks/turbopack-3qm_ffl-la-3-.js" async=""></script><script src="/_next/static/chunks/0ehjiuuxbbhq9.js" async=""></script><script src="/_next/static/chunks/0mj1vhxl2xsfl.js" async=""></script><script src="/_next/static/chunks/185iuvqxzq-s9.js" async=""></script><script src="/_next/static/chunks/110z8nsm2cn5e.js" async=""></script><script src="/_next/static/chunks/1h6avwzdsesw3.js" async=""></script><script src="/_next/static/chunks/35-mmu2mdql9z.js" async=""></script><meta name="theme-color" content="#f4f1e8"/><title>桃源境 · 桃源旅人的数字小院</title><meta name="description" content="写代码，也收集生活里的微光。 在这里，慢一点也没关系。"/><link rel="icon" href="/icon.svg"/><script src="/_next/static/chunks/0cz1d0mv5g_q7.js" noModule=""></script></head><body><div hidden=""><!--$--><!--/$--></div><div class="realm-app" data-view="explore"><div class="landscape-layer" aria-hidden="true"><!--$!--><template data-dgst="BAILOUT_TO_CLIENT_SIDE_RENDERING"></template><!--/$--></div><div class="paper-grain" aria-hidden="true"></div><div class="site-chrome"><a class="skip-link" href="#main-content">跳至主要内容</a><header class="site-header"><button class="brand" aria-label="桃源境首页"><svg width="35" height="35" viewBox="0 0 64 64" fill="none" aria-hidden="true"><g fill="currentColor"><ellipse cx="32" cy="21" rx="7.5" ry="12" transform="rotate(0 32 32)"></ellipse><ellipse cx="32" cy="21" rx="7.5" ry="12" transform="rotate(72 32 32)"></ellipse><ellipse cx="32" cy="21" rx="7.5" ry="12" transform="rotate(144 32 32)"></ellipse><ellipse cx="32" cy="21" rx="7.5" ry="12" transform="rotate(216 32 32)"></ellipse><ellipse cx="32" cy="21" rx="7.5" ry="12" transform="rotate(288 32 32)"></ellipse></g><circle cx="32" cy="32" r="4" fill="#f4f1e8"></circle></svg><span>桃源境<small>A PERSONAL REALM</small></span></button><nav class="view-switch" aria-label="浏览方式"><button class="active"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-compass" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"></path></svg> 漫游</button><button class=""><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open" aria-hidden="true"><path d="M12 5v16"></path><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"></path></svg> 手记</button></nav><div class="header-actions"><span class="header-note"><i></i> 自由探索 · 风起桃源</span><button class="icon-button " title="开启环境音" aria-label="开启环境音" aria-pressed="false"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-volume-x" aria-hidden="true"><path d="M11 4.702a.7.7 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.7.7 0 0 0 11 19.298z"></path><path d="m16.5 14.5 5-5"></path><path d="m16.5 9.5 5 5"></path></svg></button><button class="icon-button" aria-label="漫游指南"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-question-mark lucide-help-circle lucide-circle-help" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg></button><button class="icon-button mobile-menu" aria-label="打开导航"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu" aria-hidden="true"><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path></svg> </button></div></header><footer class="site-footer"><span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>在山水之间</span><span class="footer-links"><a href="/admin" title="内容管理" aria-label="内容管理"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings-2" aria-hidden="true"><path d="M14 17H5"></path><path d="M19 7h-9"></path><circle cx="17" cy="17" r="3"></circle><circle cx="7" cy="7" r="3"></circle></svg></a><small>示例小院</small><span>© <!-- -->2026<!-- --> 桃源境</span></span></footer></div><div aria-hidden="true" style="position:fixed;inset:0;pointer-events:none;opacity:0;background:radial-gradient(circle,#fffaf0 0%,#f7e7c6 60%,#f4b6c2 100%);z-index:40"></div><div class="loading-screen" role="status"><svg width="45" height="45" viewBox="0 0 64 64" fill="none" aria-hidden="true"><g fill="currentColor"><ellipse cx="32" cy="21" rx="7.5" ry="12" transform="rotate(0 32 32)"></ellipse><ellipse cx="32" cy="21" rx="7.5" ry="12" transform="rotate(72 32 32)"></ellipse><ellipse cx="32" cy="21" rx="7.5" ry="12" transform="rotate(144 32 32)"></ellipse><ellipse cx="32" cy="21" rx="7.5" ry="12" transform="rotate(216 32 32)"></ellipse><ellipse cx="32" cy="21" rx="7.5" ry="12" transform="rotate(288 32 32)"></ellipse></g><circle cx="32" cy="32" r="4" fill="#f4f1e8"></circle></svg><p>一隅山水，正在醒来</p><span class="loading-line"></span><small>桃源境 · DIGITAL GARDEN</small></div></div><noscript><style>.realm-app{display:none}</style><main class="nojs-content"><h1>桃源境 · <!-- -->桃源旅人<!-- -->的数字小院</h1><p>写代码，也收集生活里的微光。
+在这里，慢一点也没关系。</p><article><h2><a href="/read/about">你好，我是桃源旅人</a></h2><p>写代码，也收集生活里的微光。</p><div class="prose"><h2>在这里，慢一点也没关系</h2>
+<p>我喜欢把想法做成可以触摸的东西，也喜欢山间的风、纸上的字和没有目的的散步。这里是我的数字小院：收着做过的作品、走过的路，以及一些还在生长的念头。</p>
+<h3>我在关注</h3>
+<ul>
+<li><strong>设计与技术</strong>：让工具有温度，让交互更自然。</li>
+<li><strong>独立创作</strong>：从一个小问题出发，做完整、安静的作品。</li>
+<li><strong>日常观察</strong>：记录天气、阅读和路上的片刻。</li>
+</ul>
+<blockquote>
+<p>土地平旷，屋舍俨然，有良田美池桑竹之属。</p>
+</blockquote>
+<p>这是可替换的示例简介。你可以在内容管理中写下自己的故事。</p></div></article><article><h2><a href="/read/realm">桃源境 · 数字小院</a></h2><p>把个人网站，做成一处可以漫游的风景。</p><div class="prose"><h2>为自己造一座桃花源</h2>
+<p>个人网站不一定是一张履历。它也可以是一片风景，让作品成为林间的灯，让文字藏进竹影，让生活沿着水面慢慢展开。</p>
+<h3>交互设计</h3>
+<ol>
+<li>从一扇门开始，跟随镜头走进山水。</li>
+<li>用五个地点组织不同的内容。</li>
+<li>点击风景中的节点，打开一页故事。</li>
+<li>用「手记」模式快速查找和阅读。</li>
+</ol>
+<h3>技术实现</h3>
+<p>使用 React Three Fiber 绘制场景，GSAP 编排镜头，Next.js 提供内容读写。桃林采用实例化渲染，弱设备可以切换为轻量模式。</p>
+<pre><code class="language-ts">const idea = &#x27;让信息成为风景&#x27;;
+const realm = createSomething(idea);
+</code></pre>
+<p>这是一篇项目介绍示例，可以在后台修改。</p></div></article><article><h2><a href="/read/slow-notes">拾光 · 慢笔记</a></h2><p>一个留给日常观察的小小容器。</p><div class="prose"><h2>给日常留一个位置</h2>
+<p>有些想法还不够完整，不必急着变成文章。拾光是一个笔记工具的概念项目：用简洁的记录、标签和日历，把零散的片刻慢慢串起来。</p>
+<h3>设计原则</h3>
+<ul>
+<li>打开就能写，减少记录之前的准备。</li>
+<li>不统计连续打卡，让记录回到自己的节奏。</li>
+<li>支持 Markdown 和纯文本导出。</li>
+</ul>
+<p><strong>这是一份示例项目概念，并非已发布的产品。</strong></p></div></article><article><h2><a href="/read/season-colors">四时色 · 自然调色</a></h2><p>从季节里，借一组温柔的颜色。</p><div class="prose"><h2>自然是最好的调色师</h2>
+<p>春天的嫩绿，夏日的湖青，秋天的赭石，冬日的雾白。这个概念练习尝试把自然的色彩整理成日常设计可以使用的色板。</p>
+<h3>一组春日配色</h3>
+<table><thead><tr><th>名称</th><th>色值</th><th>用途</th></tr></thead><tbody><tr><td>桃夭</td><td>#DFA99C</td><td>点缀</td></tr><tr><td>湖青</td><td>#809B8D</td><td>主色</td></tr><tr><td>宣纸</td><td>#F5F2E9</td><td>背景</td></tr></tbody></table>
+<p><strong>示例设计练习，可替换为你的真实作品。</strong></p></div></article><article><h2><a href="/read/making">开始独立创作</a></h2><p>给自己的想法，一段认真生长的时间。</p><div class="prose"><h2>把一个想法做完整</h2>
+<p>从观察一个问题，到画出草图，再到让它真正运行，独立创作让我重新理解「完成」的意义。</p>
+<p>这一段时间想尝试：</p>
+<ul>
+<li>做一个自己愿意每天使用的小工具。</li>
+<li>记录设计和开发中的取舍。</li>
+<li>保持开放，接受作品不够完美。</li>
+</ul>
+<p><em>这是经历示例，请替换为你的真实时间线。</em></p></div></article><article><h2><a href="/read/learning">在设计与代码之间</a></h2><p>学习用另一种语言，表达同一个想法。</p><div class="prose"><h2>从界面走向体验</h2>
+<p>代码负责让事情发生，设计决定事情如何被感知。我希望在两者之间找到自己的表达方式。</p>
+<p>这是一个学习经历的占位条目，可以写成教育经历、工作经历，或一段对你很重要的旅程。</p></div></article><article><h2><a href="/read/quiet-interface">好的界面，也懂得留白</a></h2><p>当信息越来越多，我们为什么需要一点安静。</p><div class="prose"><h2>留白不是空着</h2>
+<p>我们习惯把屏幕填满。按钮、提示、通知，每一块空间似乎都应该有用。但空间也能帮助理解：它告诉我们，哪里结束，哪里开始，什么值得停留。</p>
+<h3>从一个小决定开始</h3>
+<p>写一段文字时，先问自己：读者此刻最想知道什么？做一个界面时，也可以这样问。</p>
+<ul>
+<li>把最重要的事放在最容易发现的地方。</li>
+<li>把相关内容放在一起。</li>
+<li>给不同层级足够的距离。</li>
+</ul>
+<blockquote>
+<p>安静的界面，不是没有信息，而是信息各得其所。</p>
+</blockquote>
+<h3>让功能适时出现</h3>
+<p>并不是每一个操作都需要一直站在台前。阅读时，让内容成为主角；编辑时，再让工具来到手边。</p>
+<p>这是一篇可编辑的示例手记。</p></div></article><article><h2><a href="/read/digital-garden">种一座数字花园</a></h2><p>让个人网站成为一个持续生长的地方。</p><div class="prose"><h2>不是每篇文章都要写完</h2>
+<p>花园里的植物有不同的生长阶段。想法也一样：一些刚刚冒头，一些长出了枝叶，一些终于开花。</p>
+<p>数字花园让这些阶段都可以被看见。你可以写下未完成的问题，补充新的发现，也可以在几年之后回来修改最初的判断。</p>
+<h3>从一块小地方开始</h3>
+<p>选择一个你愿意长期关注的主题。写一页，链接另一页。慢慢地，这些路会连接起来。</p>
+<p>重要的不是更新的频率，而是你是否还愿意回来。</p></div></article><article><h2><a href="/read/walk">散步，是另一种思考</a></h2><p>离开屏幕以后，问题有时会自己松开。</p><div class="prose"><h2>去走一走</h2>
+<p>有时候，卡住并不是因为不够努力，而是因为一直用同一个角度看问题。</p>
+<p>出门以后，注意力重新回到身体：脚下的路，树叶的影子，路边的风。思绪不用被强迫着往前走，反而开始自由地连接。</p>
+<p>我想把散步变成一种习惯：不为了步数，不为了效率，只是给一天留一段空白。</p>
+<p><em>示例随笔，你可以写下自己的观察。</em></p></div></article><article><h2><a href="/read/morning">今天的风，有一点秋天</a></h2><p>早上开窗，听见树叶在说话。</p><div class="prose"><p>窗外的光比前几天柔和了些。泡了一杯茶，把桌上没读完的书翻开。</p>
+<p>没有特别的事发生，也是值得记录的一天。</p></div></article><article><h2><a href="/read/book">读到一句喜欢的话</a></h2><p>「生活，是很好玩的。」</p><div class="prose"><p>把喜欢的句子抄进本子里。读书的快乐，有时就是在某一页里，忽然遇见一个能替你说出心事的人。</p>
+<p>——示例阅读记录</p></div></article><article><h2><a href="/read/light">收集一束傍晚的光</a></h2><p>它落在桌角，停了一小会儿。</p><div class="prose"><p>傍晚的阳光穿过窗户，在桌上留下一块金色。等我想起拍照，它已经慢慢移开了。</p>
+<p>有些美好，记住就好。</p></div></article></main></noscript><!--$--><!--/$--><script src="/_next/static/chunks/31cgqj_-l15yt.js" id="_R_" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0])</script><script>self.__next_f.push([1,"1:\"$Sreact.fragment\"\n2:I[39756,[\"/_next/static/chunks/0ehjiuuxbbhq9.js\"],\"default\"]\n3:I[58298,[\"/_next/static/chunks/0ehjiuuxbbhq9.js\",\"/_next/static/chunks/0mj1vhxl2xsfl.js\"],\"default\"]\n4:I[37457,[\"/_next/static/chunks/0ehjiuuxbbhq9.js\"],\"default\"]\n6:I[97367,[\"/_next/static/chunks/0ehjiuuxbbhq9.js\"],\"OutletBoundary\"]\n7:\"$Sreact.suspense\"\n9:I[97367,[\"/_next/static/chunks/0ehjiuuxbbhq9.js\"],\"ViewportBoundary\"]\nb:I[97367,[\"/_next/static/chunks/0ehjiuuxbbhq9.js\"],\"MetadataBoundary\"]\nd:I[68027,[\"/_next/static/chunks/0ehjiuuxbbhq9.js\"],\"default\",1]\n:HL[\"/_next/static/chunks/2l9qizuf8q028.css\",\"style\"]\n0:{\"P\":null,\"c\":[\"\",\"\"],\"q\":\"\",\"i\":false,\"f\":[[[\"\",{\"children\":[\"__PAGE__\",{},\"$undefined\",\"$undefined\",4608]},\"$undefined\",\"$undefined\",4624],[[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/chunks/2l9qizuf8q028.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}],[\"$\",\"script\",\"script-0\",{\"src\":\"/_next/static/chunks/0ehjiuuxbbhq9.js\",\"async\":true,\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"zh-CN\",\"children\":[\"$\",\"body\",null,{\"children\":[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$3\",\"errorStyles\":[],\"errorScripts\":[[\"$\",\"script\",\"script-0\",{\"src\":\"/_next/static/chunks/0mj1vhxl2xsfl.js\",\"async\":true,\"nonce\":\"$undefined\"}]],\"template\":[\"$\",\"$L4\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[\"$\",\"main\",null,{\"className\":\"status-page\",\"children\":[[\"$\",\"svg\",null,{\"width\":45,\"height\":45,\"viewBox\":\"0 0 64 64\",\"fill\":\"none\",\"aria-hidden\":\"true\",\"children\":[[\"$\",\"g\",null,{\"fill\":\"currentColor\",\"children\":[[\"$\",\"ellipse\",\"0\",{\"cx\":\"32\",\"cy\":\"21\",\"rx\":\"7.5\",\"ry\":\"12\",\"transform\":\"rotate(0 32 32)\"}],[\"$\",\"ellipse\",\"72\",{\"cx\":\"32\",\"cy\":\"21\",\"rx\":\"7.5\",\"ry\":\"12\",\"transform\":\"rotate(72 32 32)\"}],[\"$\",\"ellipse\",\"144\",{\"cx\":\"32\",\"cy\":\"21\",\"rx\":\"7.5\",\"ry\":\"12\",\"transform\":\"rotate(144 32 32)\"}],[\"$\",\"ellipse\",\"216\",{\"cx\":\"32\",\"cy\":\"21\",\"rx\":\"7.5\",\"ry\":\"12\",\"transform\":\"rotate(216 32 32)\"}],[\"$\",\"ellipse\",\"288\",{\"cx\":\"32\",\"cy\":\"21\",\"rx\":\"7.5\",\"ry\":\"12\",\"transform\":\"rotate(288 32 32)\"}]]}],[\"$\",\"circle\",null,{\"cx\":\"32\",\"cy\":\"32\",\"r\":\"4\",\"fill\":\"#f4f1e8\"}]]}],[\"$\",\"span\",null,{\"className\":\"eyebrow\",\"children\":\"404 · A PATH LESS TRAVELED\"}],[\"$\",\"h1\",null,{\"children\":\"这条小径，还没有通向远方。\"}],[\"$\",\"p\",null,{\"children\":\"你寻找的故事可能已被移走，回小院看看别的风景吧。\"}],[\"$\",\"a\",null,{\"className\":\"primary-button\",\"href\":\"/\",\"children\":\"回到桃源 ↗\"}]]}],[]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]}]}]]}],{\"children\":[[\"$\",\"$1\",\"c\",{\"children\":[\"$L5\",[[\"$\",\"script\",\"script-0\",{\"src\":\"/_next/static/chunks/185iuvqxzq-s9.js\",\"async\":true,\"nonce\":\"$undefined\"}],[\"$\",\"script\",\"script-1\",{\"src\":\"/_next/static/chunks/110z8nsm2cn5e.js\",\"async\":true,\"nonce\":\"$undefined\"}],[\"$\",\"script\",\"script-2\",{\"src\":\"/_next/static/chunks/1h6avwzdsesw3.js\",\"async\":true,\"nonce\":\"$undefined\"}],[\"$\",\"script\",\"script-3\",{\"src\":\"/_next/static/chunks/35-mmu2mdql9z.js\",\"async\":true,\"nonce\":\"$undefined\"}]],[\"$\",\"$L6\",null,{\"children\":[\"$\",\"$7\",null,{\"name\":\"Next.MetadataOutlet\",\"children\":\"$@8\"}]}]]}],{},null,false,null]},null,false,null],[\"$\",\"$1\",\"h\",{\"children\":[null,[\"$\",\"$L9\",null,{\"children\":\"$La\"}],[\"$\",\"div\",null,{\"hidden\":true,\"children\":[\"$\",\"$Lb\",null,{\"children\":[\"$\",\"$7\",null,{\"name\":\"Next.Metadata\",\"children\":\"$Lc\"}]}]}],null]}],false]],\"m\":\"$undefined\",\"G\":[\"$d\",[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/chunks/2l9qizuf8q028.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]]],\"S\":true,\"h\":null,\"r\":\"$undefined\",\"s\":\"$undefined\",\"a\":\"$undefined\",\"l\":\"$undefined\",\"p\":\"$undefined\",\"d\":\"$undefined\",\"b\":\"qeldikmnHjIk1IREbNSj4\"}\na:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"meta\",\"1\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}],[\"$\",\"meta\",\"2\",{\"name\":\"theme-color\",\"content\":\"#f4f1e8\"}]]\n"])</script><script>self.__next_f.push([1,"e:I[9116,[\"/_next/static/chunks/0ehjiuuxbbhq9.js\",\"/_next/static/chunks/185iuvqxzq-s9.js\",\"/_next/static/chunks/110z8nsm2cn5e.js\",\"/_next/static/chunks/1h6avwzdsesw3.js\",\"/_next/static/chunks/35-mmu2mdql9z.js\"],\"RealmApp\"]\n10:I[27201,[\"/_next/static/chunks/0ehjiuuxbbhq9.js\"],\"IconMark\"]\n5:[[\"$\",\"$Le\",null,{\"initialNodes\":[{\"id\":\"about\",\"slug\":\"about\",\"type\":\"profile\",\"title\":\"你好，我是桃源旅人\",\"summary\":\"写代码，也收集生活里的微光。\",\"body\":\"## 在这里，慢一点也没关系\\n\\n我喜欢把想法做成可以触摸的东西，也喜欢山间的风、纸上的字和没有目的的散步。这里是我的数字小院：收着做过的作品、走过的路，以及一些还在生长的念头。\\n\\n### 我在关注\\n\\n- **设计与技术**：让工具有温度，让交互更自然。\\n- **独立创作**：从一个小问题出发，做完整、安静的作品。\\n- **日常观察**：记录天气、阅读和路上的片刻。\\n\\n\u003e 土地平旷，屋舍俨然，有良田美池桑竹之属。\\n\\n这是可替换的示例简介。你可以在内容管理中写下自己的故事。\",\"date\":\"2026-10-10\",\"tags\":[\"关于我\",\"示例\"],\"meta\":{},\"cover\":null,\"images\":[],\"zone\":null,\"visual\":{},\"position\":[0,0.8,0],\"importance\":3,\"createdAt\":\"2026-10-10\",\"published\":true},{\"id\":\"realm\",\"slug\":\"realm\",\"type\":\"project\",\"title\":\"桃源境 · 数字小院\",\"summary\":\"把个人网站，做成一处可以漫游的风景。\",\"body\":\"## 为自己造一座桃花源\\n\\n个人网站不一定是一张履历。它也可以是一片风景，让作品成为林间的灯，让文字藏进竹影，让生活沿着水面慢慢展开。\\n\\n### 交互设计\\n\\n1. 从一扇门开始，跟随镜头走进山水。\\n2. 用五个地点组织不同的内容。\\n3. 点击风景中的节点，打开一页故事。\\n4. 用「手记」模式快速查找和阅读。\\n\\n### 技术实现\\n\\n使用 React Three Fiber 绘制场景，GSAP 编排镜头，Next.js 提供内容读写。桃林采用实例化渲染，弱设备可以切换为轻量模式。\\n\\n```ts\\nconst idea = '让信息成为风景';\\nconst realm = createSomething(idea);\\n```\\n\\n这是一篇项目介绍示例，可以在后台修改。\",\"date\":\"2026-10-08\",\"tags\":[\"交互设计\",\"Three.js\",\"Next.js\"],\"meta\":{\"stack\":[\"Next.js\",\"React Three Fiber\",\"GSAP\"],\"status\":\"持续生长\"},\"cover\":null,\"images\":[],\"zone\":null,\"visual\":{},\"position\":[16.186107431773046,2.044402111969325,5.461378699769543],\"importance\":2,\"createdAt\":\"2026-10-08\",\"published\":true},{\"id\":\"slow-notes\",\"slug\":\"slow-notes\",\"type\":\"project\",\"title\":\"拾光 · 慢笔记\",\"summary\":\"一个留给日常观察的小小容器。\",\"body\":\"## 给日常留一个位置\\n\\n有些想法还不够完整，不必急着变成文章。拾光是一个笔记工具的概念项目：用简洁的记录、标签和日历，把零散的片刻慢慢串起来。\\n\\n### 设计原则\\n\\n- 打开就能写，减少记录之前的准备。\\n- 不统计连续打卡，让记录回到自己的节奏。\\n- 支持 Markdown 和纯文本导出。\\n\\n**这是一份示例项目概念，并非已发布的产品。**\",\"date\":\"2026-09-18\",\"tags\":[\"产品设计\",\"概念作品\"],\"meta\":{\"stack\":[\"React\",\"TypeScript\"],\"status\":\"概念探索\"},\"cover\":null,\"images\":[],\"zone\":null,\"visual\":{},\"position\":[15.426478995900904,2.28955822517675,-6.06987007242623],\"importance\":2,\"createdAt\":\"2026-09-18\",\"published\":true},{\"id\":\"season-colors\",\"slug\":\"season-colors\",\"type\":\"project\",\"title\":\"四时色 · 自然调色\",\"summary\":\"从季节里，借一组温柔的颜色。\",\"body\":\"## 自然是最好的调色师\\n\\n春天的嫩绿，夏日的湖青，秋天的赭石，冬日的雾白。这个概念练习尝试把自然的色彩整理成日常设计可以使用的色板。\\n\\n### 一组春日配色\\n\\n| 名称 | 色值 | 用途 |\\n| --- | --- | --- |\\n| 桃夭 | #DFA99C | 点缀 |\\n| 湖青 | #809B8D | 主色 |\\n| 宣纸 | #F5F2E9 | 背景 |\\n\\n**示例设计练习，可替换为你的真实作品。**\",\"date\":\"2026-08-22\",\"tags\":[\"视觉设计\",\"色彩\"],\"meta\":{\"stack\":[\"设计系统\"],\"status\":\"设计练习\"},\"cover\":null,\"images\":[],\"zone\":null,\"visual\":{},\"position\":[22.581114237240243,2.047953734088433,4.992650877362917],\"importance\":2,\"createdAt\":\"2026-08-22\",\"published\":true},{\"id\":\"making\",\"slug\":\"making\",\"type\":\"experience\",\"title\":\"开始独立创作\",\"summary\":\"给自己的想法，一段认真生长的时间。\",\"body\":\"## 把一个想法做完整\\n\\n从观察一个问题，到画出草图，再到让它真正运行，独立创作让我重新理解「完成」的意义。\\n\\n这一段时间想尝试：\\n\\n- 做一个自己愿意每天使用的小工具。\\n- 记录设计和开发中的取舍。\\n- 保持开放，接受作品不够完美。\\n\\n*这是经历示例，请替换为你的真实时间线。*\",\"date\":\"2026-06-01\",\"tags\":[\"独立创作\",\"示例\"],\"meta\":{\"org\":\"个人创作\",\"role\":\"设计 / 开发\"},\"cover\":null,\"images\":[],\"zone\":null,\"visual\":{},\"position\":[-26,0.10915651743932595,-3],\"importance\":2,\"createdAt\":\"2026-06-01\",\"published\":true},{\"id\":\"learning\",\"slug\":\"learning\",\"type\":\"experience\",\"title\":\"在设计与代码之间\",\"summary\":\"学习用另一种语言，表达同一个想法。\",\"body\":\"## 从界面走向体验\\n\\n代码负责让事情发生，设计决定事情如何被感知。我希望在两者之间找到自己的表达方式。\\n\\n这是一个学习经历的占位条目，可以写成教育经历、工作经历，或一段对你很重要的旅程。\",\"date\":\"2025-09-01\",\"tags\":[\"学习\",\"示例\"],\"meta\":{\"org\":\"自我学习\",\"role\":\"探索者\"},\"cover\":null,\"images\":[],\"zone\":null,\"visual\":{},\"position\":[-25,0.1357129906339341,21],\"importance\":2,\"createdAt\":\"2025-09-01\",\"published\":true},{\"id\":\"quiet-interface\",\"slug\":\"quiet-interface\",\"type\":\"article\",\"title\":\"好的界面，也懂得留白\",\"summary\":\"当信息越来越多，我们为什么需要一点安静。\",\"body\":\"## 留白不是空着\\n\\n我们习惯把屏幕填满。按钮、提示、通知，每一块空间似乎都应该有用。但空间也能帮助理解：它告诉我们，哪里结束，哪里开始，什么值得停留。\\n\\n### 从一个小决定开始\\n\\n写一段文字时，先问自己：读者此刻最想知道什么？做一个界面时，也可以这样问。\\n\\n- 把最重要的事放在最容易发现的地方。\\n- 把相关内容放在一起。\\n- 给不同层级足够的距离。\\n\\n\u003e 安静的界面，不是没有信息，而是信息各得其所。\\n\\n### 让功能适时出现\\n\\n并不是每一个操作都需要一直站在台前。阅读时，让内容成为主角；编辑时，再让工具来到手边。\\n\\n这是一篇可编辑的示例手记。\",\"date\":\"2026-10-06\",\"tags\":[\"设计随想\",\"界面\"],\"meta\":{},\"cover\":null,\"images\":[],\"zone\":null,\"visual\":{},\"position\":[5.199243835835129,1.0768778351448085,-20.282720739081572],\"importance\":2,\"createdAt\":\"2026-10-06\",\"published\":true},{\"id\":\"digital-garden\",\"slug\":\"digital-garden\",\"type\":\"article\",\"title\":\"种一座数字花园\",\"summary\":\"让个人网站成为一个持续生长的地方。\",\"body\":\"## 不是每篇文章都要写完\\n\\n花园里的植物有不同的生长阶段。想法也一样：一些刚刚冒头，一些长出了枝叶，一些终于开花。\\n\\n数字花园让这些阶段都可以被看见。你可以写下未完成的问题，补充新的发现，也可以在几年之后回来修改最初的判断。\\n\\n### 从一块小地方开始\\n\\n选择一个你愿意长期关注的主题。写一页，链接另一页。慢慢地，这些路会连接起来。\\n\\n重要的不是更新的频率，而是你是否还愿意回来。\",\"date\":\"2026-09-26\",\"tags\":[\"写作\",\"个人网站\"],\"meta\":{},\"cover\":null,\"images\":[],\"zone\":null,\"visual\":{},\"position\":[12.663029650679057,1.7734871739945985,-17.18734138404831],\"importance\":2,\"createdAt\":\"2026-09-26\",\"published\":true},{\"id\":\"walk\",\"slug\":\"walk\",\"type\":\"article\",\"title\":\"散步，是另一种思考\",\"summary\":\"离开屏幕以后，问题有时会自己松开。\",\"body\":\"## 去走一走\\n\\n有时候，卡住并不是因为不够努力，而是因为一直用同一个角度看问题。\\n\\n出门以后，注意力重新回到身体：脚下的路，树叶的影子，路边的风。思绪不用被强迫着往前走，反而开始自由地连接。\\n\\n我想把散步变成一种习惯：不为了步数，不为了效率，只是给一天留一段空白。\\n\\n*示例随笔，你可以写下自己的观察。*\",\"date\":\"2026-09-10\",\"tags\":[\"生活\",\"观察\"],\"meta\":{},\"cover\":null,\"images\":[],\"zone\":null,\"visual\":{},\"position\":[3.7711436559991194,0.9269839039767882,-25.96288644619426],\"importance\":2,\"createdAt\":\"2026-09-10\",\"published\":true},{\"id\":\"morning\",\"slug\":\"morning\",\"type\":\"moment\",\"title\":\"今天的风，有一点秋天\",\"summary\":\"早上开窗，听见树叶在说话。\",\"body\":\"窗外的光比前几天柔和了些。泡了一杯茶，把桌上没读完的书翻开。\\n\\n没有特别的事发生，也是值得记录的一天。\",\"date\":\"2026-10-09\",\"createdAt\":\"2026-10-09\",\"tags\":[\"日常\",\"秋天\"],\"cover\":null,\"images\":[],\"zone\":null,\"position\":[-4.0953441675657505,-0.30000000000000004,15.69114879363661],\"visual\":{},\"importance\":2,\"published\":true,\"meta\":{\"stack\":[],\"links\":[],\"org\":\"\",\"role\":\"\",\"status\":\"\"}},{\"id\":\"book\",\"slug\":\"book\",\"type\":\"moment\",\"title\":\"读到一句喜欢的话\",\"summary\":\"「生活，是很好玩的。」\",\"body\":\"把喜欢的句子抄进本子里。读书的快乐，有时就是在某一页里，忽然遇见一个能替你说出心事的人。\\n\\n——示例阅读记录\",\"date\":\"2026-10-03\",\"tags\":[\"阅读\"],\"meta\":{},\"cover\":null,\"images\":[],\"zone\":null,\"visual\":{},\"position\":[-11.043569835319701,-0.30000000000000004,31.536440930945943],\"importance\":2,\"createdAt\":\"2026-10-03\",\"published\":true},{\"id\":\"light\",\"slug\":\"light\",\"type\":\"moment\",\"title\":\"收集一束傍晚的光\",\"summary\":\"它落在桌角，停了一小会儿。\",\"body\":\"傍晚的阳光穿过窗户，在桌上留下一块金色。等我想起拍照，它已经慢慢移开了。\\n\\n有些美好，记住就好。\",\"date\":\"2026-09-30\",\"tags\":[\"光影\",\"日常\"],\"meta\":{},\"cover\":null,\"images\":[],\"zone\":null,\"visual\":{},\"position\":[-2,-0.30000000000000004,26],\"importance\":2,\"createdAt\":\"2026-09-30\",\"published\":true}],\"settings\":{\"name\":\"桃源旅人\",\"role\":\"设计 · 开发 · 日常观察\",\"intro\":\"写代码，也收集生活里的微光。\\n在这里，慢一点也没关系。\",\"email\":\"\",\"github\":\"\",\"location\":\"在山水之间\",\"demo\":true}}],\"$Lf\"]\n8:null\nc:[[\"$\",\"title\",\"0\",{\"children\":\"桃源境 · 桃源旅人的数字小院\"}],[\"$\",\"meta\",\"1\",{\"name\":\"description\",\"content\":\"写代码，也收集生活里的微光。 在这里，慢一点也没关系。\"}],[\"$\",\"link\",\"2\",{\"rel\":\"icon\",\"href\":\"/icon.svg\"}],[\"$\",\"$L10\",\"3\",{}]]\n"])</script><script>self.__next_f.push([1,"11:[[\"$\",\"style\",null,{\"children\":\".realm-app{display:none}\"}],[\"$\",\"main\",null,{\"className\":\"nojs-content\",\"children\":[[\"$\",\"h1\",null,{\"children\":[\"桃源境 · \",\"桃源旅人\",\"的数字小院\"]}],[\"$\",\"p\",null,{\"children\":\"写代码，也收集生活里的微光。\\n在这里，慢一点也没关系。\"}],[[\"$\",\"article\",\"about\",{\"children\":[[\"$\",\"h2\",null,{\"children\":[\"$\",\"a\",null,{\"href\":\"/read/about\",\"children\":\"你好，我是桃源旅人\"}]}],[\"$\",\"p\",null,{\"children\":\"写代码，也收集生活里的微光。\"}],[\"$\",\"div\",null,{\"className\":\"prose\",\"children\":[[\"$\",\"h2\",\"h2-0\",{\"children\":\"在这里，慢一点也没关系\"}],\"\\n\",[\"$\",\"p\",\"p-0\",{\"children\":\"我喜欢把想法做成可以触摸的东西，也喜欢山间的风、纸上的字和没有目的的散步。这里是我的数字小院：收着做过的作品、走过的路，以及一些还在生长的念头。\"}],\"\\n\",[\"$\",\"h3\",\"h3-0\",{\"children\":\"我在关注\"}],\"\\n\",[\"$\",\"ul\",\"ul-0\",{\"children\":[\"\\n\",[\"$\",\"li\",\"li-0\",{\"children\":[[\"$\",\"strong\",\"strong-0\",{\"children\":\"设计与技术\"}],\"：让工具有温度，让交互更自然。\"]}],\"\\n\",[\"$\",\"li\",\"li-1\",{\"children\":[[\"$\",\"strong\",\"strong-0\",{\"children\":\"独立创作\"}],\"：从一个小问题出发，做完整、安静的作品。\"]}],\"\\n\",[\"$\",\"li\",\"li-2\",{\"children\":[[\"$\",\"strong\",\"strong-0\",{\"children\":\"日常观察\"}],\"：记录天气、阅读和路上的片刻。\"]}],\"\\n\"]}],\"\\n\",[\"$\",\"blockquote\",\"blockquote-0\",{\"children\":[\"\\n\",[\"$\",\"p\",\"p-0\",{\"children\":\"土地平旷，屋舍俨然，有良田美池桑竹之属。\"}],\"\\n\"]}],\"\\n\",[\"$\",\"p\",\"p-1\",{\"children\":\"这是可替换的示例简介。你可以在内容管理中写下自己的故事。\"}]]}]]}],[\"$\",\"article\",\"realm\",{\"children\":[[\"$\",\"h2\",null,{\"children\":[\"$\",\"a\",null,{\"href\":\"/read/realm\",\"children\":\"桃源境 · 数字小院\"}]}],[\"$\",\"p\",null,{\"children\":\"把个人网站，做成一处可以漫游的风景。\"}],[\"$\",\"div\",null,{\"className\":\"prose\",\"children\":[[\"$\",\"h2\",\"h2-0\",{\"children\":\"为自己造一座桃花源\"}],\"\\n\",[\"$\",\"p\",\"p-0\",{\"children\":\"个人网站不一定是一张履历。它也可以是一片风景，让作品成为林间的灯，让文字藏进竹影，让生活沿着水面慢慢展开。\"}],\"\\n\",[\"$\",\"h3\",\"h3-0\",{\"children\":\"交互设计\"}],\"\\n\",[\"$\",\"ol\",\"ol-0\",{\"children\":[\"\\n\",[\"$\",\"li\",\"li-0\",{\"children\":\"从一扇门开始，跟随镜头走进山水。\"}],\"\\n\",[\"$\",\"li\",\"li-1\",{\"children\":\"用五个地点组织不同的内容。\"}],\"\\n\",[\"$\",\"li\",\"li-2\",{\"children\":\"点击风景中的节点，打开一页故事。\"}],\"\\n\",[\"$\",\"li\",\"li-3\",{\"children\":\"用「手记」模式快速查找和阅读。\"}],\"\\n\"]}],\"\\n\",[\"$\",\"h3\",\"h3-1\",{\"children\":\"技术实现\"}],\"\\n\",[\"$\",\"p\",\"p-1\",{\"children\":\"使用 React Three Fiber 绘制场景，GSAP 编排镜头，Next.js 提供内容读写。桃林采用实例化渲染，弱设备可以切换为轻量模式。\"}],\"\\n\",[\"$\",\"pre\",\"pre-0\",{\"children\":[\"$\",\"code\",\"code-0\",{\"className\":\"language-ts\",\"children\":\"const idea = '让信息成为风景';\\nconst realm = createSomething(idea);\\n\"}]}],\"\\n\",[\"$\",\"p\",\"p-2\",{\"children\":\"这是一篇项目介绍示例，可以在后台修改。\"}]]}]]}],[\"$\",\"article\",\"slow-notes\",{\"children\":[[\"$\",\"h2\",null,{\"children\":[\"$\",\"a\",null,{\"href\":\"/read/slow-notes\",\"children\":\"拾光 · 慢笔记\"}]}],[\"$\",\"p\",null,{\"children\":\"一个留给日常观察的小小容器。\"}],[\"$\",\"div\",null,{\"className\":\"prose\",\"children\":[[\"$\",\"h2\",\"h2-0\",{\"children\":\"给日常留一个位置\"}],\"\\n\",[\"$\",\"p\",\"p-0\",{\"children\":\"有些想法还不够完整，不必急着变成文章。拾光是一个笔记工具的概念项目：用简洁的记录、标签和日历，把零散的片刻慢慢串起来。\"}],\"\\n\",[\"$\",\"h3\",\"h3-0\",{\"children\":\"设计原则\"}],\"\\n\",[\"$\",\"ul\",\"ul-0\",{\"children\":[\"\\n\",[\"$\",\"li\",\"li-0\",{\"children\":\"打开就能写，减少记录之前的准备。\"}],\"\\n\",[\"$\",\"li\",\"li-1\",{\"children\":\"不统计连续打卡，让记录回到自己的节奏。\"}],\"\\n\",[\"$\",\"li\",\"li-2\",{\"children\":\"支持 Markdown 和纯文本导出。\"}],\"\\n\"]}],\"\\n\",[\"$\",\"p\",\"p-1\",{\"children\":[\"$\",\"strong\",\"strong-0\",{\"children\":\"这是一份示例项目概念，并非已发布的产品。\"}]}]]}]]}],[\"$\",\"article\",\"season-colors\",{\"children\":[[\"$\",\"h2\",null,{\"children\":[\"$\",\"a\",null,{\"href\":\"/read/season-colors\",\"children\":\"四时色 · 自然调色\"}]}],[\"$\",\"p\",null,{\"children\":\"从季节里，借一组温柔的颜色。\"}],[\"$\",\"div\",null,{\"className\":\"prose\",\"children\":[[\"$\",\"h2\",\"h2-0\",{\"children\":\"自然是最好的调色师\"}],\"\\n\",[\"$\",\"p\",\"p-0\",{\"children\":\"春天的嫩绿，夏日的湖青，秋天的赭石，冬日的雾白。这个概念练习尝试把自然的色彩整理成日常设计可以使用的色板。\"}],\"\\n\",[\"$\",\"h3\",\"h3-0\",{\"children\":\"一组春日配色\"}],\"\\n\",[\"$\",\"table\",\"table-0\",{\"children\":[[\"$\",\"thead\",\"thead-0\",{\"children\":[\"$\",\"tr\",\"tr-0\",{\"children\":[[\"$\",\"th\",\"th-0\",{\"children\":\"名称\"}],[\"$\",\"th\",\"th-1\",{\"children\":\"色值\"}],[\"$\",\"th\",\"th-2\",{\"children\":\"用途\"}]]}]}],[\"$\",\"tbody\",\"tbody-0\",{\"children\":[[\"$\",\"tr\",\"tr-0\",{\"children\":[[\"$\",\"td\",\"td-0\",{\"children\":\"桃夭\"}],[\"$\",\"td\",\"td-1\",{\"children\":\"#DFA99C\"}],[\"$\",\"td\",\"td-2\",{\"children\":\"点缀\"}]]}],[\"$\",\"tr\",\"tr-1\",{\"children\":[[\"$\",\"td\",\"td-0\",{\"children\":\"湖青\"}],[\"$\",\"td\",\"td-1\",{\"children\":\"#809B8D\"}],[\"$\",\"td\",\"td-2\",{\"children\":\"主色\"}]]}],[\"$\",\"tr\",\"tr-2\",{\"children\":[[\"$\",\"td\",\"td-0\",{\"children\":\"宣纸\"}],[\"$\",\"td\",\"td-1\",{\"children\":\"#F5F2E9\"}],[\"$\",\"td\",\"td-2\",{\"children\":\"背景\"}]]}]]}]]}],\"\\n\",[\"$\",\"p\",\"p-1\",{\"children\":[\"$\",\"strong\",\"strong-0\",{\"children\":\"示例设计练习，可替换为你的真实作品。\"}]}]]}]]}],[\"$\",\"article\",\"making\",{\"children\":[[\"$\",\"h2\",null,{\"children\":[\"$\",\"a\",null,{\"href\":\"/read/making\",\"children\":\"开始独立创作\"}]}],[\"$\",\"p\",null,{\"children\":\"给自己的想法，一段认真生长的时间。\"}],[\"$\",\"div\",null,{\"className\":\"prose\",\"children\":[[\"$\",\"h2\",\"h2-0\",{\"children\":\"把一个想法做完整\"}],\"\\n\",[\"$\",\"p\",\"p-0\",{\"children\":\"从观察一个问题，到画出草图，再到让它真正运行，独立创作让我重新理解「完成」的意义。\"}],\"\\n\",[\"$\",\"p\",\"p-1\",{\"children\":\"这一段时间想尝试：\"}],\"\\n\",[\"$\",\"ul\",\"ul-0\",{\"children\":[\"\\n\",[\"$\",\"li\",\"li-0\",{\"children\":\"做一个自己愿意每天使用的小工具。\"}],\"\\n\",[\"$\",\"li\",\"li-1\",{\"children\":\"记录设计和开发中的取舍。\"}],\"\\n\",[\"$\",\"li\",\"li-2\",{\"children\":\"保持开放，接受作品不够完美。\"}],\"\\n\"]}],\"\\n\",[\"$\",\"p\",\"p-2\",{\"children\":[\"$\",\"em\",\"em-0\",{\"children\":\"这是经历示例，请替换为你的真实时间线。\"}]}]]}]]}],[\"$\",\"article\",\"learning\",{\"children\":[\"$L12\",\"$L13\",\"$L14\"]}],\"$L15\",\"$L16\",\"$L17\",\"$L18\",\"$L19\",\"$L1a\"]]}]]\nf:[\"$\",\"noscript\",null,{\"children\":\"$11\"}]\n"])</script><script>self.__next_f.push([1,"12:[\"$\",\"h2\",null,{\"children\":[\"$\",\"a\",null,{\"href\":\"/read/learning\",\"children\":\"在设计与代码之间\"}]}]\n13:[\"$\",\"p\",null,{\"children\":\"学习用另一种语言，表达同一个想法。\"}]\n14:[\"$\",\"div\",null,{\"className\":\"prose\",\"children\":[[\"$\",\"h2\",\"h2-0\",{\"children\":\"从界面走向体验\"}],\"\\n\",[\"$\",\"p\",\"p-0\",{\"children\":\"代码负责让事情发生，设计决定事情如何被感知。我希望在两者之间找到自己的表达方式。\"}],\"\\n\",[\"$\",\"p\",\"p-1\",{\"children\":\"这是一个学习经历的占位条目，可以写成教育经历、工作经历，或一段对你很重要的旅程。\"}]]}]\n15:[\"$\",\"article\",\"quiet-interface\",{\"children\":[[\"$\",\"h2\",null,{\"children\":[\"$\",\"a\",null,{\"href\":\"/read/quiet-interface\",\"children\":\"好的界面，也懂得留白\"}]}],[\"$\",\"p\",null,{\"children\":\"当信息越来越多，我们为什么需要一点安静。\"}],[\"$\",\"div\",null,{\"className\":\"prose\",\"children\":[[\"$\",\"h2\",\"h2-0\",{\"children\":\"留白不是空着\"}],\"\\n\",[\"$\",\"p\",\"p-0\",{\"children\":\"我们习惯把屏幕填满。按钮、提示、通知，每一块空间似乎都应该有用。但空间也能帮助理解：它告诉我们，哪里结束，哪里开始，什么值得停留。\"}],\"\\n\",[\"$\",\"h3\",\"h3-0\",{\"children\":\"从一个小决定开始\"}],\"\\n\",[\"$\",\"p\",\"p-1\",{\"children\":\"写一段文字时，先问自己：读者此刻最想知道什么？做一个界面时，也可以这样问。\"}],\"\\n\",[\"$\",\"ul\",\"ul-0\",{\"children\":[\"\\n\",[\"$\",\"li\",\"li-0\",{\"children\":\"把最重要的事放在最容易发现的地方。\"}],\"\\n\",[\"$\",\"li\",\"li-1\",{\"children\":\"把相关内容放在一起。\"}],\"\\n\",[\"$\",\"li\",\"li-2\",{\"children\":\"给不同层级足够的距离。\"}],\"\\n\"]}],\"\\n\",[\"$\",\"blockquote\",\"blockquote-0\",{\"children\":[\"\\n\",[\"$\",\"p\",\"p-0\",{\"children\":\"安静的界面，不是没有信息，而是信息各得其所。\"}],\"\\n\"]}],\"\\n\",[\"$\",\"h3\",\"h3-1\",{\"children\":\"让功能适时出现\"}],\"\\n\",[\"$\",\"p\",\"p-2\",{\"children\":\"并不是每一个操作都需要一直站在台前。阅读时，让内容成为主角；编辑时，再让工具来到手边。\"}],\"\\n\",[\"$\",\"p\",\"p-3\",{\"children\":\"这是一篇可编辑的示例手记。\"}]]}]]}]\n16:[\"$\",\"article\",\"digital-garden\",{\"children\":[[\"$\",\"h2\",null,{\"children\":[\"$\",\"a\",null,{\"href\":\"/read/digital-garden\",\"children\":\"种一座数字花园\"}]}],[\"$\",\"p\",null,{\"children\":\"让个人网站成为一个持续生长的地方。\"}],[\"$\",\"div\",null,{\"className\":\"prose\",\"children\":[[\"$\",\"h2\",\"h2-0\",{\"children\":\"不是每篇文章都要写完\"}],\"\\n\",[\"$\",\"p\",\"p-0\",{\"children\":\"花园里的植物有不同的生长阶段。想法也一样：一些刚刚冒头，一些长出了枝叶，一些终于开花。\"}],\"\\n\",[\"$\",\"p\",\"p-1\",{\"children\":\"数字花园让这些阶段都可以被看见。你可以写下未完成的问题，补充新的发现，也可以在几年之后回来修改最初的判断。\"}],\"\\n\",[\"$\",\"h3\",\"h3-0\",{\"children\":\"从一块小地方开始\"}],\"\\n\",[\"$\",\"p\",\"p-2\",{\"children\":\"选择一个你愿意长期关注的主题。写一页，链接另一页。慢慢地，这些路会连接起来。\"}],\"\\n\",[\"$\",\"p\",\"p-3\",{\"children\":\"重要的不是更新的频率，而是你是否还愿意回来。\"}]]}]]}]\n17:[\"$\",\"article\",\"walk\",{\"children\":[[\"$\",\"h2\",null,{\"children\":[\"$\",\"a\",null,{\"href\":\"/read/walk\",\"children\":\"散步，是另一种思考\"}]}],[\"$\",\"p\",null,{\"children\":\"离开屏幕以后，问题有时会自己松开。\"}],[\"$\",\"div\",null,{\"className\":\"prose\",\"children\":[[\"$\",\"h2\",\"h2-0\",{\"children\":\"去走一走\"}],\"\\n\",[\"$\",\"p\",\"p-0\",{\"children\":\"有时候，卡住并不是因为不够努力，而是因为一直用同一个角度看问题。\"}],\"\\n\",[\"$\",\"p\",\"p-1\",{\"children\":\"出门以后，注意力重新回到身体：脚下的路，树叶的影子，路边的风。思绪不用被强迫着往前走，反而开始自由地连接。\"}],\"\\n\",[\"$\",\"p\",\"p-2\",{\"children\":\"我想把散步变成一种习惯：不为了步数，不为了效率，只是给一天留一段空白。\"}],\"\\n\",[\"$\",\"p\",\"p-3\",{\"children\":[\"$\",\"em\",\"em-0\",{\"children\":\"示例随笔，你可以写下自己的观察。\"}]}]]}]]}]\n18:[\"$\",\"article\",\"morning\",{\"children\":[[\"$\",\"h2\",null,{\"children\":[\"$\",\"a\",null,{\"href\":\"/read/morning\",\"children\":\"今天的风，有一点秋天\"}]}],[\"$\",\"p\",null,{\"children\":\"早上开窗，听见树叶在说话。\"}],[\"$\",\"div\",null,{\"className\":\"prose\",\"children\":[[\"$\",\"p\",\"p-0\",{\"children\":\"窗外的光比前几天柔和了些。泡了一杯茶，把桌上没读完的书翻开。\"}],\"\\n\",[\"$\",\"p\",\"p-1\",{\"children\":\"没有特别的事发生，也是值得记录的一天。\"}]]}]]}]\n19:[\"$\",\"article\",\"book\",{\"children\":[[\"$\",\"h2\",null,{\"children\":[\"$\",\"a\",null,{\"href\":\"/read/book\",\"children\":\"读到一句喜欢的话\"}]}],[\"$\",\"p\",null,{\"children\":\"「生活，是很好玩的。」\"}],[\"$\",\"div\",null,{\"className\":\"prose\",\"children\":[[\"$\",\"p\",\"p-0\",{\"children\":\"把喜欢的句子抄进本子里。读书的快乐，有时就是在某一页里，忽然遇见一个能替你说出心事的人。\"}],\"\\n\",[\"$\",\"p\",\"p-1\",{\"children\":\"——示例阅读记录\"}]]}]]}]\n1a:[\"$\",\"article\",\"light\",{\"children\":[[\"$\",\"h2\",null,{\"children\":[\"$\",\"a\",null,{\"href\":\"/read/light\",\"children\":\"收集一束傍晚的光\"}]}],[\"$\",\"p\",null,{\"children\":\"它落在桌角，停了一小会儿。\"}],[\"$\",\"div\",null,{\"className\":\"prose\",\"children\":[[\"$\",\"p\",\"p-0\",{\"children\":\"傍晚的阳光穿过窗户，在桌上留下一块金色。等我想起拍照，它已经慢慢移开了。\"}],\"\\n\",[\"$\",\"p\",\"p-1\",{\"children\":\"有些美好，记住就好。\"}]]}]]}]\n"])</script></body></html>
