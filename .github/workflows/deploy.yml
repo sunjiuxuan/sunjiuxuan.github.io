@@ -24,17 +24,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Prepare Clean Site
-        run: |
-          mkdir -p _site
-          cp -r index.html .nojekyll 404.html icon.svg _next read _site/
-          [ -f admin.html ] && cp admin.html _site/ || true
-          [ -d admin ] && cp -r admin _site/ || true
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: '项目18（win opus 5.5)/项目17（opus 5.5 个人网站）/out'
 
       - name: Deploy to GitHub Pages
         id: deployment

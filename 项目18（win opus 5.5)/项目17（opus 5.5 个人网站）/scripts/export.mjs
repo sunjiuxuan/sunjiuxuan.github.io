@@ -5,7 +5,6 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, "..");
-const repoRoot = path.resolve(projectRoot, "../.."); // /Users/shanchahuadubudongbaimeigui/Documents/Antigravity IDE
 
 const apiDir = path.join(projectRoot, "src/app/api");
 const hiddenApiDir = path.join(projectRoot, "src/app/_api");
@@ -33,18 +32,7 @@ try {
   // 创建 .nojekyll，确保 GitHub Pages 不忽略 _next 目录
   fs.writeFileSync(path.join(outDir, ".nojekyll"), "");
   console.log("✓ 已生成 .nojekyll 文件");
-
-  console.log("✓ 静态构建成功导出至: " + outDir);
-
-  // 同步到仓库根目录用于 GitHub Pages 托管
-  console.log("📦 正在同步静态站点到仓库根目录:", repoRoot);
-  const items = fs.readdirSync(outDir);
-  for (const item of items) {
-    const src = path.join(outDir, item);
-    const dest = path.join(repoRoot, item);
-    fs.cpSync(src, dest, { recursive: true, force: true });
-  }
-  console.log("🎉 已成功同步所有文件到仓库根目录！");
+  console.log("✓ 静态构建成功保留在当前项目 out 目录中: " + outDir);
 } finally {
   if (apiRenamed && fs.existsSync(hiddenApiDir)) {
     fs.renameSync(hiddenApiDir, apiDir);
