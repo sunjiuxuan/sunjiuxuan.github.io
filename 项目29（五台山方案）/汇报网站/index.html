@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>清凉妙境 · 五台山非遗馆</title>
+<meta name="description" content="五台山非物质文化遗产馆建设方案：基于真实地形的现状与方案三维对比、选址比选、投资估算、运营收支、宣传推广与实施计划。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;900&display=swap">
+<link rel="stylesheet" href="css/viewer.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<nav class="nav" aria-label="章节导航">
+  <div class="wrap" id="navLinks">
+    <span class="brand">清凉妙境</span>
+    <a href="#top">三维对比</a>
+    <a href="#summary">一页看懂</a>
+    <a href="#status">现状</a>
+    <a href="#needs">需求</a>
+    <a href="#concept">方案</a>
+    <a href="#site">选址</a>
+    <a href="#heart">心馆</a>
+    <a href="#peaks">五台与朝台径</a>
+    <a href="#invest">投资</a>
+    <a href="#ops">运营收支</a>
+    <a href="#benefit">效益</a>
+    <a href="#build">建设条件</a>
+    <a href="#promo">宣传推广</a>
+    <a href="#risk">风险</a>
+    <a href="#plan">实施计划</a>
+    <a href="#next">下一步</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="hero" id="top">
+    <div>
+      <div class="eyebrow">五台山非物质文化遗产馆 · 建设方案</div>
+      <h1>清凉妙境<small>在真实的五台山上，看见方案落地后的样子</small></h1>
+    </div>
+    <div class="meta">依据：孟俊峰《五台山非遗馆建设意义和路径研究》中期汇报<br>方案深化稿 · 2026年10月</div>
+  </header>
+
+  <div class="stage">
+    <div class="wt-view" id="hero3d" aria-label="五台山真实地形三维，可拖动旋转、缩放">
+      <div class="viewbar">
+        <div class="seg big" role="group" aria-label="对比">
+          <button type="button" data-mode="now" aria-pressed="true">现状</button>
+          <button type="button" data-mode="plan" aria-pressed="false">方案实施后</button>
+        </div>
+        <div class="seg" role="group" aria-label="范围">
+          <button type="button" data-area="region" aria-pressed="true">全域五台</button>
+          <button type="button" data-area="taihuai" aria-pressed="false">台怀镇</button>
+          <button type="button" data-area="court" aria-pressed="false">心馆</button>
+        </div>
+      </div>
+      <div class="tools">
+        <div class="seg" role="group" aria-label="视角" id="presetBar"></div>
+        <div class="seg"><button type="button" id="t-night" aria-pressed="false">夜景</button><button type="button" id="t-labels" aria-pressed="true">标注</button><button type="button" id="t-rotate" aria-pressed="true">环绕</button></div>
+        <div class="seg" id="courtTools" hidden><button type="button" id="t-xray" aria-pressed="false">揭顶看展陈</button><button type="button" id="t-route" aria-pressed="true">参观流线</button></div>
+      </div>
+      <div class="hint">拖动旋转 · 滚轮或双指缩放 · 点击标注</div>
+    </div>
+    <aside class="side" id="side" aria-live="polite"></aside>
+  </div>
+  <p class="note" style="margin-top:8px">地形为真实高程（全域按1.6倍竖向放大以便观察），卫星影像为2016年Sentinel-2无云合成，建筑与道路来自OpenStreetMap，可能不完整。方案要素为示意，需实地测绘后深化。</p>
+
+  <!-- 一页看懂 -->
+  <section class="part" id="summary">
+    <div class="part-h"><div class="no">第一部分</div><h2>一页看懂</h2><div class="act">给时间最紧的人</div></div>
+    <div class="part-body">
+      <p class="lead">五台山每年有七百多万游客，五台县有<b>2项国家级、6项省级</b>非遗，但游客缺少一个集中认识它们的地方。方案用<b>一座心馆</b>先把非遗集中起来，再沿千年朝台路延伸到五座台顶，分三期建成一座<b>“没有围墙的非遗馆”</b>。</p>
+      <div class="tiles">
+        <div class="tile"><div class="big"><span class="cnt" data-v="727.44" data-d="2"></span><small>万人次</small></div><div class="lab">2025年五台山景区接待游客</div><div class="src">同比增长5.22%</div></div>
+        <div class="tile"><div class="big">2 + 6</div><div class="lab">国家级 + 省级非遗项目（五台县）</div><div class="src">另有市级14项、县级59项</div></div>
+        <div class="tile"><div class="big"><span class="cnt" data-v="2480"></span><small>万元</small></div><div class="lab">一期投资估算（心馆 + 东台试点）</div><div class="src">三期合计约7,794万元，分9年投入</div></div>
+        <div class="tile"><div class="big"><span class="cnt" data-v="3.0" data-d="1"></span><small>%</small></div><div class="lab">保本所需的游客进馆比例</div><div class="src">约22万人次/年即可覆盖652万元年运营成本</div></div>
+        <div class="tile"><div class="big"><span class="cnt" data-v="71"></span><small>公里</small></div><div class="lab">朝台径全程（地形计算）</div><div class="src">九成以上可利用既有道路与山路</div></div>
+        <div class="tile"><div class="big">2029.6</div><div class="lab">建议开馆时间</div><div class="src">赶在旅游旺季和文化和自然遗产日</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 现状 -->
+  <section class="part" id="status">
+    <div class="part-h"><div class="no">第二部分</div><h2>现状与时机</h2><div class="act">为什么是现在</div></div>
+    <div class="part-body">
+      <div class="grid2">
+        <div class="card"><div class="sub-row"><h3 class="sub">游客持续增长</h3><span class="note">万人次</span></div><div id="chVisitors" style="margin-top:12px"></div><p class="note" style="margin-top:8px">2024年受《黑神话：悟空》取景地热度带动增长明显。2024年数据由2025年同比增速推算。</p></div>
+        <div class="card"><div class="sub-row"><h3 class="sub">五台县非遗名录</h3><span class="note">项</span></div><div id="chHeritage" style="margin-top:12px"></div><p class="note" style="margin-top:8px" id="heritageNote"></p></div>
+      </div>
+      <div class="grid4">
+        <div class="card"><h4>非遗分散，没有窗口</h4><p>项目分布在各乡镇和寺院，游客能看到寺院，却很少能接触到佛乐以外的非遗。</p></div>
+        <div class="card"><h4>旺季集中，冬季漫长</h4><p>旅游旺季集中在4–10月，冬季通常10月降雪至次年3–4月，需要四季都能运营的产品。</p></div>
+        <div class="card"><h4>高铁将改变客流</h4><p>雄忻高铁预计2027年3月底具备开通条件，五台山站距景区入口约7.9公里，需要提前准备承接。</p></div>
+        <div class="card"><h4>政策窗口已打开</h4><p>“十五五”非遗保护规划征求意见稿提出建设综合性、专题性非遗馆，推进数智化体验新场景。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 需求 -->
+  <section class="part" id="needs">
+    <div class="part-h"><div class="no">第三部分</div><h2>各方需求</h2><div class="act">把想到的和没想到的都摆出来</div></div>
+    <div class="part-body">
+      <p class="lead">一个能落地的方案，要同时回答七类人的问题。下表左边是他们关心什么，右边是方案里对应的安排。</p>
+      <div class="scroller"><table class="matrix" id="needsTable"><thead><tr><th>相关方</th><th>他们关心</th><th>方案的回应</th></tr></thead><tbody></tbody></table></div>
+      <div>
+        <h3 class="sub">公众期待（中期汇报问卷）</h3>
+        <div id="chSurvey" style="margin-top:12px"></div>
+        <p class="note" style="margin-top:8px">按“提及频次 ÷ 占比”推算有效样本约128份。科技期待最低，所以方案把科技定位为“隐形的翼”。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 方案 -->
+  <section class="part" id="concept">
+    <div class="part-h"><div class="no">第四部分</div><h2>方案总览</h2><div class="act">一心 · 五台 · 一径 · 一云</div></div>
+    <div class="part-body">
+      <p class="lead">先建一座能马上运营的<b>心馆</b>，把五台县的非遗集中展示；再沿传统朝台路，在五座台顶设<b>轻型驿亭</b>，用一册“朝台印谱”把它们串起来；最后用数字平台让冬天和远方的人也能“进馆”。</p>
+      <div class="grid4">
+        <div class="card hl"><span class="tag gold">一期</span><h4 style="margin-top:8px">心 · 台怀「清凉之心」</h4><p>约1,200㎡合院式心馆，9个功能分区，标准参观约100分钟。</p></div>
+        <div class="card"><span class="tag">一期试点 · 二期</span><h4 style="margin-top:8px">台 · 五台五驿</h4><p>依托台顶既有寺院与设施，各设一处≤60㎡装配式驿亭，一台一字：晨、雪、石、月、花。</p></div>
+        <div class="card"><span class="tag">二期</span><h4 style="margin-top:8px">径 · 非遗朝台径</h4><p>约71公里，沿既有朝台路优化标识与安全设施，五台各盖一枚印。</p></div>
+        <div class="card"><span class="tag">一至三期</span><h4 style="margin-top:8px">云 · 云上清凉</h4><p>全山非遗声音地图、传承人影像库，冬季封山时线上“云朝台”。</p></div>
+      </div>
+      <div class="grid3">
+        <div class="card"><h4>佛教文化展示高地</h4><p>以国家级非遗五台山佛乐为核心，系统呈现佛乐、八大套、彩塑等。</p></div>
+        <div class="card"><h4>非遗美育实践基地</h4><p>工坊、研学课程、传承人驻馆，年服务研学约2万人次。</p></div>
+        <div class="card"><h4>五台山文旅融合引擎</h4><p>纳入景区预约与游览动线，用朝台印谱把客流引进来、留下来。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 选址 -->
+  <section class="part" id="site">
+    <div class="part-h"><div class="no">第五部分</div><h2>选址比选</h2><div class="act">用真实地形算出来</div></div>
+    <div class="part-body">
+      <p class="lead">在台怀镇周边比较了三处候选地。用真实高程计算坡度，用开放地图测量到主路和塔院寺的距离。<b>推荐候选A · 杨柏峪南</b>：最平整，紧邻大石线，又与核心寺院群保持两公里以上的距离。</p>
+      <div class="scroller"><table class="data" id="siteTable"><thead><tr><th>候选地</th><th>海拔</th><th>平均坡度</th><th>距主路</th><th>距塔院寺</th><th>评价</th></tr></thead><tbody></tbody></table></div>
+      <div class="grid3" id="siteBars"></div>
+      <p class="note">用地性质、权属与是否位于遗产核心区，需与五台山风景区管委会核对后确定。开放地图在杨柏峪一带建筑数据不全，现状建筑以实测为准。<button type="button" class="tag gold" data-goto="3d-taihuai-plan" style="border:none;cursor:pointer">在三维中查看三处候选地</button></p>
+    </div>
+  </section>
+
+  <!-- 心馆 -->
+  <section class="part" id="heart">
+    <div class="part-h"><div class="no">第六部分</div><h2>心馆设计</h2><div class="act">一期 · 合院式</div></div>
+    <div class="part-body">
+      <p class="lead">晋北合院形制，青砖灰瓦，坐北朝南。观众沿“前序—中核—两厢—归院”顺时针参观，最后在文创区出馆。</p>
+      <div class="gallery" id="gallery"></div>
+      <div class="grid2">
+        <div class="card"><h3 class="sub">功能分区与面积</h3><table class="data" id="areaTable" style="margin-top:10px"><thead><tr><th>#</th><th>分区</th><th>位置</th><th style="text-align:right">㎡</th></tr></thead><tbody></tbody><tfoot><tr><td></td><td>建筑面积合计</td><td></td><td class="n" id="areaSum"></td></tr></tfoot></table></div>
+        <div class="card"><h3 class="sub">标准参观时长（分钟）</h3><div id="chJourney" style="margin-top:12px"></div><p class="note" style="margin-top:8px">研学课程约45分钟，需预约，不计入。<button type="button" class="tag gold" data-goto="3d-court" style="border:none;cursor:pointer">打开心馆三维</button></p></div>
+      </div>
+      <div>
+        <h3 class="sub">展陈内容</h3>
+        <div class="grid4" style="margin-top:12px">
+          <div class="card"><span class="tag">第一单元</span><h4 style="margin-top:8px">圣山遗音</h4><p>五台山佛乐（国家级）、五台八大套（国家级），乐谱、法器、早晚课影像。</p></div>
+          <div class="card"><span class="tag">第二单元</span><h4 style="margin-top:8px">礼俗人间</h4><p>五台山骡马大会（省级）、朝台礼俗、五台赛戏（省级）。</p></div>
+          <div class="card"><span class="tag">第三单元</span><h4 style="margin-top:8px">匠心妙艺</h4><p>五台民间传统彩塑、温氏空心澄泥砚、五台山红灯笼制作技艺（均为省级）。</p></div>
+          <div class="card"><span class="tag">第四单元</span><h4 style="margin-top:8px">康养智慧</h4><p>素食、药草与康养，衔接五台山康养目的地建设。</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 五台与朝台径 -->
+  <section class="part" id="peaks">
+    <div class="part-h"><div class="no">第七部分</div><h2>五台五驿与朝台径</h2><div class="act">二期 · 把馆延伸到山上</div></div>
+    <div class="part-body">
+      <p class="lead">每座台顶有自己的自然性格，给每台定一个字作驿亭主题。驿亭依托现有寺院和设施，<b>不新建大体量建筑</b>，只做轻量的声音、影像与体验装置。</p>
+      <div class="peaks" id="peakCards"></div>
+      <div class="grid2">
+        <div class="card"><div class="sub-row"><h3 class="sub">朝台径分段长度</h3><span class="note">公里 · 按真实地形计算</span></div><div id="chLegs" style="margin-top:12px"></div></div>
+        <div class="card"><h3 class="sub">朝台印谱</h3><p style="margin-top:6px">每到一台盖一枚印，五印集齐，可以在心馆兑换一份非遗手作，并在千灯声殿点亮一盏灯。</p>
+          <div class="seals" style="margin-top:14px"><div class="seal" style="--rot:-3deg">晨</div><div class="seal" style="--rot:2deg">雪</div><div class="seal" style="--rot:-1deg">石</div><div class="seal" style="--rot:3deg">月</div><div class="seal" style="--rot:-2deg">花</div></div>
+          <p class="note" style="margin-top:12px">线路：心馆 → 东台 → 北台 → 中台 → 西台 → 南台 → 心馆。冬季台顶封闭期间可线上集印。</p></div>
+      </div>
+      <div class="grid3">
+        <div class="card"><h4>声音地图</h4><p>塔院寺晨钟、显通寺早课、菩萨顶佛乐、黛螺顶山风……按位置收听。</p></div>
+        <div class="card"><h4>一村一艺</h4><p>杨柏峪、台怀、东庄、光明寺等村各认领一项非遗，开设家庭工坊，收入留在村里。</p></div>
+        <div class="card"><h4>科技不进殿堂</h4><p>数字装置只放在心馆、驿亭和线上，寺院与仪式现场保持原样。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 投资 -->
+  <section class="part" id="invest">
+    <div class="part-h"><div class="no">第八部分</div><h2>投资估算与资金来源</h2><div class="act">钱从哪里来，花在哪里</div></div>
+    <div class="part-body">
+      <p class="lead">三期合计约<b><span class="cnt" data-v="7794"></span>万元</b>，分9年投入。一期<b>2,480万元</b>建成心馆和东台试点，单独即可运营；二期、三期视一期运营效果再启动。</p>
+      <div class="card"><div class="sub-row"><h3 class="sub">分期投资构成</h3><span class="note">万元</span></div><div id="chPhases" style="margin-top:14px"></div><div class="keys" id="phaseKeys" style="margin-top:10px"></div></div>
+      <div class="grid2">
+        <div class="card"><h3 class="sub">一期费用明细</h3><div class="scroller"><table class="data" id="p1Table" style="margin-top:10px"><thead><tr><th>项目</th><th>测算依据</th><th style="text-align:right">万元</th></tr></thead><tbody></tbody><tfoot><tr><td>一期合计</td><td></td><td class="n" id="p1Sum"></td></tr></tfoot></table></div></div>
+        <div class="card"><h3 class="sub">一期资金来源（建议结构）</h3><div class="donut-wrap" style="margin-top:14px"><div id="chFunding"></div><div id="fundingList" class="hbars"></div></div></div>
+      </div>
+      <p class="note">单方造价为估算区间的中值，考虑了高海拔、冬季停工和仿古做法；正式立项前需由造价咨询机构编制投资估算。资金结构为建议，需按当年专项资金申报指南调整。</p>
+    </div>
+  </section>
+
+  <!-- 运营 -->
+  <section class="part" id="ops">
+    <div class="part-h"><div class="no">第九部分</div><h2>运营收支</h2><div class="act">能不能自己养活自己</div></div>
+    <div class="part-body">
+      <p class="lead">基本陈列<b>免费预约</b>，保持公益属性；收入来自体验工坊、文创、素斋和研学。只要约<b>3%</b>的入园游客进馆，就能覆盖每年约652万元的运营成本。</p>
+      <div class="grid2">
+        <div class="card"><div class="sub-row"><h3 class="sub">年运营成本构成</h3><span class="note">万元/年</span></div><div id="chOpex" style="margin-top:12px"></div></div>
+        <div class="card"><div class="sub-row"><h3 class="sub">三种情景的年收支</h3><span class="note">万元/年</span></div><div id="chScen" style="margin-top:12px"></div></div>
+      </div>
+      <div class="card">
+        <h3 class="sub">自己算一算</h3>
+        <div class="calc" style="margin-top:14px">
+          <div class="calc-controls">
+            <div class="scen" id="scenBtns"></div>
+            <label for="c-conv"><span>游客进馆比例 <b id="o-conv"></b></span><input type="range" id="c-conv" min="1" max="12" step="0.5"></label>
+            <label for="c-study"><span>研学人次（万/年） <b id="o-study"></b></span><input type="range" id="c-study" min="0" max="5" step="0.5"></label>
+            <label for="c-shop"><span>文创客单价（元） <b id="o-shop"></b></span><input type="range" id="c-shop" min="30" max="200" step="10"></label>
+            <label for="c-work"><span>工坊参与率 <b id="o-work"></b></span><input type="range" id="c-work" min="5" max="40" step="1"></label>
+          </div>
+          <div class="result">
+            <div><div class="note">年净收支</div><div class="net" id="r-net"></div></div>
+            <div class="vs" id="r-vs"></div>
+            <div id="r-msg"></div>
+            <p class="note">基数为2025年接待量727.44万人次。一期承载上限约42.4万人次/年（人均3㎡、停留1.7小时、年开放300天）。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 效益 -->
+  <section class="part" id="benefit">
+    <div class="part-h"><div class="no">第十部分</div><h2>综合效益</h2><div class="act">账面之外的回报</div></div>
+    <div class="part-body">
+      <div class="tiles">
+        <div class="tile"><div class="big"><span class="cnt" data-v="66"></span><small>个</small></div><div class="lab">带动就业岗位</div><div class="src">馆内28、驻馆传承人8、一村一艺工坊约30</div></div>
+        <div class="tile"><div class="big"><span class="cnt" data-v="36"></span><small>万人次/年</small></div><div class="lab">中性情景年入馆人数</div><div class="src">直接接触五台县非遗名录项目</div></div>
+        <div class="tile"><div class="big"><span class="cnt" data-v="2"></span><small>万人次/年</small></div><div class="lab">研学学生</div><div class="src">与当地院校共建实习基地</div></div>
+        <div class="tile"><div class="big"><span class="cnt" data-v="7.3" data-d="1"></span><small>万人·晚</small></div><div class="lab">若带动1%游客多住一晚</div><div class="src">情景测算，不计入收支</div></div>
+        <div class="tile"><div class="big"><span class="cnt" data-v="60"></span><small>万元/年</small></div><div class="lab">直接投入传承人</div><div class="src">驻馆补贴，另有文创收益分成</div></div>
+        <div class="tile"><div class="big">四季</div><div class="lab">冬季也有理由来</div><div class="src">雪中声殿、云朝台、非遗夜话</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 建设条件 -->
+  <section class="part" id="build">
+    <div class="part-h"><div class="no">第十一部分</div><h2>建设条件与审批</h2><div class="act">好不好建，怎么批</div></div>
+    <div class="part-body">
+      <div class="grid2">
+        <div class="card"><h3 class="sub">施工窗口</h3><div class="months" id="months" style="margin-top:12px"></div><p class="note" style="margin-top:8px">有效施工期约7个月。建议主体采用工厂预制、现场装配，压缩现场工期；屋面与外装赶在10月前完成。</p></div>
+        <div class="card"><div class="sub-row"><h3 class="sub">交通可达</h3><span class="note">公里</span></div><div id="chTransport" style="margin-top:12px"></div></div>
+      </div>
+      <div class="card">
+        <h3 class="sub">需要办理的主要审批事项</h3>
+        <div class="flow" style="--n:7;margin-top:26px">
+          <div class="st"><b>项目建议书与可研</b><span>发改部门立项</span></div>
+          <div class="st"><b>选址论证</b><span>符合风景名胜区总体规划与详细规划</span></div>
+          <div class="st"><b>遗产影响评估</b><span>世界遗产地建设项目</span></div>
+          <div class="st"><b>规划许可</b><span>方案审查，风貌控制</span></div>
+          <div class="st"><b>专项审批</b><span>环评、林地、文物、宗教事务</span></div>
+          <div class="st"><b>施工许可</b><span>装配式施工组织</span></div>
+          <div class="st"><b>验收与备案</b><span>非遗馆备案、评估定级</span></div>
+        </div>
+        <p class="note" style="margin-top:12px">具体事项与顺序需与五台山风景区管委会、自然资源、文旅、文物、宗教事务等部门逐项确认。</p>
+      </div>
+      <div class="grid3">
+        <div class="card"><h4>场地</h4><p>候选A海拔约1,616米，平均坡度2.6°，土方量小；距大石线约68米，入口道路短。</p></div>
+        <div class="card"><h4>能源与采暖</h4><p>高寒地区冬季采暖是运营成本大头，建议地源热泵或空气源热泵加强保温，年能耗费用已按110万元计入。</p></div>
+        <div class="card"><h4>测绘先行</h4><p>建议先用无人机倾斜摄影做现状实景三维，费用已计入一期“工程建设其他费”。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 运营组织 + 宣传 -->
+  <section class="part" id="promo">
+    <div class="part-h"><div class="no">第十二部分</div><h2>运营组织与宣传推广</h2><div class="act">建好之后怎么让人知道</div></div>
+    <div class="part-body">
+      <div class="grid2">
+        <div class="card"><h3 class="sub">组织架构</h3><ul><li><b>管理理事会</b>：景区、宗教界、学界、企业代表，负责重大决策</li><li><b>专家委员会</b>：展陈大纲、藏品遴选、学术研究</li><li><b>运营团队28人</b>：见右图</li><li><b>志愿者</b>：青年朝台志愿者，兼做田野调查</li></ul></div>
+        <div class="card"><div class="sub-row"><h3 class="sub">人员编制</h3><span class="note">人</span></div><div id="chStaff" style="margin-top:12px"></div></div>
+      </div>
+      <div class="card hl">
+        <span class="tag gold">品牌</span>
+        <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin-top:10px">
+          <div class="seal" style="width:86px;height:86px;font-size:23px;line-height:1.1;text-align:center">清凉<br>妙境</div>
+          <div><h3 style="font-size:26px">到五台山，听见非遗</h3><p class="note" style="margin-top:6px">主色取五台山青灰瓦与殿宇金色，标志采用朝台印谱的印章形式，所有物料与驿亭统一。</p></div>
+        </div>
+      </div>
+      <div>
+        <h3 class="sub">渠道矩阵</h3>
+        <div class="scroller" style="margin-top:10px"><table class="matrix" id="channelTable"><thead><tr><th>平台</th><th>内容</th><th>频率</th><th>主要人群</th></tr></thead><tbody></tbody></table></div>
+      </div>
+      <div class="card"><h3 class="sub">开馆传播节奏</h3><div class="scroller" style="margin-top:12px"><div id="chLaunch"></div></div></div>
+      <div class="card"><div class="sub-row"><h3 class="sub">建议目标：首年与第三年</h3><span class="note">建议值，用于考核</span></div><div class="grid2" style="margin-top:12px"><div id="chKpiA"></div><div id="chKpiB"></div></div></div>
+    </div>
+  </section>
+
+  <!-- 风险 -->
+  <section class="part" id="risk">
+    <div class="part-h"><div class="no">第十三部分</div><h2>风险与应对</h2><div class="act">提前想到最坏情况</div></div>
+    <div class="part-body">
+      <div class="risk-wrap"><div class="risk-svg card" id="riskSvg"></div><div class="risk-list" id="riskList"></div></div>
+    </div>
+  </section>
+
+  <!-- 计划 -->
+  <section class="part" id="plan">
+    <div class="part-h"><div class="no">第十四部分</div><h2>实施计划</h2><div class="act">2026年第四季度起</div></div>
+    <div class="part-body">
+      <div class="card"><div class="scroller"><div id="chGantt"></div></div><p class="note" style="margin-top:10px">施工安排避开冬季；一期建议2029年6月文化和自然遗产日前后开馆。排期为建议值，取决于审批与资金到位。</p></div>
+    </div>
+  </section>
+
+  <!-- 下一步 -->
+  <section class="part" id="next">
+    <div class="part-h"><div class="no">第十五部分</div><h2>下一步</h2><div class="act">需要双方一起做的事</div></div>
+    <div class="part-body">
+      <div class="grid2">
+        <div class="card"><h3 class="sub">需要五台山方面提供</h3><ul><li>候选地块的用地红线、权属和规划条件</li><li>近三年分月客流与预约数据</li><li>现有游客中心、停车场与接驳线路资料</li><li>非遗项目与代表性传承人名单</li><li>寺院合作意向，尤其台顶驿亭所在寺院</li><li>可用资金渠道与年度预算安排</li></ul></div>
+        <div class="card"><h3 class="sub">我们接下来做</h3><ul><li>第二轮田野调查：佛乐传承谱系、骡马大会等礼俗</li><li>无人机倾斜摄影，建立现状实景三维</li><li>展陈大纲修订与藏品征集计划</li><li>委托造价咨询编制投资估算</li><li>与传承人逐一访谈，确定驻馆与工坊意向</li></ul></div>
+      </div>
+      <div class="card qr"><img src="img/qr.png" alt="本方案网址二维码" width="150" height="150"><div><h3 class="sub">扫码在手机上查看本方案</h3><p class="note" style="margin-top:6px" id="siteUrl">sunjiuxuan.github.io/wutaishan/</p></div></div>
+    </div>
+  </section>
+
+  <footer id="sources">
+    <b>数据来源与说明</b>
+    <span>游客数据：<a href="https://www.peopleapp.com/column/30046577234-500005750662" target="_blank" rel="noopener">人民日报客户端（2023年）</a>、<a href="https://news.ifeng.com/c/8qvyfsLjXPm" target="_blank" rel="noopener">凤凰网（2025年）</a>；非遗名录：<a href="https://i.ifeng.com/c/8x1XJ1PoKHs" target="_blank" rel="noopener">《千年五台韵 一脉匠心传》</a>；高铁：<a href="https://www.news.cn/local/20260818/b96e5039502f44aeafbe07a719b14e22/c.html" target="_blank" rel="noopener">新华网</a>；交通：携程、澎湃新闻公开资料。</span>
+    <span>地形：AWS Terrain Tiles（SRTM 等）；卫星影像：Sentinel-2 cloudless 2016 by EOX IT Services GmbH（含修改的哥白尼 Sentinel 数据，CC BY 4.0）；建筑、道路、寺院：© OpenStreetMap 贡献者（ODbL）。</span>
+    <span>投资、收支、承载量、排期等为方案测算的建议值，用于讨论，不作为正式投资估算。方案基于孟俊峰《五台山非遗馆建设意义和路径研究》中期汇报深化。</span>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="data/geo.js"></script>
+<script src="data/plan.js"></script>
+<script src="data/finance.js"></script>
+<script src="js/courtyard.js"></script>
+<script src="js/terrain.js"></script>
+<script src="js/court-viewer.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

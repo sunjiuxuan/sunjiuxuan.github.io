@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>五台山三维出图</title>
+<link rel="stylesheet" href="css/viewer.css">
+<style>
+  html, body { margin: 0; height: 100%; background: #0b1220; }
+  #v { position: fixed; inset: 0; }
+  .wt-labels { font-size: 21px; }
+</style>
+</head>
+<body>
+<div id="v" class="wt-view"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="data/geo.js"></script>
+<script src="data/plan.js"></script>
+<script src="js/courtyard.js"></script>
+<script src="js/terrain.js"></script>
+<script src="js/court-viewer.js"></script>
+<script>
+  // 用法：render.html?area=region|taihuai|court&proposal=1&night=1&preset=overview&labels=0&xray=1
+  var q = new URLSearchParams(location.search), el = document.getElementById('v');
+  var area = q.get('area') || 'region', shot = q.get('shot') === '1';
+  var api;
+  if (area === 'court') api = WT.createCourtViewer(el, { shot: shot, preset: q.get('preset') || 'aerial', xray: q.get('xray') === '1', night: q.get('night') === '1', labels: q.get('labels') !== '0', route: q.get('route') === '1' });
+  else api = WT.createTerrain(el, { area: area, shot: shot, proposal: q.get('proposal') === '1', night: q.get('night') === '1', preset: q.get('preset') || undefined, labels: q.get('labels') !== '0' });
+  window.API = api;
+  api.ready.then(function () { setTimeout(function () { document.title = 'READY'; window.WT_READY = true; }, 600); });
+</script>
+</body>
+</html>
