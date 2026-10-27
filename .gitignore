@@ -8,3 +8,6 @@ venv/
 .venv/
 __pycache__/
 *.pyc
+
+# 五台山方案已迁到 whmiealy 账号下的独立仓库
+项目29（五台山方案）/

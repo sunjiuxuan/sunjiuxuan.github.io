@@ -24,9 +24,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Add Wutaishan plan site
-        run: cp -r "项目29（五台山方案）/汇报网站" "项目18（win opus 5.5)/项目17（opus 5.5 个人网站）/out/wutaishan"
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
